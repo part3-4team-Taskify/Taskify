@@ -50,9 +50,9 @@ jobs:
 
           source-directory: 'output'
 
-          destination-github-username: MINJI121
+          destinationGithubUsername: MINJI121
 
-          destination-repository-name: Taskify
+          destinationRepositoryName: Taskify
 
           user-email: ${{ secrets.EMAIL }}
 
