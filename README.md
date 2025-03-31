@@ -1,40 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+<div style="text-align: center;">
+  <a href="https://taskify-theta-seven.vercel.app/">
+    <img alt="Taskify" src='/public/images/landing_hero' width="300" height="300">
+  </a>
+</div>
 
-## Getting Started
+- Taskify 일정관리
+- 개발 기간 : 24.01.25(목) ~ 24.02.14(수)
 
-First, run the development server:
+# Team
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 황혜진
+
+- 팀장님!
+- 담당하신 내역 써주시면 수정하겟습니다.
+
+## 김교연
+
+- 
+
+## 임용균
+
+
+- 
+
+## 조민지
+
+- 
+
+## 정종
+
+- 
+
+# Images
+
+//이미지 나중에 GIF 추가 부탁드립니다.
+
+# Skill Stacks
+
+## Environment
+
+<img alt="Git" src ="https://img.shields.io/badge/Git-f05032.svg?&style=for-the-badge&logo=Git&logoColor=white"/> <img alt="GitHub" src ="https://img.shields.io/badge/GitHub-181717.svg?&style=for-the-badge&logo=GitHub&logoColor=white"/> <img alt="VSCode" src ="https://img.shields.io/badge/VSCode-007acc.svg?&style=for-the-badge&logo=visualstudiocode&logoColor=white"/> <img alt="Vercel" src ="https://img.shields.io/badge/Vercel-000000.svg?&style=for-the-badge&logo=Vercel&logoColor=white"/> <img alt="Figma" src ="https://img.shields.io/badge/Figma-f24e1e.svg?&style=for-the-badge&logo=Figma&logoColor=white"/>
+
+## Development
+
+<img alt="Tailwind CSS" src ="https://img.shields.io/badge/Tailwind_CSS-06B6D4.svg?&style=for-the-badge&logo=tailwindcss&logoColor=white"/> <img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="Next.js" src ="https://img.shields.io/badge/Next.js-000000.svg?&style=for-the-badge&logo=Next.js&logoColor=white"/>
+
+## Libraries
+
+<img alt="Axios" src ="https://img.shields.io/badge/Axios-5429e4.svg?&logo=Axios&logoColor=white&style=for-the-badge"/>
+<img alt="clsx" src ="https://img.shields.io/badge/clsx-CB3837.svg?&style=for-the-badge"/>
+<img alt="tailwind-scrollbar-hide" src ="https://img.shields.io/badge/tailwind_scrollbar_hide-06B6D4.svg?&style=for-the-badge"/>
+
+# Package Structure
+
+```
+taskify
+├─ public
+│  ├─ svgs                  # 아이콘 리소스
+│  └─ images                # 이미지 리소스
+├─ src
+│  ├─ api                   # API 사용을 위한 세팅
+│  ├─ components            # 주요 컴포넌트
+│  ├─ constants             #
+│  ├─ hocks                 # 인증, 모달 컨텍스트 프로바이더
+│  ├─ pages                 # 커스텀 훅
+│  ├─ shared                #
+|  ├─ store                 #
+├─ styles
+│  └─ globals.css           # 폰트
+└─ types                    # 스타일
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Installation
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+git clone https://github.com/part3-4team-Taskify
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+2. Install dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+```
 
-## Learn More
+3. Start the development server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+4. Open the project in your browser
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```bash
+http://localhost:3000
+```
