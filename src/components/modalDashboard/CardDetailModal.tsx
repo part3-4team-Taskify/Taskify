@@ -12,7 +12,7 @@ import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-
+import isEqual from "lodash/isEqual";
 interface CardDetailModalProps {
   card: CardDetailType;
   currentUserId: number;
