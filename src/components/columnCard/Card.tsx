@@ -19,7 +19,7 @@ export default function Card({
     <div
       onClick={onClick}
       className={`
-        flex flex-col md:flex-row lg:flex-col
+        flex flex-col md:flex-row lg:flex-col cursor-pointer
         items-start rounded-md bg-white border border-gray-200 p-4
         w-[284px] sm:w-full md:w-[544px] md:h-[93px] lg:w-[314px] lg:h-auto
       `}
@@ -97,9 +97,19 @@ export default function Card({
               />
               <span>{dueDate}</span>
             </div>
-            <div className="w-6 h-6 flex items-center justify-center bg-[#A3C4A2] text-white font-bold rounded-full text-xs">
-              {assignee.nickname[0]}
-            </div>
+            {assignee.profileImageUrl ? (
+              <Image
+                src={assignee.profileImageUrl}
+                alt="프로필 이미지"
+                width={24}
+                height={24}
+                className="w-6 h-6 rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-6 h-6 flex items-center justify-center bg-[#A3C4A2] text-white font-bold rounded-full text-xs">
+                {assignee.nickname[0]}
+              </div>
+            )}
           </div>
         </div>
       </div>

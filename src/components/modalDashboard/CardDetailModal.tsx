@@ -12,6 +12,7 @@ import TaskModal from "@/components/modalInput/TaskModal";
 import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 interface CardDetailModalProps {
   card: CardDetailType;
@@ -65,7 +66,12 @@ export default function CardDetailPage({
     mutationFn: () => deleteCard(card.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cards"] });
+      toast.success("카드가 삭제되었습니다.");
       onClose();
+
+      setTimeout(() => {
+        router.reload();
+      }, 1500);
     },
   });
 
