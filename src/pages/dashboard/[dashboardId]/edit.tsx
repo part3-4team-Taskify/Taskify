@@ -65,10 +65,9 @@ export default function EditDashboard() {
         onCreateDashboard={() => fetchDashboards()}
       />
 
-      <div className="flex flex-col flex-1">
-        <div className="flex flex-col overflow-hidden">
-          <HeaderDashboardEdit variant="edit" dashboardId={dashboardId} />
-        </div>
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <HeaderDashboardEdit variant="edit" dashboardId={dashboardId} />
+
         <div
           className="overflow-auto flex-1 px-[50px] pt-[10px] pb-10"
           style={{ backgroundColor: "var(--color-gray5)" }}
