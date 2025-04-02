@@ -13,6 +13,7 @@ import NewDashboard from "@/components/modal/NewDashboard";
 import { DeleteModal } from "@/components/modal/DeleteModal";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { TEAM_ID } from "@/constants/team";
+import { Search } from "lucide-react";
 
 interface Dashboard {
   id: number;
@@ -142,55 +143,58 @@ export default function MyDashboardPage() {
           onToggleEditMode={() => setIsEditMode((prev) => !prev)}
         />
 
-        <main className="flex-1 overflow-auto px-[25px] pt-[40px] pb-10 bg-[#f9f9f9] ">
+        <main className="flex-col overflow-auto px-[25px] pt-[40px] pb-10 bg-[#f9f9f9] ">
           {/* 검색 입력창 */}
-          <section className="w-full max-w-[1100px] px-4">
-            <input
-              type="text"
-              value={searchKeyword}
-              onChange={(e) => {
-                setSearchKeyword(e.target.value);
-                setCurrentPage(1);
-              }}
-              placeholder="대시보드 이름을 입력하세요"
-              className="w-full max-w-[332px] px-4 py-2 border border-[var(--color-gray3)] rounded-md outline-none bg-[var(--color-white)]"
-            />
+          <section className="w-full overflow-hidden transition-all">
+            <div className="min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px]">
+              <div className="relative flex items-center justify-end">
+                <input
+                  type="text"
+                  value={searchKeyword}
+                  onChange={(e) => {
+                    setSearchKeyword(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  placeholder="대시보드 이름을 입력하세요"
+                  className="w-full px-4 py-2 border border-[var(--color-gray3)] rounded-md outline-none bg-[var(--color-white)]"
+                />
+                <Search
+                  size={18}
+                  color="#989a98"
+                  className="absolute right-4"
+                />
+              </div>
+            </div>
           </section>
 
           {/* 카드 영역 */}
-          <section className="w-full max-w-[1100px] px-4">
-            <div className="flex flex-wrap gap-[16px] justify-start py-2">
+          <section className="w-full max-w-[260px] sm:max-w-[504px] lg:max-w-[1022px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-2">
               {currentItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-10.66px)]"
-                >
-                  {item}
-                </div>
+                <div key={index}>{item}</div>
               ))}
             </div>
+            {totalPages > 1 && (
+              <div className="w-full flex justify-end items-center mt-1.5">
+                <span className="font-14r text-black3 px-[8px] whitespace-nowrap">
+                  {`${totalPages} 페이지 중 ${currentPage}`}
+                </span>
+                <PaginationButton
+                  direction="left"
+                  disabled={currentPage === 1}
+                  onClick={handlePrevPage}
+                />
+                <PaginationButton
+                  direction="right"
+                  disabled={currentPage === totalPages}
+                  onClick={handleNextPage}
+                />
+              </div>
+            )}
           </section>
 
-          {totalPages > 1 && (
-            <div className="w-full max-w-[1100px] flex justify-center items-center">
-              <PaginationButton
-                direction="left"
-                disabled={currentPage === 1}
-                onClick={handlePrevPage}
-              />
-              <span className="font-14r text-black3 px-[8px] whitespace-nowrap">
-                {`${totalPages} 페이지 중 ${currentPage}`}
-              </span>
-              <PaginationButton
-                direction="right"
-                disabled={currentPage === totalPages}
-                onClick={handleNextPage}
-              />
-            </div>
-          )}
-
           {/* 초대받은 대시보드 */}
-          <section className="w-full px-[20px]">
+          <section className="w-full">
             <div className="mt-[74px]">
               <InvitedDashBoard />
             </div>
@@ -200,7 +204,7 @@ export default function MyDashboardPage() {
 
       {isModalOpen && (
         <NewDashboard
-          teamId={TEAM_ID} // ✅ 수정된 부분: teamId 전달
+          teamId={TEAM_ID}
           onClose={() => {
             setIsModalOpen(false);
             fetchDashboards();

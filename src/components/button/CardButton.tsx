@@ -63,12 +63,11 @@ const CardButton: React.FC<CardButtonProps> = ({
       className={clsx(
         "flex justify-between items-center bg-white transition-all",
         "rounded-lg px-4 py-3 font-16sb",
-        "border border-gray-300",
-        fullWidth ? "w-full" : "w-[260px] md:w-[247px] lg:w-[332px]",
+        "border border-[var(--color-gray3)]",
+        "min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px]",
         "h-[58px] md:h-[68px] lg:h-[70px]",
         "mt-[10px] md:mt-[16px] lg:mt-[20px]",
         "text-lg md:text-2lg lg:text-2lg",
-        "transition-all",
         isEditMode
           ? "cursor-default hover:border-gray-300"
           : "cursor-pointer hover:border-purple-500",
@@ -83,7 +82,7 @@ const CardButton: React.FC<CardButtonProps> = ({
         </svg>
 
         {/* 제목 */}
-        <span className="font-16sb truncate max-w-[90px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[160px]">
+        <span className="text-black3 font-16sb truncate max-w-[90px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[160px]">
           {title}
         </span>
 

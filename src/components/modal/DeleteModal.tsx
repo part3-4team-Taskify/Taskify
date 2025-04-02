@@ -33,7 +33,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
         onClose={() => setIsDeleteModalOpen(false)}
         className="flex items-center justify-center text-center"
       >
-        <div className="flex flex-col items-center gap-1 text-center">
+        <div className="flex flex-col items-center gap-1 text-center min-h-[60px]">
           <div className="text-[var(--primary)] font-16m">{selectedTitle}</div>
           <div className="text-black3 font-16m">
             {selectedCreatedByMe
@@ -73,7 +73,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
         onClose={() => setIsConfirmDeleteModalOpen(false)}
         className="flex items-center justify-center text-center"
       >
-        <div className="flex flex-col items-center gap-1 text-center">
+        <div className="flex flex-col items-center gap-1 text-center min-h-[60px]">
           <div className="text-red-400 font-16m">
             삭제 시 복구할 수 없습니다.
           </div>

@@ -75,7 +75,7 @@ export default function EditDashboard() {
             </button>
           </div>
 
-          <div className="mt-5">
+          <div className="my-5">
             <ChangeBebridge />
           </div>
 
@@ -84,14 +84,14 @@ export default function EditDashboard() {
             <MemberList dashboardId={dashboardId} />
           </div>
 
-          <div className="mt-15">
+          <div className="my-5">
             <InviteRecords dashboardId={dashboardIdString || ""} />{" "}
             {/* undefined일 경우 빈 문자열로 전달*/}
           </div>
           <div className="flex mt-15 sm:mt-0">
             <button
               onClick={openModal}
-              className="text-base sm:text-lg cursor-pointer w-[320px] h-[62px] text-black3 rounded-[8px] border-[1px] border-[var(--color-gray3)] hover:scale-105 transition-transform duration-200 ml-0 lg:ml-2"
+              className="text-base sm:text-lg cursor-pointer w-[320px] h-[62px] text-black3 rounded-[8px] border-[1px] border-[var(--color-gray3)] hover:scale-105 transition-transform duration-200"
             >
               대시보드 삭제하기
             </button>

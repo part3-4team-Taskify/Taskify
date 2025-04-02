@@ -4,8 +4,7 @@ import InviteDashboard from "../modal/InviteDashboard";
 import { apiRoutes } from "@/api/apiRoutes";
 import axiosInstance from "@/api/axiosInstance";
 import { AxiosError } from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
   const [inviteList, setInviteList] = useState<
@@ -101,8 +100,7 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
   };
 
   return (
-    <div className="relative bg-white p-4 rounded-lg  lg:w-[620px] lg:h-[477px] w-[284px] h-[406px] sm:w-[544px] sm:h-[477px]">
-      <ToastContainer position="top-center" autoClose={2000} />
+    <div className="lg:w-[620px] lg:h-[404px] w-[284px] h-[337px] sm:w-[544px] sm:h-[404px] relative p-6 rounded-lg bg-white">
       <div className="flex justify-between items-start sm:items-center">
         {/* 제목 */}
         <p className="md:text-[24px] text-[20px] text-xl font-bold">
@@ -110,7 +108,7 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
         </p>
 
         {/* 페이지네이션 + 초대하기 버튼 컨테이너 */}
-        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-4">
           {/* 페이지네이션 */}
           <Pagination
             currentPage={currentPage}
@@ -122,7 +120,7 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
           {/* 초대하기 버튼 (모바일에서 페이지네이션 아래로 이동) */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="cursor-pointer sm:text-[14px] text-[12px] sm:w-[105px] w-[86px] sm:h-[32px] h-[26px] rounded-[4px] bg-[#5534DA] text-white flex items-center justify-center gap-2 lg:mr-3 "
+            className="cursor-pointer text-[12px] sm:text-[14px] sm:w-[105px] w-[86px] sm:h-[32px] h-[26px] rounded-[4px] bg-[#5534DA] text-white flex items-center justify-center gap-2"
           >
             <img src="/svgs/add_white_box.svg" alt="icon" className="w-4 h-4" />
             초대하기
@@ -151,7 +149,7 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
             </div>
             <button
               onClick={() => handleCancel(invite.id)}
-              className="cursor-pointer font-medium sm:text-sm text-xs h-[32px] sm:h-[32px] w-[52px] sm:w-[84px] md:w-[84px] border border-gray-300 text-indigo-600 px-2 py-1 rounded-md hover:bg-gray-100 lg:mr-3"
+              className="text-12m cursor-pointer sm:font-sm h-[32px] sm:h-[32px] w-[52px] sm:w-[84px] md:w-[84px] border border-[var(--color-gray3)] text-[var(--primary)] px-2 py-1 rounded-md hover:bg-gray-100"
             >
               취소
             </button>

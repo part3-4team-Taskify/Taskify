@@ -5,7 +5,7 @@ import Image from "next/image";
 import axiosInstance from "@/api/axiosInstance";
 import { apiRoutes } from "@/api/apiRoutes";
 import { AxiosError } from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function InviteDashboard({ onClose }: { onClose?: () => void }) {
@@ -95,7 +95,6 @@ export default function InviteDashboard({ onClose }: { onClose?: () => void }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35 z-50">
-      <ToastContainer position="top-center" autoClose={2000} />
       <div className="bg-white p-6 rounded-lg shadow-lg w-[327px] sm:w-[568px] sm:h-[279px]">
         <div className="flex justify-between items-center">
           <h2 className="text-sm sm:text-[24px] font-bold">초대하기</h2>

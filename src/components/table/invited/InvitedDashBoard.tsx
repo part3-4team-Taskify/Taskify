@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef, ChangeEvent } from "react";
-import Image from "next/image";
 import NoResultDashBoard from "./NoResultDashBoard";
 import EmptyInvitations from "./EmptyInvitations";
 import { apiRoutes } from "@/api/apiRoutes";
 import axiosInstance from "@/api/axiosInstance";
 import { Invite } from "@/types/invite";
 import useUserStore from "@/store/useUserStore";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { Search } from "lucide-react";
 
 const ITEMS_PER_PAGE = 6; // 한 번에 보여줄 개수
 
@@ -96,14 +95,13 @@ function InvitedList({
   };
 
   return (
-    <div className="relative bg-white w-[260px] sm:w-[504px] lg:w-[1050px] h-[770px] sm:h-[592px] lg:h-[620px] mx-auto mt-[40px]">
-      <ToastContainer position="top-center" autoClose={2000} />
+    <div className="relative bg-white w-full max-w-[260px] sm:max-w-[504px] lg:max-w-[966px] mx-auto mt-[40px]">
       {filteredData.length > 0 && (
-        <div className="hidden sm:flex p-6 w-full h-[26px] justify-start items-center pl-[43px] pr-[76px] md:gap-x-[130px] lg:gap-x-[280px]">
+        <div className="hidden sm:grid grid-cols-3 px-6 w-full h-[26px] justify-start items-center">
           <p className="lg:ml-10 font-normal text-[var(--color-gray2)]">이름</p>
           <p className="font-normal text-[var(--color-gray2)]">초대자</p>
           <p className="lg:ml-13 font-normal text-[var(--color-gray2)]">
-            수락여부
+            수락 여부
           </p>
         </div>
       )}
@@ -112,20 +110,17 @@ function InvitedList({
           ? filteredData.map((invite, index) => (
               <div
                 key={index}
-                className="pb-5 mb-[20px] w-[260px] sm:w-[504px] lg:w-[1050px] h-auto sm:h-[50px] sm:grid sm:grid-cols-[1fr_1fr_1fr] sm:items-center flex flex-col gap-10 border-b border-[var(--color-gray4)]"
+                className="pb-5 mb-[20px] w-full max-w-[260px] sm:max-w-[504px] lg:max-w-[966px] h-auto sm:h-[50px]
+                sm:grid sm:grid-cols-[1fr_1fr_1fr] sm:items-center flex flex-col gap-10 border-b border-[var(--color-gray4)]"
               >
                 {/* 모바일 레이아웃 */}
-                <div className="flex flex-col sm:hidden">
-                  <p className="ml-9 mt-1 w-full">
-                    <span className="mr-8 text-[var(--color-gray2)]">이름</span>
-                    <span className="text-[#333236]">{invite.title}</span>
-                  </p>
-                  <p className="ml-9 mt-1 w-full">
-                    <span className="mr-3.5 text-[var(--color-gray2)]">
-                      초대자
-                    </span>{" "}
-                    <span className="text-[#333236]">{invite.nickname}</span>
-                  </p>
+                <div className="flex flex-col mt-1 sm:hidden">
+                  <span className="text-[var(--color-gray2)]">이름</span>
+                  <span className="text-[#333236]">{invite.title}</span>
+                  <span className="mr-3.5 text-[var(--color-gray2)]">
+                    초대자
+                  </span>{" "}
+                  <span className="text-[#333236]">{invite.nickname}</span>
                   <div className="flex gap-2 mt-2 justify-center">
                     <button
                       className="cursor-pointer border px-3 py-1 rounded-md w-[84px] h-[32px] text-[var(--primary)] border-[var(--color-gray3)]"
@@ -267,35 +262,38 @@ export default function InvitedDashBoard() {
       {invitationArray.length === 0 ? (
         <EmptyInvitations />
       ) : (
-        <div className="relative bg-white rounded-lg shadow-md w-[260px] sm:w-[504px] lg:w-[1050px] h-[770px] sm:h-[592px] lg:h-[620px] max-w-none">
-          <div className="p-6 relative w-full h-[104px]">
-            <div className="flex justify-between items-center mb-[32px]">
-              <p className="text-xl sm:text-2xl font-bold">초대받은 대시보드</p>
-            </div>
-            <div className="relative w-[228px] sm:w-[448px] lg:w-[966px]">
-              <input
-                id="title"
-                placeholder="검색"
-                type="text"
-                value={searchTitle}
-                onChange={handleSearchInputChange}
-                className="text-[var(--color-gray2)] w-full h-[40px] px-[40px] py-[6px] border border-[#D9D9D9] bg-white rounded-[6px] placeholder-gray-400 outline-none"
-              />
-              <Image
-                src="/svgs/search.svg"
-                alt="검색 아이콘"
-                width={20}
-                height={20}
-                className="absolute left-[12px] top-1/2 transform -translate-y-1/2"
-              />
+        <div className="relative bg-white rounded-lg shadow-md w-[260px] sm:w-[504px] lg:w-[1022px] h-[770px] sm:h-[592px] lg:h-[620px] max-w-none">
+          <div className="flex flex-col p-6 w-full h-[104px]">
+            <div className="flex flex-col w-[228px] sm:w-[448px] lg:w-[966px] gap-[24px]">
+              <p className="text-black3 text-xl sm:text-2xl font-bold">
+                초대받은 대시보드
+              </p>
+
+              <div className="relative w-[228px] sm:w-[448px] lg:w-[966px] mx-auto">
+                <input
+                  id="title"
+                  placeholder="검색"
+                  type="text"
+                  value={searchTitle}
+                  onChange={handleSearchInputChange}
+                  className="text-[var(--color-gray2)] w-full h-[40px] px-[40px] py-[6px] border border-[#D9D9D9] bg-white rounded-[6px] placeholder-gray-400 outline-none"
+                />
+                <Search
+                  width={18}
+                  height={18}
+                  color="#333236"
+                  className="absolute left-[12px] top-1/2 transform -translate-y-1/2"
+                />
+
+                <InvitedList
+                  searchTitle={searchTitle}
+                  invitationData={invitationArray}
+                  fetchNextPage={fetchNextPage}
+                  hasMore={hasMore}
+                />
+              </div>
             </div>
           </div>
-          <InvitedList
-            searchTitle={searchTitle}
-            invitationData={invitationArray}
-            fetchNextPage={fetchNextPage}
-            hasMore={hasMore}
-          />
         </div>
       )}
     </div>

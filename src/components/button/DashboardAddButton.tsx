@@ -19,7 +19,7 @@ const DashboardAddButton: React.FC<DashboardAddButtonProps> = ({
         "flex justify-center items-center gap-[10px] bg-white transition-all",
         "rounded-lg px-4 py-3 font-16sb",
         "border border-gray-300 hover:border-purple-500",
-        fullWidth ? "w-full" : "w-[260px] md:w-[247px] lg:w-[332px]", // 반응형 너비
+        "min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px]", // 반응형 너비
         "h-[58px] md:h-[68px] lg:h-[70px]", // 반응형 높이
         "mt-[10px] md:mt-[16px] lg:mt-[20px]", // 여백
         "text-lg md:text-2lg lg:text-2lg",
@@ -28,7 +28,7 @@ const DashboardAddButton: React.FC<DashboardAddButtonProps> = ({
       )}
       {...props}
     >
-      <span className="font-semibold">{children}</span>
+      <span className="text-black3 font-semibold">{children}</span>
       <Image
         src="/svgs/add.svg"
         alt="Plus Icon"

@@ -20,6 +20,7 @@
 .Toastify__toast {
   width: 250px !important;
   border-radius: 16px;
+  background-color: #f3f0ff !important;
   padding: 14px 18px;
   font-size: 14px;
   font-weight: 400;
@@ -49,14 +50,22 @@
   display: none !important;
 }
 
-/* success 토스트: 프라이머리 컬러 */
+/* default icon */
 .Toastify__toast-icon svg {
   fill: #5534da !important;
 }
 
-/* error 토스트: 핑크 */
+/* error icon */
 .Toastify__toast--error .Toastify__toast-icon svg {
   fill: #d549b6 !important;
+}
+
+.Toastify__progress-bar--success {
+  background: #5534da !important;
+}
+
+.Toastify__progress-bar--error {
+  background: #d549b6 !important;
 }
 
 @layer base {
