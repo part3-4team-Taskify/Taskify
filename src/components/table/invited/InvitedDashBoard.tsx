@@ -65,7 +65,7 @@ function InvitedList({
       toast.success("대시보드 수락 성공");
       setTimeout(() => {
         window.location.reload();
-      }, 1700);
+      }, 1500);
     } catch (error) {
       console.error("수락 실패:", error);
       toast.error("초대 수락에 실패했습니다");
@@ -83,7 +83,7 @@ function InvitedList({
       toast.success("대시보드 거절 성공");
       setTimeout(() => {
         window.location.reload();
-      }, 1700);
+      }, 1500);
     } catch (error) {
       console.error("거절 실패:", error);
       toast.error("초대 거절에 실패했습니다");
