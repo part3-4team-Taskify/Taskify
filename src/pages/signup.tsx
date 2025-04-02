@@ -33,6 +33,11 @@ export default function SignUpPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (password !== passwordCheck) {
+      toast.error("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
     if (!isFormValid) return;
     try {
       await signUp({
