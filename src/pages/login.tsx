@@ -42,10 +42,6 @@ export default function LoginPage() {
     } catch (error) {
       console.error("로그인 실패:", error);
       toast.error("로그인에 실패했습니다.");
-<<<<<<< HEAD
-      return;
-=======
->>>>>>> upstream/dev
     }
   };
 

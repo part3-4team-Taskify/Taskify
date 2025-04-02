@@ -14,6 +14,7 @@ import { DeleteModal } from "@/components/modal/DeleteModal";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { TEAM_ID } from "@/constants/team";
 import { Search } from "lucide-react";
+import { toast } from "react-toastify";
 
 interface Dashboard {
   id: number;
@@ -113,7 +114,7 @@ export default function MyDashboardPage() {
       setSelectedDashboardId(null);
       fetchDashboards();
     } catch (error) {
-      alert("대시보드 삭제에 실패했습니다.");
+      toast.error("대시보드 삭제에 실패했습니다.");
       console.error("삭제 실패:", error);
     }
   };
@@ -195,7 +196,7 @@ export default function MyDashboardPage() {
 
           {/* 초대받은 대시보드 */}
           <section className="w-full">
-            <div className="mt-[74px]">
+            <div className="mt-[50px]">
               <InvitedDashBoard />
             </div>
           </section>
