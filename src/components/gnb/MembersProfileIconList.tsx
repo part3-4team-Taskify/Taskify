@@ -60,7 +60,7 @@ export const MembersProfileIconList: React.FC<MemberIconProps> = ({
 
           {/* 출력되지 않은 나머지 멤버 수 */}
           {members.length > maxVisibleMembers && (
-            <div className="relative flex items-center justify-center w-[34px] h-[34px] md:w-[38px] md:h-[38px] rounded-full bg-[#F4D7DA] font-16m text-[#D25B68] border-[2px] border-white overflow-hidden">
+            <div className="relative flex items-center justify-center w-[34px] h-[34px] md:w-[38px] md:h-[38px] rounded-full bg-[#F4D7DA] text-[14px] md:text-[16px] text-[#D25B68] border-[2px] border-white overflow-hidden">
               +{members.length - maxVisibleMembers}
             </div>
           )}
