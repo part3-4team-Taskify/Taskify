@@ -53,7 +53,7 @@ export default function EditDashboard() {
       <SideMenu teamId={TEAM_ID} dashboardList={dashboardList} />
 
       <div className="flex flex-col flex-1">
-        <div className="flex flex-col">
+        <div className="flex flex-col overflow-hidden">
           <HeaderDashboardEdit variant="edit" dashboardId={dashboardId} />
         </div>
         <div
