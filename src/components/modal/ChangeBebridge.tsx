@@ -4,8 +4,7 @@ import Input from "../input/Input";
 import Image from "next/image";
 import axiosInstance from "@/api/axiosInstance";
 import { apiRoutes } from "@/api/apiRoutes";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const ChangeBebridge = () => {
   const router = useRouter();
@@ -61,8 +60,8 @@ const ChangeBebridge = () => {
 
       toast.success("대시보드가 업데이트되었습니다!");
       setTimeout(() => {
-        window.location.reload();
-      }, 100);
+        router.reload();
+      }, 1700);
     } catch (error) {
       toast.error("업데이트에 실패했습니다.");
     }
@@ -70,7 +69,6 @@ const ChangeBebridge = () => {
 
   return (
     <div className="lg:w-[620px] lg:h-[344px] sm:w-[544px] sm:h-[344px] w-[284px] h-[312px]  bg-white sm:rounded-[16px] rounded-[8px] p-[24px] flex flex-col">
-      <ToastContainer position="top-center" />
       <h2 className="text-[20px] sm:text-[24px] font-bold">
         {dashboardDetail.title}
       </h2>

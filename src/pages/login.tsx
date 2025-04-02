@@ -6,6 +6,7 @@ import { postAuthData } from "@/api/auth";
 import Link from "next/link";
 import Input from "@/components/input/Input";
 import { apiRoutes } from "@/api/apiRoutes";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,7 +41,8 @@ export default function LoginPage() {
       router.push("/mydashboard");
     } catch (error) {
       console.error("로그인 실패:", error);
-      alert("로그인에 실패했습니다.");
+      toast.error("로그인에 실패했습니다.");
+      return;
     }
   };
 
