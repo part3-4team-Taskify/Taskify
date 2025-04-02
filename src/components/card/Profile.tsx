@@ -55,7 +55,7 @@ export default function ProfileCard() {
       toast.success("프로필 변경이 완료되었습니다.");
       setTimeout(() => {
         router.reload();
-      }, 1700);
+      }, 1500);
     } catch (error) {
       console.error("프로필 변경 실패:", error);
       toast.error("프로필 변경에 실패하였습니다.");

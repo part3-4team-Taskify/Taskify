@@ -5,6 +5,7 @@ import Input from "@/components/input/Input";
 import Link from "next/link";
 import { Modal } from "@/components/modal/Modal";
 import { CustomBtn } from "@/components/button/CustomButton";
+import { toast } from "react-toastify";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -44,7 +45,7 @@ export default function SignUpPage() {
       setIsSuccessModalOpen(true);
     } catch (error) {
       console.error("회원가입 실패", error);
-      alert("회원가입에 실패했습니다.");
+      toast.error("회원가입에 실패했습니다.");
     }
   };
 

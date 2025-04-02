@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
 import ChangeBebridge from "@/components/modal/ChangeBebridge";
 import HeaderDashboardEdit from "@/components/gnb/HeaderDashboard";
 import MemberList from "@/components/table/member/MemberList";
@@ -10,9 +11,11 @@ import { getDashboards } from "@/api/dashboards";
 import DeleteDashboardModal from "@/components/modal/DeleteDashboardModal";
 import { DashboardType } from "@/types/task";
 import { TEAM_ID } from "@/constants/team";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 export default function EditDashboard() {
   const router = useRouter();
+  const { user, isInitialized } = useAuthGuard();
   const [dashboardList, setDashboardList] = useState<DashboardType[]>([]);
   const { dashboardId } = router.query;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,12 +48,22 @@ export default function EditDashboard() {
   };
 
   useEffect(() => {
-    fetchDashboards();
-  }, []);
+    if (isInitialized && user) {
+      fetchDashboards();
+    }
+  }, [isInitialized, user]);
+
+  if (!isInitialized || !user) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <SideMenu teamId={TEAM_ID} dashboardList={dashboardList} />
+      <SideMenu
+        teamId={TEAM_ID}
+        dashboardList={dashboardList}
+        onCreateDashboard={() => fetchDashboards()}
+      />
 
       <div className="flex flex-col flex-1">
         <div className="flex flex-col overflow-hidden">

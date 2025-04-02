@@ -69,10 +69,10 @@ export default function Column({
       const updated = await updateColumn({ columnId, title: newTitle });
       setColumnTitle(updated.title);
       setIsColumnModalOpen(false);
-      toast.success("칼럼 이름이 변경되었습니다.");
+      toast.success("칼럼이 변경되었습니다.");
     } catch (error) {
       console.error("칼럼 이름 수정 실패:", error);
-      toast.error("칼럼 이름 수정 중 오류가 발생했습니다.");
+      toast.error("칼럼 변경에 실패했습니다.");
     }
   };
 

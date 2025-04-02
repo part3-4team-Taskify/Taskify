@@ -6,6 +6,7 @@ import ModalTextarea from "@/components/modalInput/ModalTextarea";
 import ModalImage from "@/components/modalInput/ModalImage";
 import TextButton from "@/components/modalInput/TextButton";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 interface TaskModalProps {
   isOpen: boolean;
@@ -66,7 +67,7 @@ export default function TaskModal({
       const assigneeUserId = selectedAssignee?.userId;
 
       if (!assigneeUserId) {
-        alert("담당자를 선택해 주세요.");
+        toast("담당자를 선택해 주세요.");
         return;
       }
 
@@ -85,7 +86,7 @@ export default function TaskModal({
       onClose();
     } catch (err) {
       console.error("카드 생성 실패:", err);
-      alert("카드 생성에 실패했습니다.");
+      toast.error("카드 생성에 실패했습니다.");
     }
   };
 

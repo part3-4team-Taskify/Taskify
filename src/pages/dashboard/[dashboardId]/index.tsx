@@ -1,6 +1,7 @@
 // src/pages/dashboard/[dashboardId]/index.tsx
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { getColumns, createColumn } from "@/api/columns";
 import { getCardsByColumn } from "@/api/card";
 import { getDashboards } from "@/api/dashboards";
@@ -17,9 +18,11 @@ import ColumnsButton from "@/components/button/ColumnsButton";
 import AddColumnModal from "@/components/columnCard/AddColumnModal";
 import { TEAM_ID } from "@/constants/team";
 import { toast } from "react-toastify";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 export default function Dashboard() {
   const router = useRouter();
+  const { user, isInitialized } = useAuthGuard();
   const { dashboardId } = router.query;
   const [columns, setColumns] = useState<ColumnType[]>([]);
   const [tasksByColumn, setTasksByColumn] = useState<TasksByColumn>({});
@@ -41,12 +44,11 @@ export default function Dashboard() {
   const isMaxColumns = columns.length >= 10;
   const isCreateDisabled = isTitleEmpty || isDuplicate || isMaxColumns;
 
-  // router 준비되었을 때 렌더링
   useEffect(() => {
-    if (router.isReady && dashboardId) {
+    if (router.isReady && dashboardId && isInitialized && user) {
       setIsReady(true);
     }
-  }, [router.isReady, dashboardId]);
+  }, [router.isReady, dashboardId, isInitialized, user]);
 
   // 대시보드 목록 불러오기
   const fetchDashboards = async () => {
@@ -60,7 +62,7 @@ export default function Dashboard() {
 
   // 대시보드 및 칼럼/카드 데이터 패칭
   useEffect(() => {
-    if (!isReady || !dashboardId) return;
+    if (!isReady || !dashboardId || !isInitialized || !user) return;
 
     fetchDashboards();
 
@@ -93,14 +95,19 @@ export default function Dashboard() {
     };
 
     fetchColumnsAndCards();
-  }, [isReady, dashboardId]);
+  }, [isReady, dashboardId, isInitialized, user]);
 
-  if (!isReady) return <div>로딩 중...</div>;
+  if (!isReady || !isInitialized || !user) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="flex h-screen overflow-hidden ">
-      <SideMenu teamId={TEAM_ID} dashboardList={dashboardList} />
-
+      <SideMenu
+        teamId={TEAM_ID}
+        dashboardList={dashboardList}
+        onCreateDashboard={() => fetchDashboards()}
+      />
       <div className="flex flex-col flex-1 overflow-hidden">
         <HeaderDashboard variant="dashboard" dashboardId={dashboardId} />
 
@@ -123,7 +130,7 @@ export default function Dashboard() {
           {/* fixed 버튼 (모바일, 태블릿용) */}
           <div
             className={`
-    fixed bottom-0 left-0 w-full p-3 z-50 bg-white border-t border-gray-200
+    fixed bottom-0 left-0 w-full p-3 z-10 bg-white border-t border-gray-200
     flex justify-center lg:hidden`}
           >
             <ColumnsButton onClick={openModal} />
@@ -155,7 +162,7 @@ export default function Dashboard() {
                   setIsAddColumnModalOpen(false);
                 } catch (error) {
                   console.error("칼럼 생성 실패:", error);
-                  toast.error("칼럼 생성 중 에러가 발생했어요.");
+                  toast.error("칼럼 생성에 실패했습니다.");
                 }
               }}
             />

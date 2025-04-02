@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useMemo, useRef, useState } from "react";
 import { MoreVertical, X } from "lucide-react";
 import CardDetail from "./CardDetail";
@@ -13,7 +12,6 @@ import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-
 interface CardDetailModalProps {
   card: CardDetailType;
   currentUserId: number;
@@ -75,6 +73,10 @@ export default function CardDetailPage({
     },
   });
 
+  const handleClose = () => {
+    onClose();
+  };
+
   const handleCommentSubmit = () => {
     if (!commentText.trim()) return;
     createCommentMutate({
@@ -134,13 +136,7 @@ export default function CardDetailPage({
               )}
             </div>
 
-            <button
-              onClick={() => {
-                onClose();
-                router.reload(); // ✅ Next.js 방식 리로드
-              }}
-              title="닫기"
-            >
+            <button onClick={handleClose} title="닫기">
               <X className="w-7 h-7 flex items-center justify-center hover:cursor-pointer" />
             </button>
           </div>
@@ -196,10 +192,11 @@ export default function CardDetailPage({
               description: data.description,
               dueDate: data.deadline,
               tags: data.tags,
-              imageUrl: data.image ?? "",
+              imageUrl: data.image || undefined,
             });
 
             setIsEditModalOpen(false);
+            router.reload();
           }}
           initialData={{
             status: columnName,

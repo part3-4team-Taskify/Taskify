@@ -4,7 +4,6 @@ import clsx from "clsx";
 import Image from "next/image";
 
 interface CardButtonProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
-  fullWidth?: boolean;
   title?: string;
   showCrown?: boolean;
   color?: string;
@@ -16,7 +15,6 @@ interface CardButtonProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
 }
 
 const CardButton: React.FC<CardButtonProps> = ({
-  fullWidth,
   className,
   title = "비브리지",
   showCrown = true,

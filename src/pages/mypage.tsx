@@ -36,10 +36,14 @@ export default function MyPage() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <SideMenu teamId={TEAM_ID} dashboardList={dashboards} />
-      <div className="flex flex-col flex-1 bg-[var(--color-gray5)]">
+      <SideMenu
+        teamId={TEAM_ID}
+        dashboardList={dashboards}
+        onCreateDashboard={() => fetchDashboards()}
+      />
+      <div className="flex flex-col flex-1 overflow-hidden bg-[var(--color-gray5)]">
         <HeaderMyPage variant="mypage" />
-        <div className="flex flex-col justify-start overflow-auto w-full px-6 mt-6">
+        <div className="flex flex-col justify-start w-full px-6 mt-6">
           {/*돌아가기 버튼*/}
           <div className="flex gap-[8px]">
             <Image
