@@ -21,7 +21,7 @@ export const createColumn = async ({
 
 // 칼럼 목록 조회
 export const getColumns = async ({ dashboardId }: { dashboardId: number }) => {
-  const res = await axiosInstance.get(apiRoutes.columns(TEAM_ID), {
+  const res = await axiosInstance.get(apiRoutes.columns(), {
     params: {
       dashboardId,
     },
@@ -56,7 +56,7 @@ export const getColumn = async ({
   dashboardId: number;
   columnId: number;
 }) => {
-  const res = await axiosInstance.get(apiRoutes.columns(TEAM_ID), {
+  const res = await axiosInstance.get(apiRoutes.columns(), {
     params: {
       dashboardId,
     },

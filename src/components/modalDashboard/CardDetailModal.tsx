@@ -70,31 +70,14 @@ export default function CardDetailPage({
 
       setTimeout(() => {
         router.reload();
-      }, 1500);
+      }, 1700);
     },
   });
-  const initialData = {
-    title: card.title,
-    description: card.description,
-    dueDate: card.dueDate,
-    tags: card.tags,
-    assignee: card.assignee,
-  };
 
   const handleClose = () => {
     onClose();
-
-    const hasChanged =
-      cardData.title !== initialData.title ||
-      cardData.description !== initialData.description ||
-      !isEqual(cardData.dueDate, initialData.dueDate) ||
-      JSON.stringify(cardData.tags) !== JSON.stringify(initialData.tags) ||
-      JSON.stringify(cardData.assignee) !==
-        JSON.stringify(initialData.assignee);
-    if (hasChanged) {
-      router.reload(); // 수정된 게 있을 경우만 새로고침
-    }
   };
+
   const handleCommentSubmit = () => {
     if (!commentText.trim()) return;
     createCommentMutate({
@@ -210,10 +193,11 @@ export default function CardDetailPage({
               description: data.description,
               dueDate: data.deadline,
               tags: data.tags,
-              imageUrl: data.image ?? "",
+              imageUrl: data.image || undefined,
             });
 
             setIsEditModalOpen(false);
+            router.reload();
           }}
           initialData={{
             status: columnName,
