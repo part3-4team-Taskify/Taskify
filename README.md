@@ -1,36 +1,72 @@
 <div style="text-align: center;">
-  <a href="여기에 vercel 주소 올려주시면 됩니다.">
-    <img alt="Taskify" src='/images/landing_hero' width="200" height="200">
+  <a href="https://taskify-theta-plum.vercel.app/">
+    <img alt="Taskify" src='public/images/landing_hero.png' width="350" height="200">
   </a>
 </div>
 
-- Taskify 일정관리
-- 개발 기간 : 25.03.18 ~ 25.03.03
+- Taskify 일정관리 서비스
+- 개발 기간 : 25.03.18 ~ 25.04.04
 
 # Team
 
+### 황혜진 👑
 
-## 황혜진
-
-- 팀장님!
-- 담당하신 내역 써주시면 수정하겟습니다.
-
-## 김교연
-
-- 
-
-## 임용균
+- 팀장
+- 컴포넌트 작성 Button, Modal, Columns, card 
+- button, Modal 컴포넌트의 반응형 및 수정이 용이한 작성
+- card, CardList, Column 의 바닥감지 무한스크롤 기능
+- 아이디별 대시보드 페이지에서 카드 동적 랜더링
+- Modal 생성/삭제/상세조회 모달 기반 UI 작성
 
 
-- 
+### 임용균
 
-## 조민지
+- 프로젝트 세팅
+- 컴포넌트 작성 Input, SideMenu, TodoModal, TaskModal
+- 페이지 작성 landing, MyDashboard
+- SideMenu 접기/펴기 기능 및 반응형
+- MyDashboard Page 검색어 기반 필터링 및 페이지네이션 연동
+- TodoModal, TaskModal Api 연동 및 업로드 기능 구현
 
-- 
 
-## 정종우
+### 조민지
 
-- 
+- globals.css, custom toast
+- 컴포넌트 작성 Gnb
+- 페이지 작성 login/signup
+- login/logout 전역상태 관리 Zustand, UseAuthGuard
+- 대시보드 관리모드 삭제/수정 기능
+- 대시보드 멤버 목록 드롭다운 메뉴 기능
+- 404 페이지 작성
+
+
+### 김교연
+
+- 컴포넌트 작성 invited/ MemberList, inviteRecords, invitedDashBoard, card, Modal
+- invitedDashBoard 검색, 무한스크롤, 데이터 별 컴포넌트 분리
+- MemberList 프로필이미지 출력, Modal 대시보드 이름 변경 기능
+- 카드 프로필 및 비밀번호 변경
+- 대시보드 수정 페이지- 이름 변경, 구성원 관리, 대시보드 초대, 삭제 기능 디자인 및 기능
+- toast 알람으로 피드백 추가
+
+
+### 조민지
+
+- globals.css, custom toast
+- 컴포넌트 작성 Gnb
+- 페이지 작성 login/signup
+- login/logout 전역상태 관리 Zustand, UseAuthGuard
+- 대시보드 관리모드 삭제/수정 기능
+- 대시보드 멤버 목록 드롭다운 메뉴 기능
+- 404 페이지 작성
+
+### 정종우
+
+- apiRoutes 설정
+- 컴포넌트 작성 ModalDashBoard, Button(card, Columns,Todo)
+- 페이지 작성 mypage
+- mypage 프로필 변경, 비밀번호 변경 기능 작성
+- 대시보드 카드 모달 삭제기능
 
 # Images
 
@@ -50,13 +86,11 @@
 
 
 
-<img alt="Tailwind CSS" src ="https://img.shields.io/badge/Tailwind_CSS-06B6D4.svg?&style=for-the-badge&logo=tailwindcss&logoColor=white"/> <img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="Next.js" src ="https://img.shields.io/badge/Next.js-000000.svg?&style=for-the-badge&logo=Next.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img alt="Tailwind CSS" src ="https://img.shields.io/badge/Tailwind_CSS-06B6D4.svg?&style=for-the-badge&logo=tailwindcss&logoColor=white"/> <img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="Next.js" src ="https://img.shields.io/badge/Next.js-000000.svg?&style=for-the-badge&logo=Next.js&logoColor=white"/>
 
 ## Libraries
 
-<img alt="Axios" src ="https://img.shields.io/badge/Axios-5429e4.svg?&logo=Axios&logoColor=white&style=for-the-badge"/>
-<img alt="clsx" src ="https://img.shields.io/badge/clsx-CB3837.svg?&style=for-the-badge"/>
-<img alt="tailwind-scrollbar-hide" src ="https://img.shields.io/badge/tailwind_scrollbar_hide-06B6D4.svg?&style=for-the-badge"/>
+<img alt="Axios" src ="https://img.shields.io/badge/Axios-5429e4.svg?&logo=Axios&logoColor=white&style=for-the-badge"/> <img alt="clsx" src ="https://img.shields.io/badge/clsx-CB3837.svg?&style=for-the-badge"/> 
 
 
 # Package Structure

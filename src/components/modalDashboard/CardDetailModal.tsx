@@ -12,7 +12,6 @@ import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-
 interface CardDetailModalProps {
   card: CardDetailType;
   currentUserId: number;
