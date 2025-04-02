@@ -66,7 +66,7 @@ export default function InviteDashboard({ onClose }: { onClose?: () => void }) {
         email,
       });
 
-      toast.success("초대를 성공했습니다.");
+      toast.success("멤버 초대에 성공했습니다.");
       onClose?.();
 
       setTimeout(() => {
