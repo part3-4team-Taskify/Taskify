@@ -2,6 +2,9 @@
 import Image from "next/image";
 import { CardDetailType } from "@/types/cards";
 import { ProfileIcon } from "./profelicon";
+import ColorTagChip, {
+  getTagColor,
+} from "@/components/modalInput/chips/ColorTagChip";
 
 interface CardDetailProps {
   card: CardDetailType;
@@ -47,7 +50,7 @@ export default function CardDetail({ card, columnName }: CardDetailProps) {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 mb-2">
+      <div className="flex items-center gap-2 mb-2">
         <span
           className="rounded-full bg-violet-200 px-3 py-1 text-sm text-violet-800"
           title={`상태: ${columnName}`}
@@ -55,15 +58,14 @@ export default function CardDetail({ card, columnName }: CardDetailProps) {
           {columnName}
         </span>
         <span className="text-2xl font-extralight text-[#D9D9D9]">|</span>
-        {card.tags.map((tag, idx) => (
-          <span
-            key={idx}
-            className="rounded-full bg-gray-200 px-3 py-1 text-sm text-gray-700"
-          >
-            {}
-            {tag}
-          </span>
-        ))}
+        {card.tags.map((tag, idx) => {
+          const { textColor, bgColor } = getTagColor(idx);
+          return (
+            <ColorTagChip key={idx} className={`${textColor} ${bgColor}`}>
+              {tag}
+            </ColorTagChip>
+          );
+        })}
       </div>
       <p
         className="text-gray-700 p-2 break-words overflow-auto"

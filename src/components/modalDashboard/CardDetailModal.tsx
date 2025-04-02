@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useMemo, useRef, useState } from "react";
 import { MoreVertical, X } from "lucide-react";
 import CardDetail from "./CardDetail";
@@ -10,6 +11,7 @@ import type { CardDetailType } from "@/types/cards";
 import TaskModal from "@/components/modalInput/TaskModal";
 import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
+import { useRouter } from "next/router";
 
 interface CardDetailModalProps {
   card: CardDetailType;
@@ -36,6 +38,7 @@ export default function CardDetailPage({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const queryClient = useQueryClient();
   const popupRef = useRef(null);
+  const router = useRouter();
   useClosePopup(popupRef, () => setShowMenu(false));
 
   const { data: columns = [] } = useQuery<ColumnType[]>({
@@ -125,7 +128,13 @@ export default function CardDetailPage({
               )}
             </div>
 
-            <button onClick={onClose} title="닫기">
+            <button
+              onClick={() => {
+                onClose();
+                router.reload(); // ✅ Next.js 방식 리로드
+              }}
+              title="닫기"
+            >
               <X className="w-7 h-7 flex items-center justify-center hover:cursor-pointer" />
             </button>
           </div>
@@ -170,8 +179,12 @@ export default function CardDetailPage({
           columnId={card.columnId} // ✅ 여기에 columnId 추가!
           onClose={() => setIsEditModalOpen(false)}
           onSubmit={async (data) => {
+            const matchedColumn = columns.find(
+              (col) => col.title === data.status
+            ); // title → id
+
             await updateCardMutate({
-              status: String(cardData.columnId) || cardData.status,
+              columnId: matchedColumn?.id, // ✅ columnId로 넘기기!
               assignee: { ...cardData.assignee, nickname: data.assignee },
               title: data.title,
               description: data.description,
@@ -179,10 +192,11 @@ export default function CardDetailPage({
               tags: data.tags,
               imageUrl: data.image ?? "",
             });
-            setIsEditModalOpen(false); // 수정 후 모달 닫기
+
+            setIsEditModalOpen(false);
           }}
           initialData={{
-            status: cardData.status,
+            status: columnName,
             assignee: cardData.assignee.nickname,
             title: cardData.title,
             description: cardData.description,
