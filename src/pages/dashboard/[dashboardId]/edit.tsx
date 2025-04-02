@@ -65,10 +65,9 @@ export default function EditDashboard() {
         onCreateDashboard={() => fetchDashboards()}
       />
 
-      <div className="flex flex-col flex-1">
-        <div className="flex flex-col">
-          <HeaderDashboardEdit variant="edit" dashboardId={dashboardId} />
-        </div>
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <HeaderDashboardEdit variant="edit" dashboardId={dashboardId} />
+
         <div
           className="overflow-auto flex-1 px-[50px] pt-[10px] pb-10"
           style={{ backgroundColor: "var(--color-gray5)" }}
@@ -101,10 +100,10 @@ export default function EditDashboard() {
             <InviteRecords dashboardId={dashboardIdString || ""} />{" "}
             {/* undefined일 경우 빈 문자열로 전달*/}
           </div>
-          <div className="flex mt-15 sm:mt-0">
+          <div className="flex mt-15 sm:mt-0 ml-6">
             <button
               onClick={openModal}
-              className="text-base sm:text-lg cursor-pointer w-[320px] h-[62px] text-black3 rounded-[8px] border-[1px] border-[var(--color-gray3)] hover:scale-105 transition-transform duration-200"
+              className="text-base sm:text-lg cursor-pointer w-[284px] h-[52px] sm:w-[320px] sm:h-[62px] text-black3 rounded-[8px] border-[1px] border-[var(--color-gray3)] hover:scale-105 transition-transform duration-200"
             >
               대시보드 삭제하기
             </button>
