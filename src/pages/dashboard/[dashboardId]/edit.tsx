@@ -69,7 +69,7 @@ export default function EditDashboard() {
         <HeaderDashboardEdit variant="edit" dashboardId={dashboardId} />
 
         <div
-          className="overflow-auto flex-1 px-[50px] pt-[10px] pb-10"
+          className="overflow-auto flex-1 px-[20px] pt-[10px] pb-10"
           style={{ backgroundColor: "var(--color-gray5)" }}
         >
           <div className="mt-6">
