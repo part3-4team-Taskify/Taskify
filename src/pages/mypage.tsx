@@ -41,9 +41,9 @@ export default function MyPage() {
         dashboardList={dashboards}
         onCreateDashboard={() => fetchDashboards()}
       />
-      <div className="flex flex-col flex-1 bg-[var(--color-gray5)]">
+      <div className="flex flex-col flex-1 overflow-hidden bg-[var(--color-gray5)]">
         <HeaderMyPage variant="mypage" />
-        <div className="flex flex-col justify-start overflow-auto w-full px-6 mt-6">
+        <div className="flex flex-col justify-start w-full px-6 mt-6">
           {/*돌아가기 버튼*/}
           <div className="flex gap-[8px]">
             <Image
