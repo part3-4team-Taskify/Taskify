@@ -44,7 +44,7 @@ export default function ChangePassword() {
     setIsSubmitting(false);
     setTimeout(() => {
       router.reload();
-    }, 1700);
+    }, 1500);
   };
 
   return (
