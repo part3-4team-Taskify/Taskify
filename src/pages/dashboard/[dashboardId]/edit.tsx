@@ -59,7 +59,11 @@ export default function EditDashboard() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <SideMenu teamId={TEAM_ID} dashboardList={dashboardList} />
+      <SideMenu
+        teamId={TEAM_ID}
+        dashboardList={dashboardList}
+        onCreateDashboard={() => fetchDashboards()}
+      />
 
       <div className="flex flex-col flex-1">
         <div className="flex flex-col">
