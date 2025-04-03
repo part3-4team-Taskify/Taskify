@@ -31,13 +31,14 @@
 
 ### 조민지
 
-- globals.css, custom toast
+- Style: globals.css, custom toast
 - 컴포넌트 작성 Gnb
 - 페이지 작성 login/signup
-- login/logout 전역상태 관리 Zustand, UseAuthGuard
-- 대시보드 관리모드 삭제/수정 기능
+- login/logout 전역 상태 관리 -Zustand, UseAuthGuard
+- mydashboard에 대시보드 편집 모드 추가
 - 대시보드 멤버 목록 드롭다운 메뉴 기능
 - 404 페이지 작성
+- QA
 
 
 ### 김교연
@@ -49,17 +50,6 @@
 - 대시보드 수정 페이지- 이름 변경, 구성원 관리, 대시보드 초대, 삭제 기능 디자인 및 기능
 - toast 알람으로 피드백 추가
 
-
-### 조민지
-
-- globals.css, custom toast
-- 컴포넌트 작성 Gnb
-- 페이지 작성 login/signup
-- login/logout 전역상태 관리 Zustand, UseAuthGuard
-- 대시보드 관리모드 삭제/수정 기능
-- 대시보드 멤버 목록 드롭다운 메뉴 기능
-- 404 페이지 작성
-
 ### 정종우
 
 - apiRoutes 설정
@@ -67,6 +57,7 @@
 - 페이지 작성 mypage
 - mypage 프로필 변경, 비밀번호 변경 기능 작성
 - 대시보드 카드 모달 삭제기능
+
 
 # Images
 
