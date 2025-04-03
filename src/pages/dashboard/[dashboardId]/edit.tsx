@@ -100,7 +100,7 @@ export default function EditDashboard() {
             <InviteRecords dashboardId={dashboardIdString || ""} />{" "}
             {/* undefined일 경우 빈 문자열로 전달*/}
           </div>
-          <div className="flex mt-15 sm:mt-0 ml-6">
+          <div className="flex mt-6 sm:mt-0">
             <button
               onClick={openModal}
               className="text-base sm:text-lg cursor-pointer w-[284px] h-[52px] sm:w-[320px] sm:h-[62px] text-black3 rounded-[8px] border-[1px] border-[var(--color-gray3)] hover:scale-105 transition-transform duration-200"
