@@ -117,7 +117,7 @@ export default function Input(props: InputProps) {
           className={clsx(
             "peer flex h-[50px] w-full max-w-[520px] px-2 sm:px-4 py-2 rounded-lg transition-colors duration-200",
             "border border-[var(--color-gray3)] focus:border-[var(--primary)] focus:ring-0 focus:outline-none",
-            isInvalid
+            isInvalid || forceInvalid
               ? "border-[var(--color-red)] focus:border-[var(--color-red)]"
               : "",
             type === "password"
