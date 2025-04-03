@@ -5,7 +5,6 @@ import { getUserInfo } from "@/api/users";
 import { postAuthData } from "@/api/auth";
 import Link from "next/link";
 import Input from "@/components/input/Input";
-import { apiRoutes } from "@/api/apiRoutes";
 import { toast } from "react-toastify";
 
 export default function LoginPage() {
