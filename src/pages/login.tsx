@@ -28,8 +28,6 @@ export default function LoginPage() {
     const { email, password } = values;
 
     try {
-      // 배포 테스트
-      console.log("로그인 요청 URL:", apiRoutes.login());
       const response = await postAuthData({ email, password });
       const token = response.accessToken;
       localStorage.setItem("accessToken", token);
