@@ -26,8 +26,16 @@ export default function ProfileCard() {
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const MAX_IMAGE_SIZE = 3.5 * 1024 * 1024;
+
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
+
+      if (file.size > MAX_IMAGE_SIZE) {
+        toast.error("3.5MB 이하의 이미지만 업로드할 수 있습니다.");
+        return;
+      }
+
       setPreview(URL.createObjectURL(file)); // 미리보기
 
       try {
@@ -42,6 +50,7 @@ export default function ProfileCard() {
       }
     }
   };
+
   const handleSave = async () => {
     if (!nickname || !image) return;
 

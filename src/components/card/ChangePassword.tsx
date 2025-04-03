@@ -12,7 +12,7 @@ export default function ChangePassword() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isPasswordMismatch =
-    newPassword && checkNewpassword && newPassword !== checkNewpassword;
+    !!checkNewpassword && checkNewpassword !== newPassword;
   const isDisabled =
     !password ||
     !newPassword ||
@@ -88,10 +88,15 @@ export default function ChangePassword() {
           placeholder="새 비밀번호 입력"
           value={checkNewpassword}
           onChange={(value) => setCheckNewPassword(value)}
-          forceInvalid={!!checkNewpassword && checkNewpassword !== newPassword}
+          forceInvalid={isPasswordMismatch}
           invalidMessage="비밀번호가 일치하지 않습니다."
           className="max-w-[624px]"
         />
+        {checkNewpassword && checkNewpassword !== newPassword && (
+          <p className="font-14r block text-[var(--color-red)]">
+            비밀번호가 일치하지 않습니다.
+          </p>
+        )}
 
         <button
           className={`w-full h-[54px] 
@@ -106,12 +111,6 @@ export default function ChangePassword() {
         >
           변경
         </button>
-
-        {checkNewpassword && checkNewpassword !== newPassword && (
-          <p className="font-14r block text-[var(--color-red)]">
-            비밀번호가 일치하지 않습니다.
-          </p>
-        )}
       </div>
     </div>
   );

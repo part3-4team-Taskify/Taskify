@@ -5,7 +5,6 @@ import { getUserInfo } from "@/api/users";
 import { postAuthData } from "@/api/auth";
 import Link from "next/link";
 import Input from "@/components/input/Input";
-import { apiRoutes } from "@/api/apiRoutes";
 import { toast } from "react-toastify";
 
 export default function LoginPage() {
@@ -28,8 +27,6 @@ export default function LoginPage() {
     const { email, password } = values;
 
     try {
-      // 배포 테스트
-      console.log("로그인 요청 URL:", apiRoutes.login());
       const response = await postAuthData({ email, password });
       const token = response.accessToken;
       localStorage.setItem("accessToken", token);
