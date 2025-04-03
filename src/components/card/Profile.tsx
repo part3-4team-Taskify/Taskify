@@ -32,7 +32,7 @@ export default function ProfileCard() {
       const file = event.target.files[0];
 
       if (file.size > MAX_IMAGE_SIZE) {
-        toast.error("3.5MB 이하의 이미지만 업로드할 수 있습니다.");
+        toast.error("3.5MB 이하만 등록 가능합니다.");
         return;
       }
 
