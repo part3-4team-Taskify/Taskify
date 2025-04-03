@@ -18,7 +18,12 @@
 }
 
 .Toastify__toast {
-  width: 250px !important;
+  width: fit-content !important;
+  max-width: 380px !important;
+  white-space: normal !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  word-break: keep-all; /* 단어 단위로 줄바꿈 */
   border-radius: 16px;
   background-color: #f3f0ff !important;
   padding: 14px 18px;
