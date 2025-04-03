@@ -22,8 +22,8 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           onClick={onPrev}
           disabled={currentPage === 1}
-          className={`w-9 sm:w-10 h-9 sm:h-10 flex justify-center items-center border-r border-gray-300 hover:bg-gray-100 
-            ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+          className={`w-9 sm:w-10 h-9 sm:h-10 flex justify-center items-center border-r border-gray-300
+            ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-gray-100"}`}
         >
           <img
             src="/svgs/arrow_backward_white.svg"

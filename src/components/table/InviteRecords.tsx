@@ -100,7 +100,7 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
   };
 
   return (
-    <div className="lg:w-[620px] lg:h-[404px] w-[284px] h-[337px] sm:w-[544px] sm:h-[404px] relative p-6 rounded-lg bg-white">
+    <div className="lg:w-[620px] w-[284px] sm:w-[544px] min:h-[337px] sm:h-[430px] relative p-6 rounded-lg bg-white">
       <div className="flex justify-between items-start sm:items-center">
         {/* 제목 */}
         <p className="md:text-[24px] text-[20px] text-xl font-bold">

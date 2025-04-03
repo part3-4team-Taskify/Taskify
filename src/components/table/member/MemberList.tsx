@@ -62,7 +62,7 @@ const MemberList: React.FC<HeaderBebridgeProps> = ({ dashboardId }) => {
   }, [dashboardId]);
 
   return (
-    <div className="lg:w-[620px] lg:h-[404px] w-[284px] h-[337px] sm:w-[544px] sm:h-[404px] relative p-6 rounded-lg bg-white">
+    <div className="lg:w-[620px] lg:h-[404px] w-[284px] min:h-[337px] sm:w-[544px] sm:h-[404px] relative p-6 rounded-lg bg-white">
       <div className="flex justify-between items-center">
         <p className="text-xl sm:text-2xl font-bold">구성원</p>
         <Pagination
