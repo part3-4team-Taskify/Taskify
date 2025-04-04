@@ -144,7 +144,7 @@ export default function MyDashboardPage() {
           onToggleEditMode={() => setIsEditMode((prev) => !prev)}
         />
 
-        <main className="flex-col overflow-auto px-[25px] pt-10 pb-10 bg-[#f9f9f9] ">
+        <main className="flex-col overflow-auto px-[25px] py-5 sm:py-10 bg-[#f9f9f9] ">
           {/* 검색 입력창 */}
           <section className="w-full overflow-hidden transition-all">
             <div className="min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px] mb-3">
