@@ -64,7 +64,7 @@ const CardButton: React.FC<CardButtonProps> = ({
         "border border-[var(--color-gray3)]",
         "min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px]",
         "h-[58px] md:h-[68px] lg:h-[70px]",
-        "mt-[10px] md:mt-[16px] lg:mt-[20px]",
+        "mt-[2px]", // 카드 세로 간격
         "text-lg md:text-2lg lg:text-2lg",
         isEditMode
           ? "cursor-default hover:border-gray-300"

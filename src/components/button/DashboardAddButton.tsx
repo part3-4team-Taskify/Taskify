@@ -13,7 +13,7 @@ const DashboardAddButton: React.FC<
         "border border-gray-300 hover:border-purple-500",
         "min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px]", // 반응형 너비
         "h-[58px] md:h-[68px] lg:h-[70px]", // 반응형 높이
-        "mt-[10px] md:mt-[16px] lg:mt-[20px]", // 여백
+        "mt-[2px]", // 여백
         "text-lg md:text-2lg lg:text-2lg",
         "cursor-pointer",
         className

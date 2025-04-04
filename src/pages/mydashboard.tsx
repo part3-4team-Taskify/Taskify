@@ -144,10 +144,10 @@ export default function MyDashboardPage() {
           onToggleEditMode={() => setIsEditMode((prev) => !prev)}
         />
 
-        <main className="flex-col overflow-auto px-[25px] pt-[40px] pb-10 bg-[#f9f9f9] ">
+        <main className="flex-col overflow-auto px-[25px] pt-10 pb-10 bg-[#f9f9f9] ">
           {/* 검색 입력창 */}
           <section className="w-full overflow-hidden transition-all">
-            <div className="min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px]">
+            <div className="min-w-0 w-full max-w-[260px] md:max-w-[247px] lg:max-w-[332px] mb-3">
               <div className="relative flex items-center justify-end">
                 <input
                   type="text"
@@ -170,13 +170,13 @@ export default function MyDashboardPage() {
 
           {/* 카드 영역 */}
           <section className="w-full max-w-[260px] sm:max-w-[504px] lg:max-w-[1022px]">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[8px] md:gap-[10px] lg:gap-[13px]">
               {currentItems.map((item, index) => (
                 <div key={index}>{item}</div>
               ))}
             </div>
             {totalPages > 1 && (
-              <div className="w-full flex justify-end items-center mt-1.5">
+              <div className="w-full flex justify-end items-center mt-3">
                 <span className="font-14r text-black3 px-[8px] whitespace-nowrap">
                   {`${totalPages} 페이지 중 ${currentPage}`}
                 </span>
@@ -196,7 +196,7 @@ export default function MyDashboardPage() {
 
           {/* 초대받은 대시보드 */}
           <section className="w-full">
-            <div className="mt-[50px]">
+            <div className="mt-[25px]">
               <InvitedDashBoard />
             </div>
           </section>
