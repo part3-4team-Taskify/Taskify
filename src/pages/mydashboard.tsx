@@ -168,8 +168,8 @@ export default function MyDashboardPage() {
             </div>
           </section>
 
-          {/* 카드 영역 */}
           <section className="w-full max-w-[260px] sm:max-w-[504px] lg:max-w-[1022px]">
+            {/* 카드 영역 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[8px] md:gap-[10px] lg:gap-[13px]">
               {currentItems.map((item, index) => (
                 <div key={index}>{item}</div>
@@ -192,10 +192,7 @@ export default function MyDashboardPage() {
                 />
               </div>
             )}
-          </section>
-
-          {/* 초대받은 대시보드 */}
-          <section className="w-full">
+            {/* 초대받은 대시보드 */}
             <div className="mt-[25px]">
               <InvitedDashBoard />
             </div>
