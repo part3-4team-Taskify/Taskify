@@ -1,6 +1,11 @@
-import React, { useState } from "react";
-import Head from "next/head";
+import Footer from "@/components/landing/Footer";
+import LandingMain from "@/components/landing/LandingMain";
 
-export default function Document() {
-  return <div>Hello</div>;
+export default function Home() {
+  return (
+    <>
+      <LandingMain />
+      <Footer />
+    </>
+  );
 }
