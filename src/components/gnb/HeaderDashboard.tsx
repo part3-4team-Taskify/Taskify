@@ -138,7 +138,8 @@ const HeaderDashboard: React.FC<HeaderDashboardProps> = ({
         <div className="flex font-bold items-center gap-[8px]">
           <p
             className={clsx(
-              "text-[16px] sm:text-[20px] text-black3 whitespace-nowrap",
+              "text-[16px] sm:text-[20px] text-black3",
+              "whitespace-nowrap truncate max-w-[100px] md:max-w-[400px]",
               variant !== "mydashboard" && variant !== "mypage"
                 ? "hidden lg:block"
                 : ""
