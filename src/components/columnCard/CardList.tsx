@@ -68,7 +68,10 @@ export default function CardList({
 
   /* 무한 스크롤 */
   useEffect(() => {
-    if (!observerRef.current) return;
+    const scrollContainer = document.getElementById(
+      `scroll-column-${columnId}`
+    );
+    if (!scrollContainer || !hasMore) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -76,10 +79,10 @@ export default function CardList({
           fetchMoreCards();
         }
       },
-      { threshold: 0.5 }
+      { root: scrollContainer, threshold: 0.5 }
     );
 
-    observer.observe(observerRef.current);
+    if (observerRef.current) observer.observe(observerRef.current);
 
     return () => observer.disconnect();
   }, [fetchMoreCards, hasMore]);
@@ -94,7 +97,7 @@ export default function CardList({
           onClick={() => onCardClick(task)}
         />
       ))}
-      {hasMore && <div ref={observerRef} className="h-20 " />}
+      {hasMore && <div ref={observerRef} className="h-15" />}
     </div>
   );
 }

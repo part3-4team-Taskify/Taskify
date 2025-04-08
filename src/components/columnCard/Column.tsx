@@ -99,11 +99,12 @@ export default function Column({
 
   return (
     <div
+      id={`scroll-column-${columnId}`}
       className={`
-      flex flex-col border-r border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px] p-4
-      h-auto sm:m-h-screen overflow-y-auto overflow-x-hidden mr-4 mb-4
-      max-h-[401px] sm:max-h-none w-full lg:w-[360px]
-    `}
+      flex flex-col border-r border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
+      overflow-auto p-4 mr-4 mb-4
+      max-h-[401px] md:max-h-none w-full lg:w-[360px] shrink-0
+      `}
     >
       {/* 칼럼 헤더 */}
       <div className="flex items-center justify-between">
@@ -133,7 +134,7 @@ export default function Column({
         </div>
 
         {/* 무한스크롤 카드 리스트로 대체 */}
-        <div className="w-full max-h-[800px] overflow-y-auto">
+        <div className="w-full">
           <CardList
             columnId={columnId}
             teamId={TEAM_ID}
