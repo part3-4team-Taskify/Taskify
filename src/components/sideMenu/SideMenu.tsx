@@ -132,7 +132,7 @@ export default function SideMenu({
           {/* 대시보드 타이틀 + 추가 버튼 */}
           {!isCollapsed && (
             <div className="mb-4 flex items-center justify-between px-3 md:px-2">
-              <span className="hidden md:block font-12sb text-[var(--color-black)]">
+              <span className="hidden md:block font-12sb text-[var(--color-gray1)]">
                 Dash Boards
               </span>
               <button
