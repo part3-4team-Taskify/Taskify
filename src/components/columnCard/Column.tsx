@@ -100,8 +100,8 @@ export default function Column({
   return (
     <div
       className={`
-      flex flex-col shrink-0 overflow-hidden p-4 mr-4 mb-4
-      border-r border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
+      flex flex-col shrink-0 overflow-hidden p-4 mr-4 lg:my-0 mb-4
+      border border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
       max-h-[401px] lg:max-h-none w-full lg:w-[360px]
       `}
     >
@@ -109,8 +109,9 @@ export default function Column({
       <div className="shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold">
-              <span className="text-[var(--primary)]">•</span> {columnTitle}
+            <Image src="/svgs/ellipse.svg" alt="circle" width={8} height={8} />
+            <h2 className="text-black3 text-[16px] md:text-[18px] font-bold">
+              {columnTitle}
             </h2>
             <span className="w-5 h-5 text-sm bg-gray-200 text-gray-700 rounded-[4px] flex items-center justify-center ">
               {tasks.length}

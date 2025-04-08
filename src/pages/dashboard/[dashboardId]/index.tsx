@@ -112,9 +112,8 @@ export default function Dashboard() {
         <HeaderDashboard variant="dashboard" dashboardId={dashboardId} />
 
         <main
-          className="flex flex-1 flex-col min-h-0 lg:flex-row
-        bg-white pl-6 pt-6
-        overflow-y-auto"
+          className="flex flex-1 flex-col min-h-0 lg:flex-row overflow-y-auto
+        bg-white pl-6 py-6"
         >
           {/* 칼럼 가로 스크롤 영역 */}
           <div
@@ -133,21 +132,12 @@ export default function Dashboard() {
                 dashboardId={Number(dashboardId)}
               />
             ))}
+            {/* ColumnsButton: 모바일/태블릿에서는 하단 고정, 데스크탑에서는 원래 위치 */}
+            <div className={`p-11 hidden lg:block bg-white`}>
+              <ColumnsButton onClick={openModal} />
+            </div>
           </div>
 
-          {/* ColumnsButton: 모바일/태블릿에서는 하단 고정, 데스크탑에서는 원래 위치 */}
-          <div className={`p-11 hidden lg:block bg-white`}>
-            <ColumnsButton onClick={openModal} />
-          </div>
-
-          {/* fixed 버튼 (모바일, 태블릿용) */}
-          <div
-            className={`
-    fixed bottom-0 left-0 w-full p-3 z-10 bg-white border-t border-gray-200
-    flex justify-center lg:hidden`}
-          >
-            <ColumnsButton onClick={openModal} />
-          </div>
           {/* 칼럼 추가 모달 */}
           {isAddColumnModalOpen && (
             <AddColumnModal
@@ -181,6 +171,15 @@ export default function Dashboard() {
             />
           )}
         </main>
+        <div className="h-[100px] lg:hidden shrink-0" />
+        {/* fixed 버튼 (모바일, 태블릿용) */}
+        <div
+          className={`z-10 fixed bottom-0 left-0 w-full p-3 
+            bg-white border-t border-gray-200 
+            flex justify-center lg:hidden`}
+        >
+          <ColumnsButton onClick={openModal} />
+        </div>
       </div>
     </div>
   );
