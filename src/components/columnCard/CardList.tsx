@@ -68,10 +68,7 @@ export default function CardList({
 
   /* 무한 스크롤 */
   useEffect(() => {
-    const scrollContainer = document.getElementById(
-      `scroll-column-${columnId}`
-    );
-    if (!scrollContainer || !hasMore) return;
+    if (!observerRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -79,16 +76,16 @@ export default function CardList({
           fetchMoreCards();
         }
       },
-      { root: scrollContainer, threshold: 0.5 }
+      { threshold: 0.5 }
     );
 
-    if (observerRef.current) observer.observe(observerRef.current);
+    observer.observe(observerRef.current);
 
     return () => observer.disconnect();
   }, [fetchMoreCards, hasMore]);
 
   return (
-    <div className="grid gap-3 w-full grid-cols-1 overflow-x-hidden">
+    <div className="grid gap-3 w-full grid-cols-1">
       {cards.map((task) => (
         <Card
           key={task.id}
@@ -97,7 +94,7 @@ export default function CardList({
           onClick={() => onCardClick(task)}
         />
       ))}
-      {hasMore && <div ref={observerRef} className="h-15" />}
+      {hasMore && <div ref={observerRef} className="h-20" />}
     </div>
   );
 }
