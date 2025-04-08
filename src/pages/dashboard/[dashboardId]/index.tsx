@@ -133,7 +133,7 @@ export default function Dashboard() {
               />
             ))}
             {/* ColumnsButton: 모바일/태블릿에서는 하단 고정, 데스크탑에서는 원래 위치 */}
-            <div className={`p-11 hidden lg:block bg-white`}>
+            <div className={`py-10 px-2 hidden lg:block bg-white`}>
               <ColumnsButton onClick={openModal} />
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function Dashboard() {
         <div className="h-[100px] lg:hidden shrink-0" />
         {/* fixed 버튼 (모바일, 태블릿용) */}
         <div
-          className={`z-10 fixed bottom-0 left-0 w-full p-3 
+          className={`z-10 fixed bottom-0 left-[33px] md:left-[80px] w-full p-3
             bg-white border-t border-gray-200 
             flex justify-center lg:hidden`}
         >

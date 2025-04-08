@@ -34,7 +34,7 @@ export default function SideMenu({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const itemsPerPage = 14;
+  const itemsPerPage = 15;
   const totalPages = Math.ceil(dashboardList.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -224,7 +224,7 @@ export default function SideMenu({
 
         {/* 페이지네이션 */}
         {!isCollapsed && dashboardList.length > itemsPerPage && (
-          <div className="flex justify-start items-end mb-9 px-2">
+          <div className="flex justify-start items-end mb-1 px-2">
             <PaginationButton
               direction="left"
               disabled={currentPage === 1}
