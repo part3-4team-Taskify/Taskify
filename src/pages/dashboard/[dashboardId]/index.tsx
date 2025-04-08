@@ -111,7 +111,7 @@ export default function Dashboard() {
       <div className="flex flex-col flex-1 overflow-hidden">
         <HeaderDashboard variant="dashboard" dashboardId={dashboardId} />
 
-        <div className="flex-1 overflow-x-auto flex flex-col md:flex-col lg:flex-row bg-white">
+        <div className="flex-1 overflow-x-auto flex flex-col md:flex-col lg:flex-row bg-white pl-6 pt-6">
           {/* 각 칼럼 렌더링 */}
           {columns.map((col) => (
             <Column

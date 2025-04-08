@@ -85,7 +85,7 @@ export default function CardList({
   }, [fetchMoreCards, hasMore]);
 
   return (
-    <div className="grid gap-3 w-full grid-cols-1">
+    <div className="grid gap-3 w-full grid-cols-1 overflow-x-hidden">
       {cards.map((task) => (
         <Card
           key={task.id}

@@ -100,8 +100,8 @@ export default function Column({
   return (
     <div
       className={`
-      flex flex-col border-r border-[var(--color-gray4)] bg-[#F5F2FC] rounded-md p-4
-      h-auto sm:m-h-screen
+      flex flex-col border-r border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px] p-4
+      h-auto sm:m-h-screen overflow-y-auto overflow-x-hidden mr-4 mb-4
       max-h-[401px] sm:max-h-none w-full lg:w-[360px]
     `}
     >
