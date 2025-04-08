@@ -111,12 +111,17 @@ export default function Dashboard() {
       <div className="flex flex-col flex-1 overflow-hidden">
         <HeaderDashboard variant="dashboard" dashboardId={dashboardId} />
 
-        <main className="flex flex-1 flex-col min-h-0 overflow-x-auto lg:flex-row bg-white pl-6 pt-6">
+        <main
+          className="flex flex-1 flex-col min-h-0 lg:flex-row
+        bg-white pl-6 pt-6
+        overflow-y-auto"
+        >
           {/* 칼럼 가로 스크롤 영역 */}
           <div
             className="flex flex-col lg:flex-row
-          overflow-y-auto lg:overflow-x-auto
-          flex-1 min-h-0"
+          lg:overflow-x-auto
+          flex-1 min-h-0
+          w-[260px] sm:w-[560px]"
           >
             {/* 각 칼럼 렌더링 */}
             {columns.map((col) => (

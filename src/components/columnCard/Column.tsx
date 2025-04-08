@@ -101,13 +101,13 @@ export default function Column({
     <div
       id={`scroll-column-${columnId}`}
       className={`
-      flex flex-col border-r border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
-      overflow-auto p-4 mr-4 mb-4
-      max-h-[401px] md:max-h-none w-full lg:w-[360px] shrink-0
+      flex flex-col overflow-auto shrink-0 p-4 mr-4 mb-4
+      border-r border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
+      max-h-[401px] lg:max-h-none w-full lg:w-[360px]
       `}
     >
       {/* 칼럼 헤더 */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2">
           <h2 className="text-lg font-bold">
             <span className="text-[var(--primary)]">•</span> {columnTitle}
@@ -128,7 +128,7 @@ export default function Column({
       </div>
 
       {/* 카드 영역 */}
-      <div className="flex-1 pb-4 flex flex-col items-center gap-3">
+      <div className="flex-1 flex flex-col items-center pb-4 gap-3">
         <div onClick={() => setIsTodoModalOpen(true)} className="mb-2">
           <TodoButton />
         </div>
