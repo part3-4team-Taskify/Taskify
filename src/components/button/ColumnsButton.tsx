@@ -8,7 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const ColumnsButton: React.FC<ButtonProps> = ({
   fullWidth,
   className,
-  children = "새로운 컬럼 추가하기",
+  children = "새로운 칼럼 추가하기",
   ...props
 }) => {
   return (
