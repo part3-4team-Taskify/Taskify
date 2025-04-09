@@ -10,17 +10,23 @@ import { Search } from "lucide-react";
 
 const ITEMS_PER_PAGE = 6; // 한 번에 보여줄 개수
 
+interface InvitedProps {
+  searchTitle: string;
+  invitationData: Invite[];
+  fetchNextPage: () => void;
+  hasMore: boolean;
+  agreeInvitation?: () => void;
+  onAcceptSuccess?: (inviteId: number) => void;
+}
+
 function InvitedList({
   searchTitle,
   invitationData: invitationData,
   fetchNextPage,
   hasMore,
-}: {
-  searchTitle: string;
-  invitationData: Invite[];
-  fetchNextPage: () => void;
-  hasMore: boolean;
-}) {
+  agreeInvitation,
+  onAcceptSuccess,
+}: InvitedProps) {
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   /* IntersectionObserver 설정 */
@@ -62,10 +68,9 @@ function InvitedList({
     };
     try {
       await axiosInstance.put(apiRoutes.invitationDetail(inviteId), payload);
-      toast.success("대시보드 수락 성공");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      if (agreeInvitation) agreeInvitation();
+      if (onAcceptSuccess) onAcceptSuccess(inviteId);
+      toast.success("초대를 수락했습니다.");
     } catch (error) {
       console.error("수락 실패:", error);
       toast.error("초대 수락에 실패했습니다");
@@ -80,7 +85,7 @@ function InvitedList({
     };
     try {
       await axiosInstance.put(apiRoutes.invitationDetail(inviteId), payload);
-      toast.success("대시보드 거절 성공");
+      toast.success("초대를 거절했습니다.");
       setTimeout(() => {
         window.location.reload();
       }, 1500);
@@ -187,8 +192,13 @@ function InvitedList({
 }
 
 type CursorId = number;
+type InvitedDashBoardProps = {
+  agreeInvitation?: () => void;
+};
 
-export default function InvitedDashBoard() {
+export default function InvitedDashBoard({
+  agreeInvitation,
+}: InvitedDashBoardProps) {
   const { user } = useUserStore();
   const [searchTitle, setSearchTitle] = useState("");
   const [invitationData, setInvitationData] = useState<Map<CursorId, Invite[]>>(
@@ -270,6 +280,19 @@ export default function InvitedDashBoard() {
 
   const invitationArray = Array.from(invitationData.values()).flat();
 
+  const removeInvitation = (inviteId: number) => {
+    setInvitationData((prev) => {
+      const newMap = new Map();
+      for (const [key, list] of prev) {
+        newMap.set(
+          key,
+          list.filter((invite) => invite.id !== inviteId)
+        );
+      }
+      return newMap;
+    });
+  };
+
   return (
     <div>
       {invitationArray.length === 0 ? (
@@ -303,6 +326,8 @@ export default function InvitedDashBoard() {
                 invitationData={invitationArray}
                 fetchNextPage={fetchNextPage}
                 hasMore={hasMore}
+                agreeInvitation={agreeInvitation}
+                onAcceptSuccess={removeInvitation}
               />
             </div>
           </div>
