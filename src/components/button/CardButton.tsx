@@ -12,7 +12,8 @@ interface CardButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   createdByMe?: boolean;
   onDeleteClick?: (id: number) => void;
   onLeaveClick?: (id: number) => void;
-  dragHandleProps?: React.HTMLAttributes<HTMLDivElement>;
+  attributes?: React.HTMLAttributes<HTMLDivElement>;
+  listeners?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const CardButton: React.FC<CardButtonProps> = ({
@@ -25,7 +26,8 @@ const CardButton: React.FC<CardButtonProps> = ({
   createdByMe,
   onDeleteClick,
   onLeaveClick,
-  dragHandleProps,
+  attributes,
+  listeners,
   ...props
 }) => {
   const router = useRouter();
@@ -54,6 +56,8 @@ const CardButton: React.FC<CardButtonProps> = ({
 
   return (
     <div
+      {...attributes}
+      {...listeners}
       {...props}
       onClick={handleCardClick}
       className={clsx(
@@ -90,7 +94,7 @@ const CardButton: React.FC<CardButtonProps> = ({
         )}
       </div>
 
-      {/* 오른쪽: 수정/삭제 버튼 or 드래그 핸들 */}
+      {/* 오른쪽: 수정/삭제 버튼 또는 아이콘 */}
       {isEditMode ? (
         <div className="flex flex-col gap-2">
           {createdByMe && (
@@ -109,15 +113,13 @@ const CardButton: React.FC<CardButtonProps> = ({
           </button>
         </div>
       ) : (
-        <div {...dragHandleProps}>
-          <Image
-            src="/svgs/arrow-forward-black.svg"
-            alt="arrow icon"
-            width={16}
-            height={16}
-            className="ml-2 cursor-grab active:cursor-grabbing"
-          />
-        </div>
+        <Image
+          src="/svgs/arrow-forward-black.svg"
+          alt="arrow icon"
+          width={16}
+          height={16}
+          className="ml-2"
+        />
       )}
     </div>
   );

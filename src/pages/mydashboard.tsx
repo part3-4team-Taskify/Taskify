@@ -58,7 +58,13 @@ export default function MyDashboardPage() {
     useState(false);
   const itemsPerPage = 6;
 
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    })
+  );
 
   const filteredDashboardList = dashboardList.filter((dashboard) =>
     dashboard.title.toLowerCase().includes(searchKeyword.toLowerCase())

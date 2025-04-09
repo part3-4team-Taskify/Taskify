@@ -32,7 +32,8 @@ export default function SortableCardButton({
         color={dashboard.color}
         createdByMe={dashboard.createdByMe}
         {...rest}
-        dragHandleProps={{ ...attributes, ...listeners }}
+        attributes={attributes}
+        listeners={listeners}
       />
     </div>
   );
