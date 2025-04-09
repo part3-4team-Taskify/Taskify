@@ -16,7 +16,7 @@ interface InvitedProps {
   fetchNextPage: () => void;
   hasMore: boolean;
   agreeInvitation?: () => void;
-  onAcceptSuccess?: (inviteId: number) => void;
+  onDecision?: (inviteId: number) => void;
 }
 
 function InvitedList({
@@ -25,7 +25,7 @@ function InvitedList({
   fetchNextPage,
   hasMore,
   agreeInvitation,
-  onAcceptSuccess,
+  onDecision,
 }: InvitedProps) {
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -69,8 +69,8 @@ function InvitedList({
     try {
       await axiosInstance.put(apiRoutes.invitationDetail(inviteId), payload);
       if (agreeInvitation) agreeInvitation();
-      if (onAcceptSuccess) onAcceptSuccess(inviteId);
-      toast.success("초대를 수락했습니다.");
+      if (onDecision) onDecision(inviteId);
+      toast.success("초대가 수락되었습니다.");
     } catch (error) {
       console.error("수락 실패:", error);
       toast.error("초대 수락에 실패했습니다");
@@ -85,10 +85,8 @@ function InvitedList({
     };
     try {
       await axiosInstance.put(apiRoutes.invitationDetail(inviteId), payload);
-      toast.success("초대를 거절했습니다.");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      if (onDecision) onDecision(inviteId);
+      toast.success("초대가 거절되었습니다.");
     } catch (error) {
       console.error("거절 실패:", error);
       toast.error("초대 거절에 실패했습니다");
@@ -327,7 +325,7 @@ export default function InvitedDashBoard({
                 fetchNextPage={fetchNextPage}
                 hasMore={hasMore}
                 agreeInvitation={agreeInvitation}
-                onAcceptSuccess={removeInvitation}
+                onDecision={removeInvitation}
               />
             </div>
           </div>
