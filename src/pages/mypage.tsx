@@ -43,17 +43,12 @@ export default function MyPage() {
       />
       <div className="flex flex-col flex-1 overflow-hidden bg-[#F5F2FC]">
         <HeaderMyPage variant="mypage" />
-        <div className="flex flex-col justify-start overflow-auto w-full px-6 mt-6">
-          {/*돌아가기 버튼*/}
+        <div className="flex flex-col justify-start overflow-auto w-full px-6 mt-6 pb-10">
           <BackButton />
-
-          <div className="flex flex-col items-center lg:items-start gap-6">
-            <div className="mt-6">
-              <ProfileCard />
-            </div>
-            <div className="mb-20">
-              <ChangePassword />
-            </div>
+          {/* 백버튼 아래 전체 아이템 컨테이너 */}
+          <div className="flex flex-col items-center lg:items-start mt-6 gap-6">
+            <ProfileCard />
+            <ChangePassword />
           </div>
         </div>
       </div>
