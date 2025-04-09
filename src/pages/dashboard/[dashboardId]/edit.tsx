@@ -6,7 +6,7 @@ import HeaderDashboardEdit from "@/components/gnb/HeaderDashboard";
 import MemberList from "@/components/table/member/MemberList";
 import SideMenu from "@/components/sideMenu/SideMenu";
 import InviteRecords from "@/components/table/InviteRecords";
-import Image from "next/image";
+import BackButton from "@/components/button/BackButton";
 import { getDashboards } from "@/api/dashboards";
 import DeleteDashboardModal from "@/components/modal/DeleteDashboardModal";
 import { DashboardType } from "@/types/task";
@@ -22,11 +22,6 @@ export default function EditDashboard() {
   const dashboardIdString = Array.isArray(dashboardId)
     ? dashboardId[0]
     : dashboardId;
-
-  /* 돌아가기 버튼 */
-  const goToDashboard = () => {
-    router.back();
-  };
 
   /* 대시보드 삭제 모달 */
   const openModal = () => {
@@ -69,22 +64,11 @@ export default function EditDashboard() {
         <HeaderDashboardEdit variant="edit" dashboardId={dashboardId} />
 
         <div
-          className="overflow-auto flex-1 px-6 pt-[10px] pb-10"
+          className="overflow-auto flex-1 px-6 pb-10"
           style={{ backgroundColor: "#F5F2FC" }}
         >
           <div className="mt-6">
-            <button
-              onClick={goToDashboard}
-              className="cursor-pointer flex items-center gap-2"
-            >
-              <Image
-                src="/svgs/arrow-backward-black.svg"
-                alt="돌아가기"
-                width={20}
-                height={20}
-              />
-              돌아가기
-            </button>
+            <BackButton />
           </div>
 
           <div className="my-5">
