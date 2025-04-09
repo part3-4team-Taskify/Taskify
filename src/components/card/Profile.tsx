@@ -5,26 +5,10 @@ import { getUserInfo, updateProfile, uploadProfileImage } from "@/api/users";
 import Input from "@/components/input/Input";
 import { toast } from "react-toastify";
 
-interface ProfileCardProps {
-  userProfile: {
-    nickname: string;
-    profileImageUrl: string;
-  };
-  setUserProfile: React.Dispatch<
-    React.SetStateAction<{
-      nickname: string;
-      profileImageUrl: string;
-    }>
-  >;
-}
-
-export const ProfileCard = ({
-  userProfile,
-  setUserProfile,
-}: ProfileCardProps) => {
-  const { updateNickname, updateProfileImage } = useUserStore();
-  const [image, setImage] = useState(userProfile.profileImageUrl);
-  const [nickname, setNickname] = useState(userProfile.nickname);
+export const ProfileCard = () => {
+  const { user, updateNickname, updateProfileImage } = useUserStore();
+  const [image, setImage] = useState(user?.profileImageUrl);
+  const [nickname, setNickname] = useState(user?.nickname);
   const [email, setEmail] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -69,11 +53,6 @@ export const ProfileCard = ({
 
   const handleSave = async () => {
     if (!nickname || !image) return;
-
-    const userProfile = {
-      nickname,
-      profileImageUrl: image,
-    };
 
     try {
       await updateProfile({ nickname, profileImageUrl: image });

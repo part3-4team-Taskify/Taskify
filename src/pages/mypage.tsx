@@ -16,10 +16,6 @@ export default function MyPage() {
   const { user, isInitialized } = useAuthGuard();
   const { setUser } = useUserStore();
   const [dashboards, setDashboards] = useState<Dashboard[]>([]);
-  const [userProfile, setUserProfile] = useState({
-    nickname: "",
-    profileImageUrl: "",
-  });
 
   // 사이드메뉴 대시보드 목록 api 호출
   const fetchDashboards = async () => {
@@ -36,14 +32,7 @@ export default function MyPage() {
   const fetchUserData = async () => {
     try {
       const res = await getUserInfo();
-      setUser({
-        id: res.id,
-        email: res.email,
-        nickname: res.nickname,
-        profileImageUrl: res.profileImageUrl,
-        createdAt: res.createdAt,
-        updatedAt: res.updatedAt,
-      });
+      setUser(res);
     } catch (error) {
       console.error("유저 정보 불러오기 실패:", error);
       toast.error("유저 정보를 불러오는 데 실패했습니다.");
@@ -77,10 +66,7 @@ export default function MyPage() {
           </div>
           {/* 백버튼 아래 전체 아이템 컨테이너 */}
           <div className="flex flex-col items-center lg:items-start px-6 mt-6 gap-6">
-            <ProfileCard
-              userProfile={userProfile}
-              setUserProfile={setUserProfile}
-            />
+            <ProfileCard />
             <ChangePassword />
           </div>
         </div>
