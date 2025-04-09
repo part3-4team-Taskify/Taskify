@@ -1,14 +1,30 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import useUserStore from "@/store/useUserStore";
 import Image from "next/image";
 import { getUserInfo, updateProfile, uploadProfileImage } from "@/api/users";
 import Input from "@/components/input/Input";
 import { toast } from "react-toastify";
 
-export default function ProfileCard() {
-  const router = useRouter();
-  const [image, setImage] = useState<string | null>(null);
-  const [nickname, setNickname] = useState("");
+interface ProfileCardProps {
+  userProfile: {
+    nickname: string;
+    profileImageUrl: string;
+  };
+  setUserProfile: React.Dispatch<
+    React.SetStateAction<{
+      nickname: string;
+      profileImageUrl: string;
+    }>
+  >;
+}
+
+export const ProfileCard = ({
+  userProfile,
+  setUserProfile,
+}: ProfileCardProps) => {
+  const { updateNickname, updateProfileImage } = useUserStore();
+  const [image, setImage] = useState(userProfile.profileImageUrl);
+  const [nickname, setNickname] = useState(userProfile.nickname);
   const [email, setEmail] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -46,7 +62,7 @@ export default function ProfileCard() {
         setImage(response.profileImageUrl); // 서버에서 받은 URL 저장
       } catch (error) {
         console.error("이미지 업로드 실패:", error);
-        toast.error("이미지 업로드에 실패하였습니다.");
+        toast.error("이미지 업로드에 실패했습니다.");
       }
     }
   };
@@ -60,14 +76,13 @@ export default function ProfileCard() {
     };
 
     try {
-      await updateProfile(userProfile);
+      await updateProfile({ nickname, profileImageUrl: image });
+      updateNickname(nickname);
+      updateProfileImage(image);
       toast.success("프로필 변경이 완료되었습니다.");
-      setTimeout(() => {
-        router.reload();
-      }, 1500);
     } catch (error) {
       console.error("프로필 변경 실패:", error);
-      toast.error("프로필 변경에 실패하였습니다.");
+      toast.error("프로필 변경에 실패했습니다.");
     }
   };
 
@@ -138,4 +153,4 @@ export default function ProfileCard() {
       </div>
     </div>
   );
-}
+};
