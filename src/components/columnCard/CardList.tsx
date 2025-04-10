@@ -5,6 +5,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragEndEvent,
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -101,11 +102,15 @@ export default function CardList({
     return () => observer.disconnect();
   }, [fetchMoreCards, hasMore]);
 
+<<<<<<< HEAD
   useEffect(() => {
     setCards(initialTasks);
   }, [initialTasks]);
 
   const handleDragEnd = (event: any) => {
+=======
+  const handleDragEnd = (event: DragEndEvent) => {
+>>>>>>> f4ef1c1c7d023789b21e2fde3c5fbd5450fd8993
     const { active, over } = event;
 
     if (!over || active.id === over.id) return;
