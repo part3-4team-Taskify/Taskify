@@ -13,9 +13,6 @@ interface CardDetailProps {
 export default function CardDetail({ card, columnName }: CardDetailProps) {
   return (
     <div className="p-4">
-      {/* ✅ 제목 제거됨 */}
-      {/* <h2 className="text-3xl font-semibold mb-5">{card.title}</h2> */}
-
       {/* 담당자 정보 박스 */}
       <div className="absolute w-[181px] h-[155px] lg:[200px] top-20 right-10 rounded-lg p-3.5 bg-white border border-[#D9D9D9]">
         <div className="mb-3">
@@ -72,20 +69,19 @@ export default function CardDetail({ card, columnName }: CardDetailProps) {
 
       {/* 설명 */}
       <p
-        className="text-gray-700 p-2 break-words overflow-auto"
-        style={{
-          width: "470px",
-          height: "70px",
-          whiteSpace: "pre-wrap",
-          wordBreak: "break-word",
-        }}
+        className="
+          text-gray-700 p-2 break-words overflow-auto
+          w-full max-w-[470px] md:max-w-[349px]
+          whitespace-pre-wrap word-break break-words
+          h-[70px]
+        "
       >
         {card.description}
       </p>
 
       {/* 이미지 */}
       {card.imageUrl && (
-        <div className="md:w-420px lg:w-445px">
+        <div className="md:w-[420px] lg:w-[445px]">
           <Image
             src={card.imageUrl}
             alt="카드 이미지"
