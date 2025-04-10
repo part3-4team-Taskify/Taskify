@@ -10,7 +10,6 @@ import type { CardDetailType } from "@/types/cards";
 import TaskModal from "@/components/modalInput/TaskModal";
 import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
-import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
 interface CardDetailModalProps {
@@ -40,7 +39,6 @@ export default function CardDetailPage({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const queryClient = useQueryClient();
   const popupRef = useRef(null);
-  const router = useRouter();
   useClosePopup(popupRef, () => setShowMenu(false));
 
   const { data: columns = [] } = useQuery<ColumnType[]>({
