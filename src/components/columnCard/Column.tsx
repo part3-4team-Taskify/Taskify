@@ -1,5 +1,5 @@
 // Column.tsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { CardType } from "@/types/task";
 import TodoModal from "@/components/modalInput/ToDoModal";
@@ -41,6 +41,9 @@ export default function Column({
   const [members, setMembers] = useState<
     { id: number; userId: number; nickname: string }[]
   >([]);
+
+  // 카드리스트의 스크롤을 칼럼 영역으로 이동
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   // ✅ 멤버 불러오기
   useEffect(() => {
@@ -105,9 +108,9 @@ export default function Column({
   return (
     <div
       className={`
-      flex flex-col shrink-0 overflow-hidden p-4 mr-4 lg:my-0 mb-4
+      flex flex-col shrink-0 lg:items-center overflow-hidden p-4 mr-4 lg:my-0 mb-4
       border border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
-      w-full lg:w-[360px] max-h-[325px] lg:max-h-[830px]
+      w-full lg:w-[370px] max-h-[325px] lg:max-h-[830px]
       `}
     >
       {/* 칼럼 헤더 */}
@@ -156,17 +159,22 @@ export default function Column({
         </div>
       </div>
 
-      {/* 카드 리스트 */}
-      <div
-        className="flex-1 overflow-y-auto overflow-x-hidden"
-        style={{ scrollbarGutter: "stable" }}
-      >
-        <CardList
-          columnId={columnId}
-          teamId={TEAM_ID}
-          initialTasks={tasks}
-          onCardClick={(card) => handleCardClick(card.id)}
-        />
+      {/* 스크롤바 컨테이너 */}
+      <div className="flex flex-col lg:pl-[6.8px] overflow-y-auto w-full lg:w-[357px] rounded-[12px] bg-[#F5F2FC]">
+        {/* 카드 리스트 */}
+        <div
+          className="flex-1 overflow-y-auto overflow-x-hidden"
+          style={{ scrollbarGutter: "stable both-edges" }}
+          ref={scrollRef}
+        >
+          <CardList
+            columnId={columnId}
+            teamId={TEAM_ID}
+            initialTasks={tasks}
+            onCardClick={(card) => handleCardClick(card.id)}
+            scrollRoot={scrollRef}
+          />
+        </div>
       </div>
 
       {/* Todo 모달 */}
