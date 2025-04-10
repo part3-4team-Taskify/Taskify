@@ -107,7 +107,7 @@ export default function Column({
       className={`
       flex flex-col shrink-0 overflow-hidden p-4 mr-4 lg:my-0 mb-4
       border border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
-      max-h-[325px] lg:max-h-none w-full lg:w-[360px]
+      w-full lg:w-[360px] max-h-[325px] lg:max-h-[830px]
       `}
     >
       {/* 칼럼 헤더 */}
@@ -146,29 +146,27 @@ export default function Column({
             </div>
           </div>
         </div>
+        <div className="flex items-center justify-center">
+          <div
+            onClick={() => setIsTodoModalOpen(true)}
+            className="mb-2 hidden lg:block"
+          >
+            <TodoButton />
+          </div>
+        </div>
       </div>
 
-      {/* 카드 영역 */}
-      <div className="flex-1 flex flex-col overflow-hidden items-center gap-2">
-        <div
-          onClick={() => setIsTodoModalOpen(true)}
-          className="mb-2 hidden lg:block"
-        >
-          <TodoButton />
-        </div>
-
-        {/* 카드 리스트 */}
-        <div
-          className="flex-1 w-full overflow-y-auto overflow-x-hidden"
-          style={{ scrollbarGutter: "stable" }}
-        >
-          <CardList
-            columnId={columnId}
-            teamId={TEAM_ID}
-            initialTasks={tasks}
-            onCardClick={(card) => handleCardClick(card.id)}
-          />
-        </div>
+      {/* 카드 리스트 */}
+      <div
+        className="flex-1 overflow-y-auto overflow-x-hidden pr-2"
+        style={{ scrollbarGutter: "stable" }}
+      >
+        <CardList
+          columnId={columnId}
+          teamId={TEAM_ID}
+          initialTasks={tasks}
+          onCardClick={(card) => handleCardClick(card.id)}
+        />
       </div>
 
       {/* Todo 모달 */}

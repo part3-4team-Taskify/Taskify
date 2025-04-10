@@ -80,7 +80,7 @@ export const CardList = ({
         items={cards.map((card) => card.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className="grid gap-3 w-full grid-cols-1">
+        <div className="w-full grid grid-cols-1 box-border gap-3 px-2">
           {cards.map((card) => (
             <SortableCard key={card.id} card={card} onClick={onCardClick} />
           ))}
