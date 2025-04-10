@@ -1,5 +1,5 @@
 // Column.tsx
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { CardType } from "@/types/task";
 import TodoModal from "@/components/modalInput/ToDoModal";

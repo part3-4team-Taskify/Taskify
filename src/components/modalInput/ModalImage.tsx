@@ -67,7 +67,8 @@ export default function ModalImage({
       <button
         type="button"
         onClick={handleFileInputClick}
-        className="group relative flex w-[76px] h-[76px] shrink-0 items-center justify-center rounded-md bg-[var(--color-white)] border border-[var(--color-gray3)]"
+        className="group relative flex w-[76px] h-[76px] shrink-0 items-center justify-center rounded-md
+        border border-[#F5F5F5] cursor-pointer"
       >
         {backgroundImage ? (
           <>
@@ -88,7 +89,7 @@ export default function ModalImage({
             </div>
           </>
         ) : (
-          <div className="rounded-md bg-[var(--color-gray3)] p-6">
+          <div className="rounded-md bg-[#F5F5F5] p-6">
             <AddButton bgColor="todoBg" size="todoSize" />
           </div>
         )}

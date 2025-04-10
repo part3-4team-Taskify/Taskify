@@ -50,7 +50,7 @@ export default function ModalTextarea({
         htmlFor="comment"
         className="font-medium text-black3 text-[14px] sm:text-[18px]"
       >
-        {label} {required && <span className="text-[var(--primary)]">*</span>}
+        {label} {required && <span className="text-[var(--primary)]"> *</span>}
       </label>
 
       <div
