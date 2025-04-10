@@ -22,6 +22,7 @@ export default function ModalTextarea({
 }: ModalTextareaProps) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [text, setText] = useState(defaultValue);
+  const maxLength = 256;
 
   const handleTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const textarea = textareaRef.current;
@@ -63,12 +64,18 @@ export default function ModalTextarea({
             label === "설명" ? `${label}을 입력해주세요` : `${label} 작성하기`
           }
           value={text}
+          maxLength={256}
           onChange={handleTextareaChange}
           className={`
-            w-full resize-none rounded-md border-none px-2 sm:px-4 py-3 font-16r text-[var(--color-black)] outline-none bg-transparent overflow-hidden
+            w-full resize-none rounded-md border-none px-4 py-3
+            text-black3 text-[14px] sm:text-[16px] font:normal
+            outline-none bg-transparent overflow-hidden
             ${small ? "h-[50px]" : "min-h-[110px]"}
           `}
         />
+        <div className="font-14r text-[var(--color-gray1)] text-left px-4 py-2">
+          {text.length} / {maxLength}
+        </div>
         {isButton && text.length > 0 && (
           <TextButton
             color="secondary"

@@ -35,6 +35,8 @@ export default function ModalInput({
   const [selectedDate, setSelectedDate] = useState<Date | null>(
     defaultValue ? new Date(defaultValue) : null
   );
+  const [titleLength, setTitleLength] = useState<number>(0);
+  const maxTitleLength = 70;
 
   useEffect(() => {
     if (label === "태그" && defaultValueArray.length > 0) {
@@ -47,7 +49,12 @@ export default function ModalInput({
   }, [label, defaultValueArray]);
 
   const handleTitleValue = (event: ChangeEvent<HTMLInputElement>) => {
-    onValueChange([event.target.value]);
+    const newValue = event.target.value;
+
+    if (newValue.length <= maxTitleLength) {
+      onValueChange([newValue]);
+      setTitleLength(newValue.length);
+    }
   };
 
   const handleTagInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -92,15 +99,23 @@ export default function ModalInput({
   switch (label) {
     case "제목":
       inputElement = (
-        <input
-          type="text"
-          name="title"
-          id="title"
-          placeholder="제목을 입력해주세요"
-          defaultValue={defaultValue}
-          className="w-full max-w-[520px] h-[48px] rounded-md font-18r outline-none px-2 sm:px-4 border border-[var(--color-gray3)] focus:border-[var(--primary)]"
-          onChange={handleTitleValue}
-        />
+        <div className="relative w-full max-w-[520px]">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="제목을 입력해주세요"
+            defaultValue={defaultValue}
+            className="w-full max-w-[520px] h-[48px] rounded-md pl-4 pr-18
+            text-black3 text-[14px] sm:text-[16px] font:normal
+            outline-none border border-[var(--color-gray3)] focus:border-[var(--primary)]"
+            onChange={handleTitleValue}
+            maxLength={maxTitleLength}
+          />
+          <span className="absolute top-1/2 right-3 -translate-y-1/2 font-14r text-[var(--color-gray1)] pr-1.5">
+            {titleLength} / {maxTitleLength}
+          </span>
+        </div>
       );
       break;
 
@@ -123,7 +138,7 @@ export default function ModalInput({
               timeIntervals={15}
               dateFormat="yyyy-MM-dd HH:mm"
               placeholderText="날짜를 입력해주세요"
-              className="w-full h-full font-18r outline-none bg-transparent"
+              className="w-full h-full text-black3 text-[14px] sm:text-[16px] font:normal outline-none bg-transparent"
               popperPlacement="bottom-start"
               popperContainer={({ children }) => <div>{children}</div>}
               popperClassName="custom-datepicker-popper"

@@ -182,18 +182,24 @@ export default function CardDetailPage({
             const matchedColumn = columns.find(
               (col) => col.title === data.status
             );
-            await updateCardMutate({
-              columnId: matchedColumn?.id,
-              assignee: { ...cardData.assignee, nickname: data.assignee },
-              title: data.title,
-              description: data.description,
-              dueDate: data.deadline,
-              tags: data.tags,
-              imageUrl: data.image || undefined,
-            });
-            if (onChangeCard) onChangeCard();
-            onClose();
-            toast.success("카드가 수정되었습니다.");
+            try {
+              await updateCardMutate({
+                columnId: matchedColumn?.id,
+                assignee: { ...cardData.assignee, nickname: data.assignee },
+                title: data.title,
+                description: data.description,
+                dueDate: data.deadline,
+                tags: data.tags,
+                imageUrl: data.image || undefined,
+              });
+
+              if (onChangeCard) onChangeCard();
+              onClose();
+              toast.success("카드가 수정되었습니다.");
+            } catch (err) {
+              console.error("카드 수정 실패:", err);
+              toast.error("카드 수정에 실패했습니다.");
+            }
           }}
           initialData={{
             status: columnName,
