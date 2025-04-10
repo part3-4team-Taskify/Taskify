@@ -105,7 +105,7 @@ export default function Card({
                 className="w-6 h-6 rounded-full object-cover"
               />
             ) : (
-              <div className="w-6 h-6 flex items-center justify-center bg-[#A3C4A2] text-white font-bold rounded-full text-xs">
+              <div className="w-6 h-6 flex items-center justify-center bg-[#A3C4A2] text-white font-medium rounded-full text-xs">
                 {assignee.nickname[0]}
               </div>
             )}
