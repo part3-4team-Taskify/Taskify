@@ -191,7 +191,8 @@ export default function CardDetailPage({
               tags: data.tags,
               imageUrl: data.image || undefined,
             });
-            setIsEditModalOpen(false);
+            toast.success("카드가 수정되었습니다.");
+            onClose();
             if (updateCard) updateCard();
           }}
           initialData={{
