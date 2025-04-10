@@ -101,6 +101,10 @@ export default function CardList({
     return () => observer.disconnect();
   }, [fetchMoreCards, hasMore]);
 
+  useEffect(() => {
+    setCards(initialTasks);
+  }, [initialTasks]);
+
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
 
