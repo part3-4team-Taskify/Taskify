@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { CardType } from "@/types/task";
-import type { CardListRef } from "@/components/columnCard/CardList";
 import TodoModal from "@/components/modalInput/ToDoModal";
 import TodoButton from "@/components/button/TodoButton";
 import ColumnManageModal from "@/components/columnCard/ColumnManageModal";
@@ -22,6 +21,7 @@ type ColumnProps = {
   tasks?: CardType[];
   dashboardId: number;
   columnDelete: (columnId: number) => void;
+  fetchColumnsAndCards: () => void;
 };
 
 export default function Column({
@@ -30,8 +30,8 @@ export default function Column({
   tasks = [],
   dashboardId,
   columnDelete,
+  fetchColumnsAndCards,
 }: ColumnProps) {
-  const cardListRef = useRef<CardListRef>(null);
   const [columnTitle, setColumnTitle] = useState(title);
   const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -140,13 +140,12 @@ export default function Column({
           <TodoButton />
         </div>
 
-        {/* 무한스크롤 카드 리스트로 대체 */}
+        {/* 카드 리스트 */}
         <div
           className="flex-1 w-full overflow-y-auto overflow-x-hidden"
           style={{ scrollbarGutter: "stable" }}
         >
           <CardList
-            ref={cardListRef}
             columnId={columnId}
             teamId={TEAM_ID}
             initialTasks={tasks}
@@ -164,7 +163,7 @@ export default function Column({
           dashboardId={dashboardId}
           columnId={columnId}
           members={members}
-          onChangeCard={() => cardListRef.current?.refetch()}
+          onChangeCard={fetchColumnsAndCards}
         />
       )}
 
@@ -185,7 +184,6 @@ export default function Column({
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onDelete={handleDeleteColumn}
-        onChangeCard={() => cardListRef.current?.refetch()}
       />
 
       {/* 카드 상세 모달 */}
@@ -198,7 +196,7 @@ export default function Column({
             setIsCardDetailModalOpen(false);
             setSelectedCard(null);
           }}
-          onChangeCard={() => cardListRef.current?.refetch()}
+          onChangeCard={fetchColumnsAndCards}
         />
       )}
     </div>

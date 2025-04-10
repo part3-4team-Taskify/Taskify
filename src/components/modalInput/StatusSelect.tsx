@@ -37,9 +37,6 @@ export default function StatusSelect({
   const selectedStatus = statusOptions.find((opt) => opt.label === value);
 
   useEffect(() => {
-    console.log("📌 TEAM_ID:", TEAM_ID);
-    console.log("📌 dashboardId:", dashboardId);
-
     if (!TEAM_ID || isNaN(dashboardId)) {
       console.warn("❌ TEAM_ID 또는 dashboardId가 유효하지 않습니다.");
       return;
@@ -50,8 +47,6 @@ export default function StatusSelect({
         const res = await axiosInstance.get(`/${TEAM_ID}/columns`, {
           params: { dashboardId },
         });
-
-        console.log("✅ 상태 목록 응답:", res.data);
 
         const options = (res.data.data as Column[]).map((col) => ({
           label: col.title,
