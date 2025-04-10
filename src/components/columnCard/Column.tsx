@@ -163,7 +163,7 @@ export default function Column({
           dashboardId={dashboardId}
           columnId={columnId}
           members={members}
-          createdCard={fetchColumnsAndCards}
+          updateCard={fetchColumnsAndCards}
         />
       )}
 
@@ -196,6 +196,7 @@ export default function Column({
             setIsCardDetailModalOpen(false);
             setSelectedCard(null);
           }}
+          updateCard={fetchColumnsAndCards}
         />
       )}
     </div>

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 interface TaskModalProps {
   isOpen: boolean;
   onClose: () => void;
-  createdCard: () => void;
+  updateCard: () => void;
   teamId: string;
   dashboardId: number;
   columnId: number;
@@ -31,7 +31,7 @@ interface TaskData {
 
 export default function TaskModal({
   onClose,
-  createdCard,
+  updateCard,
   dashboardId,
   columnId,
   members,
@@ -81,7 +81,7 @@ export default function TaskModal({
         imageUrl: formData.image || undefined,
       });
       onClose();
-      if (createdCard) createdCard();
+      if (updateCard) updateCard();
       toast.success("카드가 생성되었습니다.");
     } catch (err) {
       console.error("카드 생성 실패:", err);
