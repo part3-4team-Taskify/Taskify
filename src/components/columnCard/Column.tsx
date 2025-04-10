@@ -110,7 +110,7 @@ export default function Column({
       className={`
       flex flex-col shrink-0 lg:items-center overflow-hidden p-4 mr-4 lg:my-0 mb-4
       border border-[var(--color-gray4)] bg-[#F5F2FC] rounded-[12px]
-      w-full lg:w-[370px] max-h-[325px] lg:max-h-[830px]
+      w-full lg:w-[370px] max-h-[325px] lg:max-h-[827px]
       `}
     >
       {/* 칼럼 헤더 */}
@@ -160,11 +160,11 @@ export default function Column({
       </div>
 
       {/* 스크롤바 컨테이너 */}
-      <div className="flex flex-col lg:pl-[6.8px] overflow-y-auto w-full lg:w-[357px] rounded-[12px] bg-[#F5F2FC]">
+      <div className="flex flex-col lg:pl-[21px] overflow-y-auto w-full lg:w-[357px] rounded-[12px] bg-[#F5F2FC]">
         {/* 카드 리스트 */}
         <div
           className="flex-1 overflow-y-auto overflow-x-hidden"
-          style={{ scrollbarGutter: "stable both-edges" }}
+          style={{ scrollbarGutter: "stable" }}
           ref={scrollRef}
         >
           <CardList
