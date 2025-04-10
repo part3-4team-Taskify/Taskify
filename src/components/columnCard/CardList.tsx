@@ -102,15 +102,11 @@ export default function CardList({
     return () => observer.disconnect();
   }, [fetchMoreCards, hasMore]);
 
-<<<<<<< HEAD
   useEffect(() => {
     setCards(initialTasks);
   }, [initialTasks]);
 
-  const handleDragEnd = (event: any) => {
-=======
   const handleDragEnd = (event: DragEndEvent) => {
->>>>>>> f4ef1c1c7d023789b21e2fde3c5fbd5450fd8993
     const { active, over } = event;
 
     if (!over || active.id === over.id) return;
@@ -122,6 +118,13 @@ export default function CardList({
     setCards(newOrder);
   };
 
+  // 마감일 빠른 순 정렬
+  const sortedCards = [...cards].sort((a, b) => {
+    const dateA = a.dueDate ? new Date(a.dueDate).getTime() : Infinity;
+    const dateB = b.dueDate ? new Date(b.dueDate).getTime() : Infinity;
+    return dateA - dateB;
+  });
+
   return (
     <DndContext
       sensors={sensors}
@@ -129,11 +132,11 @@ export default function CardList({
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={cards.map((card) => card.id)}
+        items={sortedCards.map((card) => card.id)}
         strategy={verticalListSortingStrategy}
       >
         <div className="grid gap-3 w-full grid-cols-1">
-          {cards.map((card) => (
+          {sortedCards.map((card) => (
             <SortableCard key={card.id} card={card} onClick={onCardClick} />
           ))}
           {hasMore && <div ref={observerRef} className="h-20" />}
