@@ -1,7 +1,8 @@
 // Column.tsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { CardType } from "@/types/task";
+import type { CardListRef } from "@/components/columnCard/CardList";
 import TodoModal from "@/components/modalInput/ToDoModal";
 import TodoButton from "@/components/button/TodoButton";
 import ColumnManageModal from "@/components/columnCard/ColumnManageModal";
@@ -10,7 +11,7 @@ import { updateColumn, deleteColumn } from "@/api/columns";
 import { getDashboardMembers, getCardDetail } from "@/api/card";
 import { MemberType } from "@/types/users";
 import { TEAM_ID } from "@/constants/team";
-import CardList from "./CardList";
+import { CardList } from "./CardList";
 import CardDetailModal from "@/components/modalDashboard/CardDetailModal";
 import { CardDetailType } from "@/types/cards";
 import { toast } from "react-toastify";
@@ -21,7 +22,6 @@ type ColumnProps = {
   tasks?: CardType[];
   dashboardId: number;
   columnDelete: (columnId: number) => void;
-  fetchColumnsAndCards: () => void;
 };
 
 export default function Column({
@@ -30,8 +30,8 @@ export default function Column({
   tasks = [],
   dashboardId,
   columnDelete,
-  fetchColumnsAndCards,
 }: ColumnProps) {
+  const cardListRef = useRef<CardListRef>(null);
   const [columnTitle, setColumnTitle] = useState(title);
   const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -146,6 +146,7 @@ export default function Column({
           style={{ scrollbarGutter: "stable" }}
         >
           <CardList
+            ref={cardListRef}
             columnId={columnId}
             teamId={TEAM_ID}
             initialTasks={tasks}
@@ -163,7 +164,7 @@ export default function Column({
           dashboardId={dashboardId}
           columnId={columnId}
           members={members}
-          updateCard={fetchColumnsAndCards}
+          onChangeCard={() => cardListRef.current?.refetch()}
         />
       )}
 
@@ -184,6 +185,7 @@ export default function Column({
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onDelete={handleDeleteColumn}
+        onChangeCard={() => cardListRef.current?.refetch()}
       />
 
       {/* 카드 상세 모달 */}
@@ -196,7 +198,7 @@ export default function Column({
             setIsCardDetailModalOpen(false);
             setSelectedCard(null);
           }}
-          updateCard={fetchColumnsAndCards}
+          onChangeCard={() => cardListRef.current?.refetch()}
         />
       )}
     </div>
