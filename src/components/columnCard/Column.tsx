@@ -65,7 +65,7 @@ export default function Column({
 
   const handleEditColumn = async (newTitle: string) => {
     if (!newTitle.trim()) {
-      toast.error("칼럼 제목을 입력해주세요.");
+      toast.error("칼럼 제목을 입력해 주세요.");
       return;
     }
 

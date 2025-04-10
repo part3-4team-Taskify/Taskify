@@ -46,7 +46,10 @@ export default function ModalTextarea({
 
   return (
     <div className="inline-flex flex-col items-start gap-2.5 w-full">
-      <label htmlFor="comment" className="font-18m text-[var(--color-black)]">
+      <label
+        htmlFor="comment"
+        className="font-medium text-black3 text-[14px] sm:text-[18px]"
+      >
         {label} {required && <span className="text-[var(--primary)]">*</span>}
       </label>
 
@@ -61,7 +64,7 @@ export default function ModalTextarea({
           name="comment"
           id="comment"
           placeholder={
-            label === "설명" ? `${label}을 입력해주세요` : `${label} 작성하기`
+            label === "설명" ? `${label}을 입력해 주세요` : `${label} 작성하기`
           }
           value={text}
           maxLength={256}
@@ -73,7 +76,7 @@ export default function ModalTextarea({
             ${small ? "h-[50px]" : "min-h-[110px]"}
           `}
         />
-        <div className="font-14r text-[var(--color-gray1)] text-left px-4 py-2">
+        <div className="font-light text-[12px] sm:text-[14px] text-[var(--color-gray1)] text-left px-4 py-2">
           {text.length} / {maxLength}
         </div>
         {isButton && text.length > 0 && (

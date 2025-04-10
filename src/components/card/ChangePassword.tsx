@@ -72,7 +72,7 @@ export default function ChangePassword() {
           value={newPassword}
           onChange={setNewPassword}
           pattern=".{8,}"
-          invalidMessage="8자 이상 입력해주세요."
+          invalidMessage="8자 이상 입력해 주세요."
           className="max-w-[624px]"
         />
         <Input

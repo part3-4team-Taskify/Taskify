@@ -58,7 +58,10 @@ export default function ModalImage({
 
   return (
     <div className="inline-flex flex-col items-start gap-2.5">
-      <label htmlFor="comment" className="font-18m text-[var(--color-black)]">
+      <label
+        htmlFor="comment"
+        className="text-black3 font-medium text-[14px] sm:text-[18px]"
+      >
         {label}
       </label>
       <button
