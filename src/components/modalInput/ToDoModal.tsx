@@ -141,7 +141,8 @@ export default function TaskModal({
             color="third"
             buttonSize="md"
             onClick={onClose}
-            className="w-full sm:w-[256px] h-[54px] border border-[var(--color-gray3)] bg-white text-black rounded-lg"
+            className="w-full sm:w-[256px] h-[54px] bg-white border border-[var(--color-gray3)]
+            text-[var(--color-gray1)] font-16m rounded-lg cursor-pointer"
           >
             취소
           </TextButton>
@@ -150,7 +151,7 @@ export default function TaskModal({
             color="primary"
             buttonSize="md"
             onClick={handleSubmit}
-            className="w-full sm:w-[256px] h-[54px] bg-[var(--primary)] text-white rounded-lg"
+            className="w-full sm:w-[256px] h-[54px] bg-[var(--primary)] text-white font-16m rounded-lg cursor-pointer"
             disabled={!isFormValid}
           >
             생성
