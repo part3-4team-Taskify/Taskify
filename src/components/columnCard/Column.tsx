@@ -158,7 +158,7 @@ export default function Column({
 
       {/* 카드 리스트 */}
       <div
-        className="flex-1 overflow-y-auto overflow-x-hidden pr-2"
+        className="flex-1 overflow-y-auto overflow-x-hidden"
         style={{ scrollbarGutter: "stable" }}
       >
         <CardList
