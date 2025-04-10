@@ -85,6 +85,7 @@ export default function CardList({
     }
   }, [columnId, cursorId, hasMore]);
 
+  // 무한 스크롤
   useEffect(() => {
     if (!observerRef.current) return;
 
@@ -106,6 +107,7 @@ export default function CardList({
     setCards(initialTasks);
   }, [initialTasks]);
 
+  // 드래그 & 드롭
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 

@@ -17,7 +17,6 @@ interface CardDetailModalProps {
   currentUserId: number;
   dashboardId: number;
   onClose: () => void;
-  updateCard: () => void;
 }
 
 interface ColumnType {
@@ -31,7 +30,6 @@ export default function CardDetailPage({
   currentUserId,
   dashboardId,
   onClose,
-  updateCard,
 }: CardDetailModalProps) {
   const [cardData, setCardData] = useState<CardDetailType>(card);
   const [commentText, setCommentText] = useState("");
@@ -67,7 +65,6 @@ export default function CardDetailPage({
       queryClient.invalidateQueries({ queryKey: ["cards"] });
       toast.success("카드가 삭제되었습니다.");
       onClose();
-      if (updateCard) updateCard();
     },
   });
 
@@ -193,7 +190,6 @@ export default function CardDetailPage({
             });
             toast.success("카드가 수정되었습니다.");
             onClose();
-            if (updateCard) updateCard();
           }}
           initialData={{
             status: columnName,
