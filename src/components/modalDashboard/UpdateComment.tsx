@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { deleteComment, updateComment } from "@/api/comment";
 import { Comment } from "@/types/comments";
-import { ProfileIcon } from "./profelicon";
+import { ProfileIcon } from "./ProfileIcon";
 import formatDate from "./formatDate";
 
 interface UpdateCommentProps {

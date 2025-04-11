@@ -180,7 +180,10 @@ export default function CardDetailPage({
               </div>
 
               {/* 댓글 목록 (스크롤 가능) */}
-              <div className="w-full max-w-[450px] text-base max-h-[180px] overflow-y-auto scrollbar-hidden">
+              <div
+                className="w-full max-w-[450px] sm:max-h-[180px] max-h-[70px]
+              mt-2 overflow-y-auto"
+              >
                 <CommentList
                   cardId={card.id}
                   currentUserId={currentUserId}

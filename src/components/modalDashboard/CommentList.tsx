@@ -38,8 +38,9 @@ export default function CommentList({
 
   return (
     <div
-      className="min-h-[80px] w-full rounded bg-white shadow-sm
-    flex flex-col overflow-y-scroll"
+      className="min-h-[80px] sm:max-h-[255px] max-h-[215px] w-full
+      rounded bg-white
+      flex flex-col"
     >
       {allComments.length === 0 ? (
         <p
@@ -50,7 +51,7 @@ export default function CommentList({
         </p>
       ) : (
         allComments.map((comment) => (
-          <div key={comment.id} className="py-2 last:border-b-0">
+          <div key={comment.id} className=" shrink-0 py-2 last:border-b-0">
             <UpdateComment
               comment={comment}
               currentUserId={currentUserId}
