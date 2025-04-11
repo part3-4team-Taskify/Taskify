@@ -22,7 +22,7 @@ export const ProfileIcon: React.FC<ProfileIconProps> = ({
         alt="유저 프로필 아이콘"
         width={34}
         height={34}
-        className="object-cover w-[28px] h-[28px] rounded-full"
+        className="object-cover w-[26px] h-[26px] rounded-full"
       />
     ) : (
       <RandomProfile name={nickname} />

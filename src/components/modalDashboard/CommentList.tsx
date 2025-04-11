@@ -38,7 +38,7 @@ export default function CommentList({
 
   return (
     <div
-      className="min-h-[80px] sm:max-h-[255px] max-h-[215px] w-full
+      className="min-h-[80px] sm:max-h-[240px] max-h-[215px] w-full
       rounded bg-white
       flex flex-col"
     >

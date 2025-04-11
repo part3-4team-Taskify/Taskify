@@ -101,10 +101,13 @@ export default function CardDetailPage({
         className="fixed inset-0 bg-black/30 z-50
       flex items-center justify-center px-4 sm:px-6"
       >
-        {/* 카드 컨테이너 */}
+        {/* 모달 컨테이너 */}
         <div
-          className="relative flex flex-col bg-white rounded-lg shadow-lg
-          lg:w-[730px] sm:w-[678px] w-[327px] min-h-[710px]"
+          className="relative flex flex-col
+          overflow-y-auto
+          max-w-[730px] max-h-[calc(100vh-4rem)]
+          lg:w-[730px] sm:w-[678px] w-[327px]
+          bg-white rounded-lg shadow-lg"
         >
           <div className="flex items-center justify-center px-6 pt-6 pb-2">
             {/* 내부 아이템 컨테이너 */}
@@ -123,16 +126,24 @@ export default function CardDetailPage({
                   {/* 메뉴 버튼 */}
                   <button
                     onClick={() => setShowMenu((prev) => !prev)}
-                    className="w-7 h-7 flex items-center justify-center hover:cursor-pointer"
+                    className="sm:w-[28px] sm:h-[28px] w-[20px] h-[20px]
+                    flex items-center justify-center hover:cursor-pointer"
                     title="수정하기"
                     type="button"
                   >
                     <MoreVertical className="w-8 h-8 text-black3 cursor-pointer" />
                   </button>
                   {showMenu && (
-                    <div className="absolute right-0 top-10 p-2 w-27 bg-white border border-[#D9D9D9] z-40 rounded-lg">
+                    <div
+                      className="absolute right-0 top-9.5 p-2 z-40
+                    sm:w-28 w-20
+                    bg-white border border-[#D9D9D9] rounded-lg"
+                    >
                       <button
-                        className="block w-full px-4 py-2 text-base text-gray-800 hover:bg-[#F1EFFD] hover:text-[#5534DA] rounded-sm cursor-pointer"
+                        className="w-full rounded-sm
+                        font-normal sm:text-[14px] text-[12px] text-black3
+                        hover:bg-[#F1EFFD] hover:text-[#5534DA]
+                        cursor-pointer"
                         type="button"
                         onClick={() => {
                           setIsEditModalOpen(true);
@@ -142,7 +153,10 @@ export default function CardDetailPage({
                         수정하기
                       </button>
                       <button
-                        className="block w-full px-4 py-2 text-base text-gray-800 hover:bg-[#F1EFFD] hover:text-[#5534DA] rounded-sm cursor-pointer"
+                        className="w-full rounded-sm
+                        font-normal sm:text-[14px] text-[12px] text-black3
+                        hover:bg-[#F1EFFD] hover:text-[#5534DA]
+                        cursor-pointer"
                         type="button"
                         onClick={() => deleteCardMutate()}
                       >
@@ -152,20 +166,24 @@ export default function CardDetailPage({
                   )}
                   {/* 닫기 버튼 */}
                   <button onClick={handleClose} title="닫기">
-                    <X className="w-7 h-7 flex items-center justify-center hover:cursor-pointer" />
+                    <X
+                      className="sm:w-[28px] sm:h-[28px] w-[20px] h-[20px]
+                    flex items-center justify-center hover:cursor-pointer"
+                    />
                   </button>
                 </div>
               </div>
 
-              {/* 카드 내용 */}
-              <div className="relative flex w-full">
+              {/* 카드 내용 + 담당자 컨테이너 */}
+              <div className="flex flex-col-reverse sm:flex-row gap-4">
                 <CardDetail card={cardData} columnName={columnName} />
-                <div className="absolute right-0">
+                <div>
                   <Representative card={card} />
                 </div>
               </div>
+
               {/* 댓글 입력창 */}
-              <div className="w-full lg:max-w-[445px] md:max-w-[420px] mt-4">
+              <div className="mt-4 w-full lg:max-w-[445px] md:max-w-[420px]">
                 <p className="mb-1 text-black3 font-medium sm:text-[16px] text-[14px]">
                   댓글
                 </p>
@@ -181,8 +199,9 @@ export default function CardDetailPage({
 
               {/* 댓글 목록 (스크롤 가능) */}
               <div
-                className="w-full max-w-[450px] sm:max-h-[180px] max-h-[70px]
-              mt-2 overflow-y-auto"
+                className="w-full lg:max-w-[445px] md:max-w-[420px]
+                sm:max-h-[140px] max-h-[70px]
+                my-2 overflow-y-auto"
               >
                 <CommentList
                   cardId={card.id}

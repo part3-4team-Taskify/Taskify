@@ -13,13 +13,13 @@ interface CardDetailProps {
 export default function CardDetail({ card, columnName }: CardDetailProps) {
   return (
     <div className="flex flex-col gap-5 w-full">
-      <div className="flex items-center gap-5">
+      <div className="flex flex-wrap items-center gap-5">
         {/* 칼럼 이름 태그 */}
         <ColumnNameTag label={columnName} />
         {/* 구분선 */}
         <div className="w-[1px] h-[20px] bg-[var(--color-gray3)]" />
         {/* 카드 태그 */}
-        <div className="flex gap-[6px]">
+        <div className="flex flex-wrap gap-[6px]">
           {card.tags.map((tag, idx) => {
             const { textColor, bgColor } = getTagColor(idx);
             return (
