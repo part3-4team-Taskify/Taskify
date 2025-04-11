@@ -61,7 +61,8 @@ export default function Card({
         {/* 태그 + 날짜 + 닉네임 */}
         <div
           className={`
-            flex flex-col gap-2 mt-2
+            flex flex-col gap-2 mt-2 whitespace-nowrap
+            sm:max-w-none max-w-[192px] 
             md:flex-row md:items-center md:justify-between md:mt-1
             lg:flex-col lg:items-start lg:mt-2
             text-sm md:text-xs
