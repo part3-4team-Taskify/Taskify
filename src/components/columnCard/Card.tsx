@@ -1,6 +1,7 @@
 import { AssigneeType, CardType } from "@/types/task";
 import Image from "next/image";
 import { getTagColor } from "../modalInput/chips/ColorTagChip";
+import RandomProfile from "../table/member/RandomProfile";
 
 type CardProps = CardType & {
   imageUrl?: string | null;
@@ -99,13 +100,16 @@ export default function Card({
               <Image
                 src={assignee.profileImageUrl}
                 alt="프로필 이미지"
-                width={24}
-                height={24}
-                className="w-6 h-6 rounded-full object-cover"
+                width={22}
+                height={22}
+                className="sm:w-[24px] sm:h-[24px] rounded-full object-cover"
               />
             ) : (
-              <div className="w-6 h-6 flex items-center justify-center bg-[#A3C4A2] text-white font-medium rounded-full text-xs">
-                {assignee.nickname[0]}
+              <div
+                className="sm:w-[24px] sm:h-[24px] w-[22px] h-[22px] rounded-full
+                overflow-hidden flex items-center justify-center"
+              >
+                <RandomProfile name={assignee.nickname} />
               </div>
             )}
           </div>
