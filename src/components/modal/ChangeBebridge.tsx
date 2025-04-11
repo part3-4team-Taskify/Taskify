@@ -89,18 +89,21 @@ const ChangeBebridge = ({ onUpdate }: ChangeBebridgeProps) => {
   return (
     <div className="min-h-[312px] lg:w-[620px] sm:w-[544px] w-[284px] bg-white rounded-[12px] p-[24px] flex flex-col">
       <div className="w-full flex justify-center">
-        <div className="flex flex-col w-[252px] md:w-[488px] lg:w-[564px]">
-          <h2 className="text-left text-black3 text-[20px] sm:text-[24px] font-bold">
+        {/* 내부 아이템 컨테이너 */}
+        <div className="flex flex-col lg:w-[564px] md:w-[488px] w-[252px]">
+          {/* 헤더 */}
+          <h2 className="text-left text-black3 font-bold sm:text-[24px] text-[20px]">
             {dashboardDetail.title}
           </h2>
 
+          {/* 변경할 제목 입력창 */}
           <div className="relative w-full mt-6">
             <Input
               type="text"
               onChange={handleTitleChange}
               value={title}
               label="대시보드 이름"
-              labelClassName="text-left text-black3 text-[16px] sm:text-[18px] font-medium mb-1"
+              labelClassName="text-left text-black3 font-medium sm:text-[18px] text-[16px] mb-1"
               placeholder="변경할 이름을 입력해 주세요"
               className="max-w-none mb-1 pr-[52px] placeholder:text-[14px] placeholder:sm:text-[16px]"
             />
@@ -109,6 +112,7 @@ const ChangeBebridge = ({ onUpdate }: ChangeBebridgeProps) => {
             </span>
           </div>
 
+          {/* 컬러칩 선택 */}
           <div className="flex mt-3">
             {colors.map((color, index) => (
               <div key={index} className="relative">
@@ -130,6 +134,8 @@ const ChangeBebridge = ({ onUpdate }: ChangeBebridgeProps) => {
               </div>
             ))}
           </div>
+
+          {/* 변경 버튼 */}
           <div className="flex mt-6">
             <button
               onClick={handleSubmit}

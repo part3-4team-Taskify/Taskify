@@ -133,7 +133,9 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
       </div>
 
       {/* 구성원 리스트 */}
-      <p className="sm:text-base text-sm text-gray-500 mt-6">이메일</p>
+      <p className="mt-6 text-[var(--color-gray2)] font-normal text-[14px] sm:text-[16px]">
+        이메일
+      </p>
       <ul>
         {paginatedInvitation.map((invite, index) => (
           <li
