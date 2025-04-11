@@ -38,7 +38,7 @@ export default function CardDetail({ card, columnName }: CardDetailProps) {
       {/* 내용 */}
       <p
         className="
-          text-black font-normal sm:text-[14px] text-[12px] overflow-auto pr-1
+          text-black font-normal sm:text-[16px] text-[14px] overflow-auto pr-1
           w-full lg:max-w-[445px] sm:max-w-[420px] max-w-[295px]
           min-h-0 sm:max-h-[100px] max-h-[80px]
           whitespace-pre-wrap word-break break-words

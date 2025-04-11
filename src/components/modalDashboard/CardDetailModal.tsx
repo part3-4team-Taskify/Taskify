@@ -115,7 +115,7 @@ export default function CardDetailPage({
               {/* 헤더 */}
               <div className="flex justify-between sm:mb-4 mb-2">
                 {/* 카드 제목 */}
-                <h2 className="text-black3 font-bold sm:text-[24px] text-[20px]">
+                <h2 className="text-black3 font-bold sm:text-[20px] text-[16px]">
                   {cardData.title}
                 </h2>
                 {/* 버튼 컨테이너 */}
