@@ -64,6 +64,11 @@ export default function ModalInput({
 
   const handleAddTag = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && tagInput.trim() !== "") {
+      if (tagInput.trim().length > 10) {
+        toast.error("10자 이하로 입력해 주세요.");
+        return;
+      }
+
       // 태그 개수 제한
       if (tags.length >= 4) {
         setTagInput("");

@@ -1,5 +1,6 @@
 import { AssigneeType, CardType } from "@/types/task";
 import Image from "next/image";
+import { getTagColor } from "../modalInput/chips/ColorTagChip";
 
 type CardProps = CardType & {
   imageUrl?: string | null;
@@ -70,20 +71,17 @@ export default function Card({
         >
           {/* 태그들 */}
           <div className="flex gap-1 flex-wrap">
-            {tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className={`px-2 py-0.5 rounded-md text-xs font-medium ${
-                  idx % 3 === 0
-                    ? "bg-[#F9EEE3] text-[#D58D49]"
-                    : idx % 3 === 1
-                      ? "bg-[#F7DBF0] text-[#D549B6]"
-                      : "bg-[#DBE6F7] text-[#4981D5]"
-                }`}
-              >
-                {tag}
-              </span>
-            ))}
+            {tags.map((tag, idx) => {
+              const { textColor, bgColor } = getTagColor(idx);
+              return (
+                <span
+                  key={idx}
+                  className={`px-2 py-0.5 rounded-md text-xs font-medium ${textColor} ${bgColor}`}
+                >
+                  {tag}
+                </span>
+              );
+            })}
           </div>
 
           {/* 날짜 + 닉네임 */}
