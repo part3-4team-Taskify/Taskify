@@ -84,7 +84,7 @@ const MemberList: React.FC<HeaderBebridgeProps> = ({ dashboardId }) => {
               {paginatedMembers.map((member, index) => (
                 <li
                   key={index}
-                  className={`flex items-center justify-between mt-3 pb-4 ${
+                  className={`sm:mt-4 sm:pb-4 mt-3 pb-3 flex items-center justify-between ${
                     index !== paginatedMembers.length - 1
                       ? "border-b border-gray-200"
                       : ""
