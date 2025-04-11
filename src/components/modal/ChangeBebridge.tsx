@@ -50,7 +50,7 @@ const ChangeBebridge = ({ onUpdate }: ChangeBebridgeProps) => {
     }
   }, [dashboardId]);
 
-  /* 대시보드 이름 변경 버튼 */
+  /* 대시보드 이름 글자수 제한 */
   const handleTitleChange = async (value: string) => {
     if (value.length <= maxTitleLength) {
       setTitle(value);
@@ -78,7 +78,7 @@ const ChangeBebridge = ({ onUpdate }: ChangeBebridgeProps) => {
         color: colors[selected],
       }));
 
-      toast.success("대시보드가 변경되었습니다!");
+      toast.success("대시보드가 변경되었습니다.");
       if (onUpdate) onUpdate();
     } catch (error) {
       console.error("대시보드 변경 실패:", error);
