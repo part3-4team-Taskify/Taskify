@@ -41,7 +41,7 @@ export const CardList = ({
     fetchCards();
   }, [columnId, initialTasks]);
 
-  // 스크롤 감지
+  // 스크롤
   useEffect(() => {
     if (!scrollRoot?.current || !observerRef.current) return;
 
