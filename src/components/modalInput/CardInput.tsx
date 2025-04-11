@@ -35,8 +35,11 @@ export default function CardInput({
         onChange={handleChange}
         placeholder={placeholder}
         className={clsx(
-          "p-4 w-full resize-none rounded-md border border-[var(--color-gray3)] focus:border-[var(--primary)] outline-none bg-white",
-          small ? "text-sm" : "text-base",
+          "p-4 w-full resize-none",
+          "bg-white rounded-md border border-[var(--color-gray3)]",
+          "text-black font-normal",
+          "focus:border-[var(--primary)] outline-none",
+          small ? "text-[12px]" : "text-[14px]",
           className
         )}
         style={{
@@ -54,7 +57,13 @@ export default function CardInput({
           color="secondary"
           buttonSize="xs"
           onClick={onButtonClick}
-          className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-[83px] h-[32px] border-gray-300 text-[#5534DA] cursor-pointer whitespace-nowrap rounded-sm"
+          className="absolute bottom-4 right-2.5 z-10 flex items-center justify-center
+          lg:w-[83px]
+          md:w-[77px] md:h-[32px]
+          w-[84px] h-[28px] rounded-sm
+          border-[var(--color-gray3)] hover:bg-gray-100
+          text-[var(--primary)] font-12m
+          cursor-pointer whitespace-nowrap"
         >
           입력
         </TextButton>
