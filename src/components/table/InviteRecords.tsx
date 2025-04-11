@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Pagination from "./TablePagination";
 import InviteDashboard from "../modal/InviteDashboard";
 import { apiRoutes } from "@/api/apiRoutes";
@@ -6,7 +6,12 @@ import axiosInstance from "@/api/axiosInstance";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 
-const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
+const InviteRecords = ({
+  dashboardId,
+}: {
+  dashboardId: string;
+  onUpdate?: () => void;
+}) => {
   const [inviteList, setInviteList] = useState<
     Array<{
       id: number;
@@ -15,33 +20,34 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
   >([]);
 
   /* 초대내역 목록 api 호출*/
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const dashboardIdNumber = Number(dashboardId);
-        const res = await axiosInstance.get(
-          apiRoutes.dashboardInvite(dashboardIdNumber),
-          {
-            params: {
-              dashboardId,
-            },
-          }
-        );
-        if (res.data && Array.isArray(res.data.invitations)) {
-          // 이메일 리스트를 객체 배열로 저장
-          const inviteData = res.data.invitations.map(
-            (item: { id: number; invitee: { email: string } }) => ({
-              id: item.id,
-              email: item.invitee.email,
-            })
-          );
-          setInviteList(inviteData);
-        }
-      } catch (error) {
-        console.error("초대내역 불러오는데 오류 발생:", error);
-      }
-    };
 
+  const fetchMembers = useCallback(async () => {
+    try {
+      const dashboardIdNumber = Number(dashboardId);
+      const res = await axiosInstance.get(
+        apiRoutes.dashboardInvite(dashboardIdNumber),
+        {
+          params: {
+            dashboardId,
+          },
+        }
+      );
+      if (res.data && Array.isArray(res.data.invitations)) {
+        // 이메일 리스트를 객체 배열로 저장
+        const inviteData = res.data.invitations.map(
+          (item: { id: number; invitee: { email: string } }) => ({
+            id: item.id,
+            email: item.invitee.email,
+          })
+        );
+        setInviteList(inviteData);
+      }
+    } catch (error) {
+      console.error("초대내역 불러오는데 오류 발생:", error);
+    }
+  }, [dashboardId]);
+
+  useEffect(() => {
     if (dashboardId) {
       fetchMembers();
     }
@@ -140,7 +146,10 @@ const InviteRecords = ({ dashboardId }: { dashboardId: string }) => {
                 초대하기
               </button>
               {isModalOpen && (
-                <InviteDashboard onClose={() => setIsModalOpen(false)} />
+                <InviteDashboard
+                  onClose={() => setIsModalOpen(false)}
+                  onUpdate={fetchMembers}
+                />
               )}
             </div>
           </div>
