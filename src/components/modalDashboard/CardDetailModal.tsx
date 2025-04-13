@@ -14,11 +14,13 @@ import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
 import { toast } from "react-toastify";
 import { TEAM_ID } from "@/constants/team";
+import { useDashboardPermission } from "@/hooks/useDashboardPermission";
 
 interface CardDetailModalProps {
   card: CardDetailType;
   currentUserId: number;
   dashboardId: number;
+  createdByMe: boolean;
   onClose: () => void;
   onChangeCard?: () => void;
 }
@@ -33,9 +35,12 @@ export default function CardDetailPage({
   card,
   currentUserId,
   dashboardId,
+  createdByMe,
   onClose,
   onChangeCard,
 }: CardDetailModalProps) {
+  const { canEditCards } = useDashboardPermission(dashboardId, createdByMe);
+
   const [cardData, setCardData] = useState<CardDetailType>(card);
   const [commentText, setCommentText] = useState("");
   const [showMenu, setShowMenu] = useState(false);
@@ -141,6 +146,10 @@ export default function CardDetailPage({
                         className="w-full h-full rounded-sm font-normal sm:text-[14px] text-[12px] text-black3 hover:bg-[var(--color-violet8)] hover:text-[var(--primary)] cursor-pointer"
                         type="button"
                         onClick={() => {
+                          if (!canEditCards) {
+                            toast.error("읽기 전용 대시보드입니다.");
+                            return;
+                          }
                           setIsEditModalOpen(true);
                           setShowMenu(false);
                         }}
@@ -150,7 +159,13 @@ export default function CardDetailPage({
                       <button
                         className="w-full h-full rounded-sm font-normal sm:text-[14px] text-[12px] text-black3 hover:bg-[var(--color-violet8)] hover:text-[var(--primary)] cursor-pointer"
                         type="button"
-                        onClick={() => deleteCardMutate()}
+                        onClick={() => {
+                          if (!canEditCards) {
+                            toast.error("읽기 전용 대시보드입니다.");
+                            return;
+                          }
+                          deleteCardMutate();
+                        }}
                       >
                         삭제하기
                       </button>

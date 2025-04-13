@@ -241,6 +241,7 @@ export default function Column({
             setSelectedCard(null);
           }}
           onChangeCard={fetchColumnsAndCards}
+          createdByMe={createdByMe}
         />
       )}
     </div>
