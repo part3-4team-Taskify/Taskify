@@ -7,17 +7,13 @@ import CommentInput from "@/components/modalInput/CardInput";
 import { Representative } from "@/components/modalDashboard/Representative";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createComment } from "@/api/comment";
-import {
-  deleteCard,
-  EditCard,
-  getDashboardMembers,
-  EditCardPayload,
-} from "@/api/card";
+import { deleteCard, getDashboardMembers } from "@/api/card";
 import type { CardDetailType } from "@/types/cards";
 import TaskModal from "@/components/modalInput/TaskModal";
 import { useClosePopup } from "@/hooks/useClosePopup";
 import { getColumn } from "@/api/columns";
 import { toast } from "react-toastify";
+import { TEAM_ID } from "@/constants/team";
 
 interface CardDetailModalProps {
   card: CardDetailType;
@@ -40,7 +36,6 @@ export default function CardDetailPage({
   onClose,
   onChangeCard,
 }: CardDetailModalProps) {
-  const [cardData, setCardData] = useState<CardDetailType>(card);
   const [commentText, setCommentText] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -53,17 +48,17 @@ export default function CardDetailPage({
     queryFn: () => getColumn({ dashboardId, columnId: card.columnId }),
   });
 
-  const { data: invitedMembers = [] } = useQuery({
+  const { data: members = [] } = useQuery({
     queryKey: ["dashboardMembers", dashboardId],
     queryFn: () => getDashboardMembers({ dashboardId }),
   });
 
   const columnName = useMemo(() => {
     return (
-      columns.find((col) => String(col.id) === String(cardData.columnId))
-        ?.title || "알 수 없음"
+      columns.find((col) => String(col.id) === String(card.columnId))?.title ||
+      "알 수 없음"
     );
-  }, [columns, cardData.columnId]);
+  }, [columns, card.columnId]);
 
   const { mutate: createCommentMutate } = useMutation({
     mutationFn: createComment,
@@ -97,14 +92,6 @@ export default function CardDetailPage({
     });
   };
 
-  const { mutateAsync: updateCardMutate } = useMutation({
-    mutationFn: (data: EditCardPayload) => EditCard(cardData.id, data),
-    onSuccess: (updatedCard) => {
-      setCardData(updatedCard);
-      queryClient.invalidateQueries({ queryKey: ["cards"] });
-    },
-  });
-
   return (
     <>
       {/* 모달 고정 div */}
@@ -131,7 +118,7 @@ export default function CardDetailPage({
               <div className="flex justify-between sm:mb-4 mb-2">
                 {/* 제목 */}
                 <h2 className="text-black3 font-bold sm:text-[20px] text-[16px]">
-                  {cardData.title}
+                  {card.title}
                 </h2>
                 {/* 버튼 컨테이너 */}
                 <div
@@ -177,9 +164,9 @@ export default function CardDetailPage({
 
               {/* 카드 내용 */}
               <div className="flex flex-col-reverse sm:flex-row gap-4">
-                <CardDetail card={cardData} columnName={columnName} />
+                <CardDetail card={card} columnName={columnName} />
                 <div>
-                  <Representative card={cardData} />
+                  <Representative card={card} />
                 </div>
               </div>
 
@@ -211,68 +198,28 @@ export default function CardDetailPage({
 
       {isEditModalOpen && (
         <TaskModal
+          isOpen={true}
           mode="edit"
+          teamId={TEAM_ID}
           columnId={card.columnId}
+          cardId={card.id}
+          dashboardId={dashboardId}
+          members={members}
           onClose={() => setIsEditModalOpen(false)}
-          onSubmit={async (data) => {
-            const matchedColumn = columns.find(
-              (col) => col.title === data.status
-            );
-
-            const selectedAssignee = invitedMembers.find(
-              (m: { nickname?: string; email?: string; userId: number }) =>
-                (m.nickname || m.email) === data.assignee
-            ) as {
-              userId: number;
-              nickname?: string;
-              email?: string;
-              profileImageUrl?: string;
-            };
-
-            try {
-              await updateCardMutate({
-                columnId: matchedColumn?.id,
-                assigneeUserId: selectedAssignee.userId,
-                title: data.title,
-                description: data.description,
-                dueDate: data.deadline,
-                tags: data.tags,
-                imageUrl: data.image || undefined,
-              });
-
-              setCardData((prev) => ({
-                ...prev,
-                assignee: {
-                  ...prev.assignee,
-                  id: selectedAssignee.userId,
-                  nickname:
-                    selectedAssignee.nickname || selectedAssignee.email || "",
-                  profileImageUrl: selectedAssignee.profileImageUrl || "",
-                },
-              }));
-
-              if (onChangeCard) onChangeCard();
-              setIsEditModalOpen(false);
-              toast.success("카드가 수정되었습니다.");
-            } catch (err) {
-              console.error("카드 수정 실패:", err);
-              toast.error("카드 수정에 실패했습니다.");
-            }
+          onSubmit={() => {
+            if (onChangeCard) onChangeCard();
+            queryClient.invalidateQueries({ queryKey: ["cards"] });
+            setIsEditModalOpen(false);
           }}
           initialData={{
             status: columnName,
-            assignee: cardData.assignee.nickname,
-            title: cardData.title,
-            description: cardData.description,
-            deadline: cardData.dueDate,
-            tags: cardData.tags,
-            image: cardData.imageUrl ?? "",
+            assignee: card.assignee.nickname,
+            title: card.title,
+            description: card.description,
+            deadline: card.dueDate,
+            tags: card.tags,
+            image: card.imageUrl ?? "",
           }}
-          members={invitedMembers.map(
-            (m: { nickname?: string; email?: string }) => ({
-              nickname: m.nickname || m.email,
-            })
-          )}
         />
       )}
     </>

@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { CardType } from "@/types/task";
-import TodoModal from "@/components/modalInput/ToDoModal";
+import TaskModal from "@/components/modalInput/TaskModal";
 import { TodoButton, ShortTodoButton } from "@/components/button/TodoButton";
 import ColumnManageModal from "@/components/columnCard/ColumnManageModal";
 import ColumnDeleteModal from "@/components/columnCard/ColumnDeleteModal";
@@ -35,7 +35,7 @@ export default function Column({
   const [columnTitle, setColumnTitle] = useState(title);
   const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [isCardDetailModalOpen, setIsCardDetailModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<CardDetailType | null>(null);
   const [members, setMembers] = useState<
@@ -132,7 +132,7 @@ export default function Column({
           {/* 오른쪽: 생성 버튼 + 설정 버튼 */}
           <div className="flex items-center gap-2">
             <div
-              onClick={() => setIsTodoModalOpen(true)}
+              onClick={() => setIsTaskModalOpen(true)}
               className="block lg:hidden"
             >
               <ShortTodoButton />
@@ -151,7 +151,7 @@ export default function Column({
         </div>
         <div className="flex items-center justify-center">
           <div
-            onClick={() => setIsTodoModalOpen(true)}
+            onClick={() => setIsTaskModalOpen(true)}
             className="mb-2 hidden lg:block"
           >
             <TodoButton />
@@ -177,16 +177,16 @@ export default function Column({
         </div>
       </div>
 
-      {/* Todo 모달 */}
-      {isTodoModalOpen && (
-        <TodoModal
-          isOpen={isTodoModalOpen}
-          onClose={() => setIsTodoModalOpen(false)}
+      {/* 카드 생성 모달 */}
+      {isTaskModalOpen && (
+        <TaskModal
+          isOpen={isTaskModalOpen}
+          onClose={() => setIsTaskModalOpen(false)}
           teamId={TEAM_ID}
           dashboardId={dashboardId}
           columnId={columnId}
           members={members}
-          onChangeCard={fetchColumnsAndCards}
+          onSubmit={fetchColumnsAndCards}
         />
       )}
 

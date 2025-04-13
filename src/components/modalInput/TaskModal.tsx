@@ -1,13 +1,21 @@
 import { useState } from "react";
+import {
+  createCard,
+  editCard,
+  getDashboardMembers,
+  EditCardPayload,
+} from "@/api/card";
 import ModalInput from "@/components/modalInput/ModalInput";
 import ModalTextarea from "@/components/modalInput/ModalTextarea";
 import ModalImage from "@/components/modalInput/ModalImage";
 import TextButton from "@/components/modalInput/TextButton";
 import StatusSelect from "@/components/modalInput/StatusSelect";
 import AssigneeSelect from "@/components/modalInput/AssigneeSelect";
+import { toast } from "react-toastify";
 
 interface TaskModalProps {
   mode?: "create" | "edit";
+  isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: TaskData) => void;
   initialData?: Partial<TaskData>;
@@ -16,7 +24,10 @@ interface TaskModalProps {
     userId: number;
     nickname: string;
   }[];
+  teamId: string;
   columnId: number;
+  dashboardId: number;
+  cardId?: number; // 수정 모드일 때만 사용
 }
 
 export interface TaskData {
@@ -36,6 +47,8 @@ export default function TaskModal({
   initialData = {},
   members,
   columnId,
+  dashboardId,
+  cardId,
 }: TaskModalProps) {
   const [formData, setFormData] = useState<TaskData>({
     status: initialData.status || "",
@@ -61,6 +74,56 @@ export default function TaskModal({
     formData.description &&
     formData.deadline;
 
+  const handleSubmit = async () => {
+    try {
+      const selectedAssignee = members.find(
+        (m) => m.nickname === formData.assignee
+      );
+      const assigneeUserId = selectedAssignee?.userId;
+
+      if (!assigneeUserId) {
+        toast.error("담당자를 선택해 주세요.");
+        return;
+      }
+
+      if (mode === "create") {
+        await createCard({
+          assigneeUserId,
+          dashboardId,
+          columnId,
+          title: formData.title,
+          description: formData.description,
+          dueDate: formData.deadline,
+          tags: formData.tags,
+          imageUrl: formData.image || undefined,
+        });
+        toast.success("카드가 생성되었습니다.");
+      } else {
+        if (!cardId) {
+          toast.error("카드 ID가 없습니다.");
+          return;
+        }
+
+        await editCard(cardId, {
+          assigneeUserId,
+          columnId,
+          title: formData.title,
+          description: formData.description,
+          dueDate: formData.deadline,
+          tags: formData.tags,
+          imageUrl: formData.image || undefined,
+        });
+        toast.success("카드가 수정되었습니다.");
+      }
+
+      onSubmit?.(formData);
+      onClose();
+    } catch (err) {
+      console.error("카드 처리 실패:", err);
+      toast.error(`카드 ${mode === "edit" ? "수정" : "생성"}에 실패했습니다.`);
+    }
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35 z-50">
       <div className="sm:w-[584px] w-[327px] h-auto max-h-[90vh] rounded-lg bg-white p-4 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-8 overflow-y-auto">
@@ -69,7 +132,7 @@ export default function TaskModal({
         </h2>
 
         <div className="flex flex-col gap-4 sm:gap-8">
-          {/* 상태 및 담당자 드롭다운 */}
+          {/* 상태 및 담당자 */}
           <div
             className="flex flex-col sm:flex-row gap-4
           text-black3 font-normal text-[14px] sm:text-[16px]"
@@ -140,7 +203,7 @@ export default function TaskModal({
           <TextButton
             color="primary"
             buttonSize="md"
-            onClick={() => onSubmit(formData)}
+            onClick={handleSubmit}
             className="sm:w-[256px] w-[144px] h-[54px] bg-[var(--primary)] text-white font-16m rounded-lg cursor-pointer"
             disabled={!isFormValid}
           >
