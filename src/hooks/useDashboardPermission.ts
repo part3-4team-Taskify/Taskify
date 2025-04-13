@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import useUserStore from "@/store/useUserStore";
 import { READ_ONLY_DASHBOARD_IDS } from "@/constants/protectedDashboards";
 
@@ -14,15 +13,13 @@ export const useDashboardPermission = (
   const isGuest = user?.email === "guest@gmail.com";
   const isReadOnly = READ_ONLY_DASHBOARD_IDS.includes(dashboardId);
 
-  const canEdit = useMemo(() => {
-    return createdByMe || !isReadOnly;
-  }, [createdByMe, isReadOnly]);
+  const canEdit = createdByMe || !isReadOnly;
 
   return {
     isGuest,
     isReadOnly,
     canEdit,
-    canEditCards: canEdit && !isGuest,
-    canEditColumns: canEdit && !isGuest,
+    canEditCards: canEdit,
+    canEditColumns: canEdit,
   };
 };
