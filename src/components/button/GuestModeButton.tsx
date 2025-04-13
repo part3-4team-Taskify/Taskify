@@ -9,11 +9,18 @@ const GUEST_CREDENTIALS = {
   password: "qwer1155",
 };
 
-export default function GuestModeButton() {
+interface GuestModeButtonProps {
+  setIsLoading: (value: boolean) => void;
+}
+
+export default function GuestModeButton({
+  setIsLoading,
+}: GuestModeButtonProps) {
   const router = useRouter();
   const setUser = useUserStore((state) => state.setUser);
 
   const handleGuestLogin = async () => {
+    setIsLoading(true);
     try {
       const response = await postAuthData(GUEST_CREDENTIALS);
       const token = response.accessToken;
@@ -26,7 +33,7 @@ export default function GuestModeButton() {
       router.push("/mydashboard");
     } catch (error) {
       toast.error("게스트 로그인에 실패했습니다.");
-      console.error("게스트 로그인 오류:", error);
+      setIsLoading(false);
     }
   };
 
