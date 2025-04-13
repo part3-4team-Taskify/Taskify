@@ -95,6 +95,11 @@ export default function Dashboard() {
     fetchColumnsAndCards();
   }, [isReady, dashboardId, isInitialized, user]);
 
+  // 현재 대시보드 id 추출
+  const currentDashboard = dashboardList.find(
+    (db) => db.id === Number(dashboardId)
+  );
+
   return (
     <div className="flex h-screen min-h-screen">
       <SideMenu
@@ -125,6 +130,7 @@ export default function Dashboard() {
                 title={col.title}
                 tasks={tasksByColumn[col.id] || []}
                 dashboardId={Number(dashboardId)}
+                createdByMe={currentDashboard?.createdByMe ?? false}
                 columnDelete={fetchColumnsAndCards}
                 fetchColumnsAndCards={fetchColumnsAndCards}
               />

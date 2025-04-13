@@ -14,12 +14,14 @@ import { CardList } from "./CardList";
 import CardDetailModal from "@/components/modalDashboard/CardDetailModal";
 import { CardDetailType } from "@/types/cards";
 import { toast } from "react-toastify";
+import { useDashboardPermission } from "@/hooks/useDashboardPermission";
 
 type ColumnProps = {
   columnId: number;
   title?: string;
   tasks?: CardType[];
   dashboardId: number;
+  createdByMe: boolean;
   columnDelete: (columnId: number) => void;
   fetchColumnsAndCards: () => void;
 };
@@ -29,9 +31,12 @@ export default function Column({
   title = "new Task",
   tasks = [],
   dashboardId,
+  createdByMe,
   columnDelete,
   fetchColumnsAndCards,
 }: ColumnProps) {
+  const { canEditColumns } = useDashboardPermission(dashboardId, createdByMe);
+
   const [columnTitle, setColumnTitle] = useState(title);
   const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -67,10 +72,17 @@ export default function Column({
   }, [dashboardId]);
 
   const handleEditColumn = async (newTitle: string) => {
+    if (!canEditColumns) {
+      toast.error("읽기 전용 대시보드입니다.");
+      setIsColumnModalOpen(false);
+      return;
+    }
+
     if (!newTitle.trim()) {
       toast.error("칼럼 제목을 입력해 주세요.");
       return;
     }
+    setIsColumnModalOpen(false);
 
     try {
       const updated = await updateColumn({ columnId, title: newTitle });
@@ -84,6 +96,12 @@ export default function Column({
   };
 
   const handleDeleteColumn = async () => {
+    if (!canEditColumns) {
+      toast.error("읽기 전용 대시보드입니다.");
+      setIsDeleteModalOpen(false);
+      return;
+    }
+
     try {
       await deleteColumn({ columnId });
       setIsDeleteModalOpen(false);
