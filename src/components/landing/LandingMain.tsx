@@ -2,15 +2,11 @@ import Section1 from "./Section1";
 import Section2 from "./Section2";
 import Section3 from "./Section3";
 
-interface LandingMainProps {
-  setIsLoading: (value: boolean) => void;
-}
-
-export default function LandingMain({ setIsLoading }: LandingMainProps) {
+export default function LandingMain() {
   return (
     <main className="w-full bg-[var(--color-black)] text-[var(--color-white)] flex flex-col items-center px-4">
       {/* 히어로 섹션 */}
-      <Section1 setIsLoading={setIsLoading} />
+      <Section1 />
 
       {/* Section2와 Section3 영역 */}
       <div className="md:mt-[180px] mt-[80px] md:mb-[160px] mb-[80px] w-full flex flex-col items-center">

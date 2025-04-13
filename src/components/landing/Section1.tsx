@@ -3,11 +3,7 @@ import useUserStore from "@/store/useUserStore";
 import Image from "next/image";
 import GuestModeButton from "../button/GuestModeButton";
 
-interface LandingProps {
-  setIsLoading: (value: boolean) => void;
-}
-
-export default function Section1({ setIsLoading }: LandingProps) {
+export default function Section1() {
   const user = useUserStore((state) => state.user);
   const isLoggedIn = !!user;
   const router = useRouter();
@@ -53,7 +49,7 @@ export default function Section1({ setIsLoading }: LandingProps) {
 
       {/* CTA 버튼들 */}
       <div className="sm:mt-[70px] mt-[45px] flex gap-4 flex-col sm:flex-row">
-        <GuestModeButton setIsLoading={setIsLoading} />
+        <GuestModeButton />
         <button
           onClick={handleMainClick}
           className="flex items-center justify-center
