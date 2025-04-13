@@ -42,16 +42,19 @@ export const MembersProfileIconList: React.FC<MemberIconProps> = ({
           {members.slice(0, maxVisibleMembers).map((member) => (
             <div key={member.id} className="relative rounded-full">
               {member.profileImageUrl ? (
-                <Image
-                  src={member.profileImageUrl}
-                  alt={member.nickname}
-                  width={34}
-                  height={34}
+                <div
                   className="relative flex items-center justify-center
-                    object-cover overflow-hidden
-                    sm:w-[38px] sm:h-[38px]
-                    rounded-full border-[2px] border-white"
-                />
+                w-[34px] h-[34px] md:w-[38px] md:h-[38px]
+                rounded-full border-[2px] border-white overflow-hidden"
+                >
+                  <Image
+                    src={member.profileImageUrl}
+                    alt={member.nickname}
+                    fill
+                    className="object-cover"
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
               ) : (
                 <RandomProfile
                   userId={member.id}
