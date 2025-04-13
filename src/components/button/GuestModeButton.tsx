@@ -21,9 +21,8 @@ export default function GuestModeButton() {
 
       const userData = await getUserInfo();
       setUser(userData);
-
-      toast.success("게스트 모드로 로그인되었습니다.");
       router.push("/mydashboard");
+      toast.success("게스트 모드로 로그인되었습니다.");
     } catch (error) {
       toast.error("게스트 로그인에 실패했습니다.");
     }

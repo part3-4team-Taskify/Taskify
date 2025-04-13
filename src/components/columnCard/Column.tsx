@@ -72,12 +72,6 @@ export default function Column({
   }, [dashboardId]);
 
   const handleEditColumn = async (newTitle: string) => {
-    if (!canEditColumns) {
-      toast.error("읽기 전용 대시보드입니다.");
-      setIsColumnModalOpen(false);
-      return;
-    }
-
     if (!newTitle.trim()) {
       toast.error("칼럼 제목을 입력해 주세요.");
       return;
@@ -96,12 +90,6 @@ export default function Column({
   };
 
   const handleDeleteColumn = async () => {
-    if (!canEditColumns) {
-      toast.error("읽기 전용 대시보드입니다.");
-      setIsDeleteModalOpen(false);
-      return;
-    }
-
     try {
       await deleteColumn({ columnId });
       setIsDeleteModalOpen(false);
@@ -168,7 +156,13 @@ export default function Column({
                 fill
                 priority
                 className="object-contain cursor-pointer"
-                onClick={() => setIsColumnModalOpen(true)}
+                onClick={() => {
+                  if (!canEditColumns) {
+                    toast.error("읽기 전용 대시보드입니다.");
+                    return;
+                  }
+                  setIsColumnModalOpen(true);
+                }}
               />
             </div>
           </div>
