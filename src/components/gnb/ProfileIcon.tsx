@@ -1,5 +1,5 @@
 import React from "react";
-import RandomProfile from "../table/member/RandomProfile";
+import RandomProfile from "@/components/common/RandomProfile";
 import Image from "next/image";
 import { MemberType, UserType } from "@/types/users";
 
@@ -10,7 +10,10 @@ interface MemberIconProps {
 }
 
 export const MemberProfileIcon: React.FC<MemberIconProps> = ({ members }) => (
-  <div className="relative flex items-center justify-center w-[34px] h-[34px] md:w-[38px] md:h-[38px] rounded-full border-[2px] border-white overflow-hidden">
+  <div
+    className="relative flex items-center justify-center w-[34px] h-[34px] md:w-[38px] md:h-[38px]
+  rounded-full border-[2px] border-white overflow-hidden"
+  >
     {members.profileImageUrl ? (
       <Image
         src={members.profileImageUrl}
@@ -19,7 +22,11 @@ export const MemberProfileIcon: React.FC<MemberIconProps> = ({ members }) => (
         className="object-cover"
       />
     ) : (
-      <RandomProfile name={members.nickname} />
+      <RandomProfile
+        userId={members.id}
+        name={members.nickname}
+        className="w-[34px] h-[34px] md:w-[38px] md:h-[38px]"
+      />
     )}
   </div>
 );
@@ -30,16 +37,21 @@ interface UserIconProps {
 }
 
 export const UserProfileIcon: React.FC<UserIconProps> = ({ user }) => (
-  <div className="relative w-[34px] h-[34px] md:w-[38px] md:h-[38px] rounded-full overflow-hidden">
+  <div className="relative rounded-full border-[2px] border-white overflow-hidden">
     {user.profileImageUrl ? (
       <Image
         src={user.profileImageUrl}
         alt="유저 프로필 아이콘"
-        fill
-        className="object-cover"
+        width={34}
+        height={34}
+        className="object-cover sm:w-[38px] sm:h-[38px]"
       />
     ) : (
-      <RandomProfile name={user.nickname} />
+      <RandomProfile
+        userId={user.id}
+        name={user.nickname}
+        className="w-[34px] h-[34px] md:w-[38px] md:h-[38px]"
+      />
     )}
   </div>
 );

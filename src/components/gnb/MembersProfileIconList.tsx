@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SkeletonUser from "@/shared/skeletonUser";
-import RandomProfile from "../table/member/RandomProfile";
+import RandomProfile from "@/components/common/RandomProfile";
 import Image from "next/image";
 import { MemberType } from "@/types/users";
 
@@ -14,12 +14,12 @@ export const MembersProfileIconList: React.FC<MemberIconProps> = ({
   members,
   isLoading,
 }) => {
-  // 출력할 프로필 아이콘 최대 개수
+  // 표시할 프로필 아이콘 최대 개수
   const [maxVisibleMembers, setMaxVisibleMembers] = useState(4);
 
   useEffect(() => {
     const handleResize = () => {
-      // Tailwind 기준 sm 이하 (모바일)
+      // 모바일 아이콘 최대 개수
       if (window.innerWidth < 640) {
         setMaxVisibleMembers(2);
       } else {
@@ -42,18 +42,25 @@ export const MembersProfileIconList: React.FC<MemberIconProps> = ({
           {members.slice(0, maxVisibleMembers).map((member) => (
             <div key={member.id} className="relative rounded-full">
               {member.profileImageUrl ? (
-                <div className="relative flex items-center justify-center w-[34px] h-[34px] md:w-[38px] md:h-[38px] rounded-full border-[2px] border-white overflow-hidden">
-                  <Image
-                    src={member.profileImageUrl}
-                    alt={member.nickname}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <Image
+                  src={member.profileImageUrl}
+                  alt={member.nickname}
+                  width={34}
+                  height={34}
+                  className="relative flex items-center justify-center
+                    object-cover overflow-hidden
+                    sm:w-[38px] sm:h-[38px]
+                    rounded-full border-[2px] border-white"
+                />
               ) : (
-                <div className="relative flex items-center justify-center w-[34px] h-[34px] md:w-[38px] md:h-[38px] rounded-full border-[2px] border-white overflow-hidden">
-                  <RandomProfile name={member.nickname} />
-                </div>
+                <RandomProfile
+                  userId={member.id}
+                  name={member.nickname}
+                  className="relative flex items-center justify-center
+                    object-cover overflow-hidden
+                    sm:w-[38px] sm:h-[38px] w-[34px] h-[34px]
+                    border-[2px] border-white"
+                />
               )}
             </div>
           ))}

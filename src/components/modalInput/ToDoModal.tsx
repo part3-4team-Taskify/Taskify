@@ -101,7 +101,7 @@ export default function TaskModal({
             label="담당자"
             value={formData.assignee}
             required
-            users={members.map((m) => m.nickname)}
+            users={members.map((m) => ({ id: m.id, name: m.nickname }))}
             onChange={(value) => handleChange("assignee", value)}
           />
 

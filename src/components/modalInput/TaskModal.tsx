@@ -11,7 +11,7 @@ interface TaskModalProps {
   onClose: () => void;
   onSubmit: (data: TaskData) => void;
   initialData?: Partial<TaskData>;
-  members: { nickname: string }[];
+  members: { id: number; nickname: string }[];
   columnId: number;
 }
 
@@ -83,7 +83,7 @@ export default function TaskModal({
             <AssigneeSelect
               label="담당자"
               value={formData.assignee}
-              users={members.map((m) => m.nickname)}
+              users={members.map((m) => ({ id: m.id, name: m.nickname }))}
               required
               onChange={(value) => handleChange("assignee", value)}
             />
