@@ -240,14 +240,18 @@ const HeaderDashboard: React.FC<HeaderDashboardProps> = ({
           )}
 
           {/*드롭다운 메뉴 너비 지정 목적의 유저 섹션 div*/}
-          <div className="relative flex items-center h-[60px] md:h-[70px] pr-[10px] md:pr-[30px] lg:pr-[80px]">
+          <div
+            className="relative flex items-center h-[60px] md:h-[70px]
+          pr-[10px] md:pr-[30px] lg:pr-[80px]"
+          >
             {/*구분선*/}
             <div className="h-[34px] md:h-[38px] w-[1px] bg-[var(--color-gray3)]" />
             {/*유저 드롭다운 메뉴*/}
             <div
               onMouseDown={(e) => e.stopPropagation()}
               onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="flex items-center gap-[12px] pl-[20px] md:pl-[30px] lg:pl-[35px] cursor-pointer overflow-hidden"
+              className="flex items-center gap-[12px]
+              pl-[15px] sm:pl-[30px] lg:pl-[35px] cursor-pointer overflow-hidden"
             >
               <UserMenu
                 user={user}

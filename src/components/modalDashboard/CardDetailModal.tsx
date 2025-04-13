@@ -36,6 +36,7 @@ export default function CardDetailPage({
   onClose,
   onChangeCard,
 }: CardDetailModalProps) {
+  const [cardData, setCardData] = useState<CardDetailType>(card);
   const [commentText, setCommentText] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -45,7 +46,7 @@ export default function CardDetailPage({
 
   const { data: columns = [] } = useQuery<ColumnType[]>({
     queryKey: ["columns", dashboardId],
-    queryFn: () => getColumn({ dashboardId, columnId: card.columnId }),
+    queryFn: () => getColumn({ dashboardId, columnId: cardData.columnId }),
   });
 
   const { data: members = [] } = useQuery({
@@ -55,21 +56,21 @@ export default function CardDetailPage({
 
   const columnName = useMemo(() => {
     return (
-      columns.find((col) => String(col.id) === String(card.columnId))?.title ||
-      "알 수 없음"
+      columns.find((col) => String(col.id) === String(cardData.columnId))
+        ?.title || "알 수 없음"
     );
-  }, [columns, card.columnId]);
+  }, [columns, cardData.columnId]);
 
   const { mutate: createCommentMutate } = useMutation({
     mutationFn: createComment,
     onSuccess: () => {
       setCommentText("");
-      queryClient.invalidateQueries({ queryKey: ["comments", card.id] });
+      queryClient.invalidateQueries({ queryKey: ["comments", cardData.id] });
     },
   });
 
   const { mutate: deleteCardMutate } = useMutation({
-    mutationFn: () => deleteCard(card.id),
+    mutationFn: () => deleteCard(cardData.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cards"] });
       if (onChangeCard) onChangeCard();
@@ -86,8 +87,8 @@ export default function CardDetailPage({
     if (!commentText.trim()) return;
     createCommentMutate({
       content: commentText,
-      cardId: card.id,
-      columnId: card.columnId,
+      cardId: cardData.id,
+      columnId: cardData.columnId,
       dashboardId,
     });
   };
@@ -118,7 +119,7 @@ export default function CardDetailPage({
               <div className="flex justify-between sm:mb-4 mb-2">
                 {/* 제목 */}
                 <h2 className="text-black3 font-bold sm:text-[20px] text-[16px]">
-                  {card.title}
+                  {cardData.title}
                 </h2>
                 {/* 버튼 컨테이너 */}
                 <div
@@ -164,9 +165,9 @@ export default function CardDetailPage({
 
               {/* 카드 내용 */}
               <div className="flex flex-col-reverse sm:flex-row gap-4">
-                <CardDetail card={card} columnName={columnName} />
+                <CardDetail card={cardData} columnName={columnName} />
                 <div>
-                  <Representative card={card} />
+                  <Representative card={cardData} />
                 </div>
               </div>
 
@@ -186,7 +187,7 @@ export default function CardDetailPage({
 
               <div className="w-full lg:max-w-[445px] md:max-w-[420px] sm:max-h-[140px] max-h-[70px] my-2 overflow-y-auto">
                 <CommentList
-                  cardId={card.id}
+                  cardId={cardData.id}
                   currentUserId={currentUserId}
                   teamId={""}
                 />
@@ -200,25 +201,39 @@ export default function CardDetailPage({
         <TaskModal
           isOpen={true}
           mode="edit"
-          teamId={TEAM_ID}
-          columnId={card.columnId}
-          cardId={card.id}
+          columnId={cardData.columnId}
+          cardId={cardData.id}
           dashboardId={dashboardId}
           members={members}
           onClose={() => setIsEditModalOpen(false)}
-          onSubmit={() => {
+          onSubmit={(updatedData) => {
             if (onChangeCard) onChangeCard();
             queryClient.invalidateQueries({ queryKey: ["cards"] });
+            setCardData((prev) => ({
+              ...prev,
+              title: updatedData.title,
+              description: updatedData.description,
+              dueDate: updatedData.deadline,
+              tags: updatedData.tags,
+              imageUrl: updatedData.image ?? "",
+              assignee: {
+                ...prev.assignee,
+                nickname: updatedData.assignee,
+              },
+              columnId:
+                columns.find((col) => col.title === updatedData.status)?.id ??
+                prev.columnId,
+            }));
             setIsEditModalOpen(false);
           }}
           initialData={{
             status: columnName,
-            assignee: card.assignee.nickname,
-            title: card.title,
-            description: card.description,
-            deadline: card.dueDate,
-            tags: card.tags,
-            image: card.imageUrl ?? "",
+            assignee: cardData.assignee.nickname,
+            title: cardData.title,
+            description: cardData.description,
+            deadline: cardData.dueDate,
+            tags: cardData.tags,
+            image: cardData.imageUrl ?? "",
           }}
         />
       )}

@@ -1,10 +1,7 @@
-import { useState } from "react";
-import {
-  createCard,
-  editCard,
-  getDashboardMembers,
-  EditCardPayload,
-} from "@/api/card";
+import { useState, useMemo } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { createCard, editCard } from "@/api/card";
+import { getColumn } from "@/api/columns";
 import ModalInput from "@/components/modalInput/ModalInput";
 import ModalTextarea from "@/components/modalInput/ModalTextarea";
 import ModalImage from "@/components/modalInput/ModalImage";
@@ -24,7 +21,6 @@ interface TaskModalProps {
     userId: number;
     nickname: string;
   }[];
-  teamId: string;
   columnId: number;
   dashboardId: number;
   cardId?: number; // 수정 모드일 때만 사용
@@ -40,6 +36,12 @@ export interface TaskData {
   image?: string;
 }
 
+interface ColumnType {
+  id: number;
+  title: string;
+  status: string;
+}
+
 export default function TaskModal({
   mode = "create",
   onClose,
@@ -50,6 +52,8 @@ export default function TaskModal({
   dashboardId,
   cardId,
 }: TaskModalProps) {
+  const queryClient = useQueryClient();
+
   const [formData, setFormData] = useState<TaskData>({
     status: initialData.status || "",
     assignee: initialData.assignee || "",
@@ -59,6 +63,18 @@ export default function TaskModal({
     tags: initialData.tags || [],
     image: initialData.image || "",
   });
+
+  const { data: columns = [] } = useQuery<ColumnType[]>({
+    queryKey: ["columns", dashboardId],
+    queryFn: () => getColumn({ dashboardId, columnId }),
+  });
+
+  const matchedColumn = useMemo(() => {
+    if (!columns.length) return undefined;
+    return columns.find((col) => col.title === formData.status);
+  }, [columns, formData.status]);
+
+  const updatedColumnId = matchedColumn?.id ?? columnId;
 
   const handleChange = (field: keyof TaskData, value: string | string[]) => {
     setFormData((prev) => ({
@@ -90,7 +106,7 @@ export default function TaskModal({
         await createCard({
           assigneeUserId,
           dashboardId,
-          columnId,
+          columnId: updatedColumnId,
           title: formData.title,
           description: formData.description,
           dueDate: formData.deadline,
@@ -106,13 +122,14 @@ export default function TaskModal({
 
         await editCard(cardId, {
           assigneeUserId,
-          columnId,
+          columnId: updatedColumnId,
           title: formData.title,
           description: formData.description,
           dueDate: formData.deadline,
           tags: formData.tags,
           imageUrl: formData.image || undefined,
         });
+        queryClient.invalidateQueries({ queryKey: ["cards"] });
         toast.success("카드가 수정되었습니다.");
       }
 

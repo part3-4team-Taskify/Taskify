@@ -180,12 +180,15 @@ export default function Column({
       {/* 카드 생성 모달 */}
       {isTaskModalOpen && (
         <TaskModal
+          mode="create"
           isOpen={isTaskModalOpen}
           onClose={() => setIsTaskModalOpen(false)}
-          teamId={TEAM_ID}
           dashboardId={dashboardId}
           columnId={columnId}
           members={members}
+          initialData={{
+            status: columnTitle,
+          }}
           onSubmit={fetchColumnsAndCards}
         />
       )}

@@ -37,14 +37,17 @@ interface UserIconProps {
 }
 
 export const UserProfileIcon: React.FC<UserIconProps> = ({ user }) => (
-  <div className="relative rounded-full border-[2px] border-white overflow-hidden">
+  <div
+    className="relative overflow-hidden
+  sm:w-[38px] sm:h-[38px] w-[34px] h-[34px]
+  rounded-full"
+  >
     {user.profileImageUrl ? (
       <Image
         src={user.profileImageUrl}
         alt="유저 프로필 아이콘"
-        width={34}
-        height={34}
-        className="object-cover sm:w-[38px] sm:h-[38px]"
+        fill
+        className="object-cover"
       />
     ) : (
       <RandomProfile
