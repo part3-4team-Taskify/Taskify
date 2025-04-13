@@ -11,7 +11,11 @@ interface TaskModalProps {
   onClose: () => void;
   onSubmit: (data: TaskData) => void;
   initialData?: Partial<TaskData>;
-  members: { id: number; nickname: string }[];
+  members: {
+    id: number;
+    userId: number;
+    nickname: string;
+  }[];
   columnId: number;
 }
 
@@ -59,15 +63,12 @@ export default function TaskModal({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35 z-50">
-      <div className="w-full max-w-[584px] h-auto max-h-[90vh] rounded-lg bg-white p-4 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-8 overflow-y-auto">
+      <div className="sm:w-[584px] w-[327px] h-auto max-h-[90vh] rounded-lg bg-white p-4 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-8 overflow-y-auto">
         <h2 className="font-bold text-black3 text-[16px] sm:text-[24px]">
           {mode === "edit" ? "할 일 수정" : "할 일 생성"}
         </h2>
 
-        <div
-          className="flex flex-col gap-4 sm:gap-8
-        text-black3 font-medium text-[14px] sm:text-[18px]"
-        >
+        <div className="flex flex-col gap-4 sm:gap-8">
           {/* 상태 및 담당자 드롭다운 */}
           <div
             className="flex flex-col sm:flex-row gap-4
@@ -83,8 +84,8 @@ export default function TaskModal({
             <AssigneeSelect
               label="담당자"
               value={formData.assignee}
-              users={members.map((m) => ({ id: m.id, name: m.nickname }))}
               required
+              users={members.map((m) => ({ id: m.id, name: m.nickname }))}
               onChange={(value) => handleChange("assignee", value)}
             />
           </div>
@@ -125,12 +126,12 @@ export default function TaskModal({
           />
         </div>
 
-        <div className="mt-auto flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 w-full">
+        <div className="mt-auto flex sm:flex-row justify-between gap-2 sm:gap-3 w-full">
           <TextButton
             color="third"
             buttonSize="md"
             onClick={onClose}
-            className="w-full sm:w-[256px] h-[54px] border border-[var(--color-gray3)] bg-white
+            className="sm:w-[256px] w-[144px] h-[54px] border border-[var(--color-gray3)] bg-white
             text-[var(--color-gray1)] font-16m rounded-lg cursor-pointer"
           >
             취소
@@ -140,7 +141,7 @@ export default function TaskModal({
             color="primary"
             buttonSize="md"
             onClick={() => onSubmit(formData)}
-            className="w-full sm:w-[256px] h-[54px] bg-[var(--primary)] text-white font-16m rounded-lg cursor-pointer"
+            className="sm:w-[256px] w-[144px] h-[54px] bg-[var(--primary)] text-white font-16m rounded-lg cursor-pointer"
             disabled={!isFormValid}
           >
             {mode === "edit" ? "수정" : "생성"}

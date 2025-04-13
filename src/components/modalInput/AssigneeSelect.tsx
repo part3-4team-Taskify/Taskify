@@ -89,7 +89,9 @@ export default function AssigneeSelect({
                     userId={user.id}
                     className="w-[26px] h-[26px]"
                   />
-                  <span className="font-16r text-black3">{user.name}</span>
+                  <span className="font-normal text-black3 sm:text-[16px] text-[14px]">
+                    {user.name}
+                  </span>
                 </div>
                 {value === user.name && (
                   <span className="text-[var(--primary)]">✔</span>

@@ -91,7 +91,7 @@ export default function TaskModal({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35 p-4 z-50">
-      <div className="w-full max-w-[584px] h-auto max-h-[90vh] rounded-lg bg-white p-4 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-8 overflow-y-auto">
+      <div className="sm:w-[584px] w-[327px] h-auto max-h-[90vh] rounded-lg bg-white p-4 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-8 overflow-y-auto">
         <h2 className="text-black3 text-[16px] sm:text-[24px] font-bold">
           할 일 생성
         </h2>
@@ -136,12 +136,12 @@ export default function TaskModal({
           />
         </div>
 
-        <div className="mt-auto flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 w-full">
+        <div className="mt-auto flex sm:flex-row justify-end gap-2 sm:gap-3 w-full">
           <TextButton
             color="third"
             buttonSize="md"
             onClick={onClose}
-            className="w-full sm:w-[256px] h-[54px] bg-white border border-[var(--color-gray3)]
+            className="sm:w-[256px] w-[144px] h-[54px] bg-white border border-[var(--color-gray3)]
             text-[var(--color-gray1)] font-16m rounded-lg cursor-pointer"
           >
             취소
@@ -151,7 +151,7 @@ export default function TaskModal({
             color="primary"
             buttonSize="md"
             onClick={handleSubmit}
-            className="w-full sm:w-[256px] h-[54px] bg-[var(--primary)] text-white font-16m rounded-lg cursor-pointer"
+            className="sm:w-[256px] w-[144px] h-[54px] bg-[var(--primary)] text-white font-16m rounded-lg cursor-pointer"
             disabled={!isFormValid}
           >
             생성
