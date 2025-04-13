@@ -150,7 +150,13 @@ export default function Column({
           {/* 오른쪽: 생성 버튼 + 설정 버튼 */}
           <div className="flex items-center gap-2">
             <div
-              onClick={() => setIsTaskModalOpen(true)}
+              onClick={() => {
+                if (!canEditColumns) {
+                  toast.error("읽기 전용 대시보드입니다.");
+                  return;
+                }
+                setIsTaskModalOpen(true);
+              }}
               className="block lg:hidden"
             >
               <ShortTodoButton />
@@ -169,7 +175,13 @@ export default function Column({
         </div>
         <div className="flex items-center justify-center">
           <div
-            onClick={() => setIsTaskModalOpen(true)}
+            onClick={() => {
+              if (!canEditColumns) {
+                toast.error("읽기 전용 대시보드입니다.");
+                return;
+              }
+              setIsTaskModalOpen(true);
+            }}
             className="mb-2 hidden lg:block"
           >
             <TodoButton />
