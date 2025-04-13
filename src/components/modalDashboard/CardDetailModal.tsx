@@ -56,8 +56,7 @@ export default function CardDetailPage({
 
   const columnName = useMemo(() => {
     return (
-      columns.find((col) => String(col.id) === String(cardData.columnId))
-        ?.title || "알 수 없음"
+      columns.find((col) => col.id === cardData.columnId)?.title || "알 수 없음"
     );
   }, [columns, cardData.columnId]);
 
@@ -189,7 +188,7 @@ export default function CardDetailPage({
                 <CommentList
                   cardId={cardData.id}
                   currentUserId={currentUserId}
-                  teamId={""}
+                  teamId={TEAM_ID}
                 />
               </div>
             </div>
