@@ -13,6 +13,8 @@ import { DeleteModal } from "@/components/modal/DeleteModal";
 import { TEAM_ID } from "@/constants/team";
 import { Search } from "lucide-react";
 import { toast } from "react-toastify";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+
 import {
   DndContext,
   closestCenter,
@@ -149,8 +151,12 @@ export default function MyDashboardPage() {
     });
   };
 
+  if (!isInitialized || !user) {
+    return <LoadingSpinner />;
+  }
+
   return (
-    <div className="flex h-screen overflow-hidden bg-[var(--color-violet5)]">
+    <div className="flex h-[calc(var(--vh)_*_100)] overflow-hidden bg-[var(--color-violet5)]">
       <SideMenu
         teamId={TEAM_ID}
         dashboardList={dashboardList}

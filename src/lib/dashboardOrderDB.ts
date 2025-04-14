@@ -1,4 +1,3 @@
-// src/lib/dashboardOrderDB.ts
 import Dexie from "dexie";
 
 // DB 인스턴스 생성
