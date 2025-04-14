@@ -18,6 +18,7 @@ import ColumnsButton from "@/components/button/ColumnsButton";
 import AddColumnModal from "@/components/columnCard/AddColumnModal";
 import { TEAM_ID } from "@/constants/team";
 import { toast } from "react-toastify";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -99,6 +100,10 @@ export default function Dashboard() {
   const currentDashboard = dashboardList.find(
     (db) => db.id === Number(dashboardId)
   );
+
+  if (!isInitialized || !user) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="flex h-screen min-h-screen">
