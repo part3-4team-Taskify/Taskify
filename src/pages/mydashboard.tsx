@@ -13,7 +13,6 @@ import { DeleteModal } from "@/components/modal/DeleteModal";
 import { TEAM_ID } from "@/constants/team";
 import { Search } from "lucide-react";
 import { toast } from "react-toastify";
-
 import {
   DndContext,
   closestCenter,
@@ -28,6 +27,7 @@ import {
   arrayMove,
 } from "@dnd-kit/sortable";
 import SortableCardButton from "@/components/button/SortableCardButton";
+import { dashboardOrdersTable } from "@/lib/dashboardOrderDB";
 
 interface Dashboard {
   id: number;
@@ -56,7 +56,7 @@ export default function MyDashboardPage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isConfirmDeleteModalOpen, setIsConfirmDeleteModalOpen] =
     useState(false);
-  const itemsPerPage = 6; // 버튼 포함 6개
+  const itemsPerPage = 6;
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -80,7 +80,18 @@ export default function MyDashboardPage() {
   const fetchDashboards = async () => {
     try {
       const res = await getDashboards({});
-      setDashboardList(res.dashboards);
+      const localOrder = await dashboardOrdersTable.get(TEAM_ID);
+
+      let orderedList = res.dashboards;
+      if (localOrder?.order) {
+        orderedList = res.dashboards
+          .slice()
+          .sort(
+            (a, b) =>
+              localOrder.order.indexOf(a.id) - localOrder.order.indexOf(b.id)
+          );
+      }
+      setDashboardList(orderedList);
     } catch (error) {
       console.error("대시보드 불러오기 실패:", error);
     }
@@ -121,7 +132,7 @@ export default function MyDashboardPage() {
     setSelectedDashboardId(null);
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
+  const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
@@ -130,6 +141,12 @@ export default function MyDashboardPage() {
 
     const newOrder = arrayMove(dashboardList, oldIndex, newIndex);
     setDashboardList(newOrder);
+
+    //D&D 로컬 순서 저장
+    await dashboardOrdersTable.put({
+      teamId: TEAM_ID,
+      order: newOrder.map((d) => d.id),
+    });
   };
 
   return (
