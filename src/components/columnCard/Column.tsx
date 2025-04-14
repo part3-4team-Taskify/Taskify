@@ -4,7 +4,6 @@ import Image from "next/image";
 import { CardType } from "@/types/task";
 import TaskModal from "@/components/modalInput/TaskModal";
 import { TodoButton, ShortTodoButton } from "@/components/button/TodoButton";
-import ColumnManageModal from "@/components/columnCard/ColumnManageModal";
 import ColumnDeleteModal from "@/components/columnCard/ColumnDeleteModal";
 import { updateColumn, deleteColumn } from "@/api/columns";
 import { getDashboardMembers, getCardDetail } from "@/api/card";
@@ -15,6 +14,7 @@ import CardDetailModal from "@/components/modalDashboard/CardDetailModal";
 import { CardDetailType } from "@/types/cards";
 import { toast } from "react-toastify";
 import { useDashboardPermission } from "@/hooks/useDashboardPermission";
+import FormModal from "@/components/modal/FormModal";
 
 type ColumnProps = {
   columnId: number;
@@ -218,16 +218,27 @@ export default function Column({
       )}
 
       {/* 칼럼 관리 모달 */}
-      <ColumnManageModal
-        isOpen={isColumnModalOpen}
-        onClose={() => setIsColumnModalOpen(false)}
-        onDeleteClick={() => {
-          setIsColumnModalOpen(false);
-          setIsDeleteModalOpen(true);
-        }}
-        columnTitle={columnTitle}
-        onEditSubmit={handleEditColumn}
-      />
+      {isColumnModalOpen && (
+        <FormModal
+          title="칼럼 이름 수정"
+          inputLabel="이름"
+          inputPlaceholder="변경할 이름을 입력해 주세요"
+          inputValue={columnTitle}
+          onInputChange={setColumnTitle}
+          isInputValid={columnTitle.trim().length > 0}
+          onSubmit={() => {
+            handleEditColumn(columnTitle);
+            setIsColumnModalOpen(false);
+          }}
+          submitText="변경"
+          leftButtonText="삭제"
+          onLeftButtonClick={() => {
+            setIsColumnModalOpen(false);
+            setIsDeleteModalOpen(true);
+          }}
+          onClose={() => setIsColumnModalOpen(false)}
+        />
+      )}
 
       {/* 칼럼 삭제 확인 모달 */}
       <ColumnDeleteModal
