@@ -8,7 +8,7 @@ interface RepresentativeProps {
 export const Representative = ({ card }: RepresentativeProps) => {
   return (
     <div
-      className="flex flex-col items-center justify-center gap-4
+      className="flex flex-col justify-center gap-4 sm:pl-4 pl-3
       lg:w-[200px] sm:w-[180px] w-[290px]
       sm:h-[155px] h-[65px]
       rounded-lg bg-white border border-[#D9D9D9]"
