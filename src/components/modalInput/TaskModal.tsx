@@ -86,8 +86,8 @@ export default function TaskModal({
   const isFormValid =
     formData.assignee &&
     formData.status &&
-    formData.title &&
-    formData.description;
+    formData.title.trim() &&
+    formData.description.trim();
 
   const handleSubmit = async () => {
     try {
