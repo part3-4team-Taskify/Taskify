@@ -106,7 +106,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex h-screen min-h-screen">
+    <div className="flex h-[calc(var(--vh)_*_100)]">
       <SideMenu
         teamId={TEAM_ID}
         dashboardList={dashboardList}

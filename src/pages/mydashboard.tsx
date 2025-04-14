@@ -138,7 +138,7 @@ export default function MyDashboardPage() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[var(--color-violet5)]">
+    <div className="flex h-[calc(var(--vh)_*_100)] overflow-hidden bg-[var(--color-violet5)]">
       <SideMenu
         teamId={TEAM_ID}
         dashboardList={dashboardList}
