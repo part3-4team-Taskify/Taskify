@@ -30,9 +30,12 @@ export default function Dashboard() {
 
   const [isReady, setIsReady] = useState(false);
   const [isAddColumnModalOpen, setIsAddColumnModalOpen] = useState(false);
+
   const [newColumnTitle, setNewColumnTitle] = useState("");
+  const [titleLength, setTitleLength] = useState<number>(0);
 
   const isMaxColumns = columns.length >= 10;
+  const maxColumnTitleLength = 20;
 
   // 모달이 열릴 때마다 입력값 초기화
   const openModal = () => {
@@ -43,6 +46,14 @@ export default function Dashboard() {
   const isDuplicate = columns.some(
     (col) => col.title.toLowerCase() === newColumnTitle.trim().toLowerCase()
   );
+
+  /* 칼럼 이름 글자수 제한 */
+  const handleTitleCreate = async (value: string) => {
+    if (value.length <= maxColumnTitleLength) {
+      setNewColumnTitle(value);
+      setTitleLength(value.length);
+    }
+  };
 
   useEffect(() => {
     if (router.isReady && dashboardId && isInitialized && user) {
@@ -153,12 +164,16 @@ export default function Dashboard() {
               inputLabel="이름"
               inputPlaceholder="새로운 프로젝트"
               inputValue={newColumnTitle}
-              onInputChange={setNewColumnTitle}
+              onInputChange={handleTitleCreate}
               isInputValid={
                 newColumnTitle.trim().length > 0 &&
                 !isDuplicate &&
                 !isMaxColumns
               }
+              charCount={{
+                current: titleLength,
+                max: maxColumnTitleLength,
+              }}
               errorMessage={
                 isDuplicate
                   ? "중복된 칼럼 이름입니다."

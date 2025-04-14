@@ -109,6 +109,9 @@ export default function InviteDashboard({
       onInputChange={setEmail}
       onSubmit={handleSubmit}
       submitText="초대"
+      errorMessage={
+        email && !isValidEmail(email) ? "이메일 형식을 확인해 주세요." : ""
+      }
       onClose={onClose}
     />
   );

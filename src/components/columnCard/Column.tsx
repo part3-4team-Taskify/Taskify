@@ -38,6 +38,8 @@ export default function Column({
   const { canEditColumns } = useDashboardPermission(dashboardId, createdByMe);
 
   const [columnTitle, setColumnTitle] = useState(title);
+  const [editTitle, setEditTitle] = useState(columnTitle);
+  const [titleLength, setTitleLength] = useState<number>(0);
   const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
@@ -46,6 +48,8 @@ export default function Column({
   const [members, setMembers] = useState<
     { id: number; userId: number; nickname: string }[]
   >([]);
+
+  const maxColumnTitleLength = 20;
 
   // 카드리스트의 스크롤을 칼럼 영역으로 이동
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -83,6 +87,7 @@ export default function Column({
       setColumnTitle(updated.title);
       setIsColumnModalOpen(false);
       toast.success("칼럼 제목이 변경되었습니다.");
+      fetchColumnsAndCards();
     } catch (error) {
       console.error("칼럼 제목 수정 실패:", error);
       toast.error("칼럼 제목 변경에 실패했습니다.");
@@ -161,6 +166,8 @@ export default function Column({
                     toast.error("읽기 전용 대시보드입니다.");
                     return;
                   }
+                  setEditTitle(columnTitle);
+                  setTitleLength(columnTitle.length);
                   setIsColumnModalOpen(true);
                 }}
               />
@@ -223,11 +230,20 @@ export default function Column({
           title="칼럼 이름 수정"
           inputLabel="이름"
           inputPlaceholder="변경할 이름을 입력해 주세요"
-          inputValue={columnTitle}
-          onInputChange={setColumnTitle}
+          inputValue={editTitle}
+          onInputChange={(value) => {
+            if (value.length <= maxColumnTitleLength) {
+              setEditTitle(value);
+              setTitleLength(value.length);
+            }
+          }}
           isInputValid={columnTitle.trim().length > 0}
+          charCount={{
+            current: titleLength,
+            max: maxColumnTitleLength,
+          }}
           onSubmit={() => {
-            handleEditColumn(columnTitle);
+            handleEditColumn(editTitle);
             setIsColumnModalOpen(false);
           }}
           submitText="변경"
