@@ -7,7 +7,6 @@ import { Representative } from "@/components/modalDashboard/Representative";
 import TaskModal from "@/components/modalInput/TaskModal";
 import { DeleteModal } from "@/components/modal/DeleteModal";
 import { toast } from "react-toastify";
-import { TEAM_ID } from "@/constants/team";
 import { useDashboardPermission } from "@/hooks/useDashboardPermission";
 import { useCardDetailState } from "@/hooks/useCardDetailState";
 import { useCardDetail } from "@/hooks/useCardDetail";
@@ -16,7 +15,6 @@ import type { CardDetailType } from "@/types/cards";
 
 interface CardDetailModalProps {
   card: CardDetailType;
-  currentUserId: number;
   dashboardId: number;
   createdByMe: boolean;
   onClose: () => void;
@@ -25,7 +23,6 @@ interface CardDetailModalProps {
 
 export default function CardDetailPage({
   card,
-  currentUserId,
   dashboardId,
   createdByMe,
   onClose,
@@ -144,11 +141,7 @@ export default function CardDetailPage({
               </div>
 
               <div className="w-full lg:max-w-[445px] md:max-w-[420px] sm:max-h-[140px] max-h-[70px] my-2 overflow-y-auto">
-                <CommentList
-                  cardId={cardData.id}
-                  currentUserId={currentUserId}
-                  teamId={TEAM_ID}
-                />
+                <CommentList cardId={cardData.id} />
               </div>
             </div>
           </div>
