@@ -59,7 +59,7 @@ export default function TaskModal({
     assignee: initialData.assignee || "",
     title: initialData.title || "",
     description: initialData.description || "",
-    deadline: initialData.deadline || "",
+    deadline: initialData.deadline ?? "",
     tags: initialData.tags || [],
     image: initialData.image || "",
   });

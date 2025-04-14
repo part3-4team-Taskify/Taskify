@@ -227,7 +227,7 @@ export default function CardDetailPage({
               ...prev,
               title: updatedData.title,
               description: updatedData.description,
-              dueDate: updatedData.deadline,
+              dueDate: updatedData.deadline ?? "",
               tags: updatedData.tags,
               imageUrl: updatedData.image ?? "",
               assignee: {
@@ -245,7 +245,7 @@ export default function CardDetailPage({
             assignee: cardData.assignee.nickname,
             title: cardData.title,
             description: cardData.description,
-            deadline: cardData.dueDate,
+            deadline: cardData.dueDate ?? "",
             tags: cardData.tags,
             image: cardData.imageUrl ?? "",
           }}
