@@ -332,3 +332,47 @@
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
+
+@media (max-width: 640px) {
+  .custom-datepicker-popper {
+    font-size: 8px !important;
+  }
+
+  /*시간 선택 컨테이너 폭 조절 */
+  .custom-datepicker-popper .react-datepicker__time-container {
+    width: 40px !important;
+  }
+
+  /* 시간 리스트 영역 크기와 정렬 보정 */
+  .custom-datepicker-popper .react-datepicker__time {
+    width: 50px !important;
+  }
+
+  .custom-datepicker-popper .react-datepicker__time-box {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .custom-datepicker-popper .react-datepicker__time-list {
+    padding: 2px !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  .custom-datepicker-popper .react-datepicker__time-list-item {
+    font-size: 10px !important;
+    padding: 2px 4px !important;
+    height: auto !important;
+    word-break: keep-all !important;
+  }
+
+  /*선택된 항목도 작게 & 잘림 방지 */
+  .custom-datepicker-popper .react-datepicker__time-list-item--selected {
+    font-size: 8px !important;
+    padding: 2px 4px !important;
+    background-color: #2684ff !important;
+    border-radius: 4px !important;
+    word-break: keep-all !important;
+  }
+}
