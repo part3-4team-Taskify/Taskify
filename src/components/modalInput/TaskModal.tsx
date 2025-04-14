@@ -63,7 +63,7 @@ export default function TaskModal({
   });
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35 z-50">
-      <div className="sm:w-[584px] w-[327px] h-[calc(var(--vh)_*_90)] rounded-lg bg-white p-4 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-8 overflow-y-auto">
+      <div className="sm:w-[584px] w-[320px] h-[calc(var(--vh)_*_90)] rounded-lg bg-white p-4 sm:p-8 shadow-lg flex flex-col gap-4 sm:gap-8 overflow-y-auto">
         <h2 className="font-bold text-black3 text-[18px] sm:text-[24px]">
           {mode === "edit" ? "할 일 수정" : "할 일 생성"}
         </h2>
