@@ -32,8 +32,10 @@ export default function CardDetailPage({
   onChangeCard,
 }: CardDetailModalProps) {
   const { canEditCards } = useDashboardPermission(dashboardId, createdByMe);
-  const { cardData, setCardData, columnName, columns, members } =
-    useCardDetailState(card, dashboardId);
+  const { cardData, setCardData, columnName, members } = useCardDetailState(
+    card,
+    dashboardId
+  );
 
   const {
     commentText,
@@ -168,6 +170,7 @@ export default function CardDetailPage({
               setCardData(updatedCard);
               onChangeCard?.();
             } catch (error) {
+              console.error("카드 불러오기 실패:", error);
               toast.error("카드 정보를 불러오는 데 실패했습니다.");
             } finally {
               setIsEditModalOpen(false);
