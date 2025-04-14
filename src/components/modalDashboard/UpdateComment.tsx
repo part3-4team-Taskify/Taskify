@@ -46,9 +46,6 @@ export default function UpdateComment({
     toast.success("댓글이 수정되었습니다.");
   };
 
-  console.log("currentUserId", currentUserId);
-  console.log("comment.author.id", comment.author.id);
-
   return (
     <div className="flex gap-3 items-start w-full">
       {/* 프로필 */}
