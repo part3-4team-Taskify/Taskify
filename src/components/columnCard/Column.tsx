@@ -49,7 +49,7 @@ export default function Column({
     { id: number; userId: number; nickname: string }[]
   >([]);
 
-  const maxColumnTitleLength = 20;
+  const maxColumnTitleLength = 15;
 
   // 카드리스트의 스크롤을 칼럼 영역으로 이동
   const scrollRef = useRef<HTMLDivElement | null>(null);

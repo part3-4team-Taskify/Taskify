@@ -87,8 +87,7 @@ export default function TaskModal({
     formData.assignee &&
     formData.status &&
     formData.title &&
-    formData.description &&
-    formData.deadline;
+    formData.description;
 
   const handleSubmit = async () => {
     try {
@@ -109,7 +108,7 @@ export default function TaskModal({
           columnId: updatedColumnId,
           title: formData.title,
           description: formData.description,
-          dueDate: formData.deadline,
+          dueDate: formData.deadline.trim() ? formData.deadline : undefined,
           tags: formData.tags,
           imageUrl: formData.image || undefined,
         });
@@ -125,7 +124,7 @@ export default function TaskModal({
           columnId: updatedColumnId,
           title: formData.title,
           description: formData.description,
-          dueDate: formData.deadline,
+          dueDate: formData.deadline.trim() ? formData.deadline : undefined,
           tags: formData.tags,
           imageUrl: formData.image || undefined,
         });
@@ -187,7 +186,7 @@ export default function TaskModal({
 
           <ModalInput
             label="마감일"
-            required
+            required={false}
             defaultValue={formData.deadline}
             onValueChange={(value) => handleChange("deadline", value[0])}
           />
