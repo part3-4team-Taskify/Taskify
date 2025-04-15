@@ -7,7 +7,6 @@ import { Invite } from "@/types/invite";
 import useUserStore from "@/store/useUserStore";
 import { toast } from "react-toastify";
 import { Search } from "lucide-react";
-import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 const ITEMS_PER_PAGE = 6; // 한 번에 보여줄 개수
 
