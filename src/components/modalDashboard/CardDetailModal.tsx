@@ -15,6 +15,7 @@ import type { CardDetailType } from "@/types/cards";
 
 interface CardDetailModalProps {
   card: CardDetailType;
+  currentUserId: number;
   dashboardId: number;
   createdByMe: boolean;
   onClose: () => void;
