@@ -2,16 +2,16 @@ import clsx from "clsx";
 
 const tagColorSet = [
   {
-    textColor: "text-[var(--sortTextGreen)]",
-    bgColor: "bg-[var(--sortTextBgGreen)]",
+    textColor: "text-[var(--sortTextBlue)]",
+    bgColor: "bg-[var(--sortTextBgBlue)]",
   },
   {
     textColor: "text-[var(--sortTextPink)]",
     bgColor: "bg-[var(--sortTextBgPink)]",
   },
   {
-    textColor: "text-[var(--sortTextBlue)]",
-    bgColor: "bg-[var(--sortTextBgBlue)]",
+    textColor: "text-[var(--sortTextGreen)]",
+    bgColor: "bg-[var(--sortTextBgGreen)]",
   },
   {
     textColor: "text-[var(--sortTextOrange)]",
@@ -40,7 +40,7 @@ export default function ColorTagChip({
     <button
       onClick={handleClick}
       className={clsx(
-        "px-3 py-2 rounded-lg font-14r whitespace-nowrap",
+        "px-3 py-1 rounded-[4px] font-12r whitespace-nowrap",
         className
       )}
     >

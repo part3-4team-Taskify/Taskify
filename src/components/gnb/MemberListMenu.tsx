@@ -24,14 +24,14 @@ const MemberListMenu: React.FC<MemberListMenuProps> = ({
       ref={ref}
       className={clsx(
         "absolute top-full right-0 w-[140px] sm:w-[190px] z-50",
-        "bg-white border border-[var(--color-gray3)] shadow",
+        "bg-white border border-[var(--color-gray3)] rounded-lg shadow",
         "transition-all duration-200 ease-out",
         isListOpen
           ? "opacity-100 translate-y-0"
           : "opacity-0 -translate-y-2 pointer-events-none"
       )}
     >
-      <ul className="flex flex-col font-16r max-h-[300px] overflow-y-auto">
+      <ul className="flex flex-col font-16r max-h-[200px] sm:max-h-[270px] overflow-y-auto">
         {members.map((member) => (
           <li
             key={member.id}

@@ -10,17 +10,23 @@ import { Search } from "lucide-react";
 
 const ITEMS_PER_PAGE = 6; // 한 번에 보여줄 개수
 
+interface InvitedProps {
+  searchTitle: string;
+  invitationData: Invite[];
+  fetchNextPage: () => void;
+  hasMore: boolean;
+  agreeInvitation?: () => void;
+  onDecision?: (inviteId: number) => void;
+}
+
 function InvitedList({
   searchTitle,
   invitationData: invitationData,
   fetchNextPage,
   hasMore,
-}: {
-  searchTitle: string;
-  invitationData: Invite[];
-  fetchNextPage: () => void;
-  hasMore: boolean;
-}) {
+  agreeInvitation,
+  onDecision,
+}: InvitedProps) {
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   /* IntersectionObserver 설정 */
@@ -62,10 +68,9 @@ function InvitedList({
     };
     try {
       await axiosInstance.put(apiRoutes.invitationDetail(inviteId), payload);
-      toast.success("대시보드 수락 성공");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      if (agreeInvitation) agreeInvitation();
+      if (onDecision) onDecision(inviteId);
+      toast.success("초대가 수락되었습니다.");
     } catch (error) {
       console.error("수락 실패:", error);
       toast.error("초대 수락에 실패했습니다");
@@ -80,10 +85,8 @@ function InvitedList({
     };
     try {
       await axiosInstance.put(apiRoutes.invitationDetail(inviteId), payload);
-      toast.success("대시보드 거절 성공");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      if (onDecision) onDecision(inviteId);
+      toast.success("초대가 거절되었습니다.");
     } catch (error) {
       console.error("거절 실패:", error);
       toast.error("초대 거절에 실패했습니다");
@@ -104,7 +107,7 @@ function InvitedList({
       )}
 
       {/* 리스트 */}
-      <div className="scroll-area h-[150vw] max-h-[570px] sm:max-h-[320px] lg:max-h-[400px] overflow-y-auto overflow-x-hidden">
+      <div className="scroll-area h-[150vw] max-h-[380px] sm:max-h-[240px] lg:max-h-[280px] overflow-y-auto overflow-x-hidden">
         {filteredData.length > 0 ? (
           filteredData.map((invite, index) => (
             <div
@@ -112,6 +115,7 @@ function InvitedList({
               className="pb-5 mb-[20px] w-full max-w-[260px] sm:max-w-[504px] lg:max-w-[966px]
                  h-auto sm:h-[50px] border-b border-[var(--color-gray4)]
                  sm:grid sm:grid-cols-[3fr_2fr_3fr] sm:items-center
+                 text-black3 text-[14px] sm:text-[16px] font-normal
                  flex flex-col gap-10"
             >
               {/* 모바일 레이아웃 */}
@@ -186,9 +190,16 @@ function InvitedList({
 }
 
 type CursorId = number;
+type InvitedDashBoardProps = {
+  agreeInvitation?: () => void;
+};
 
-export default function InvitedDashBoard() {
+export default function InvitedDashBoard({
+  agreeInvitation,
+}: InvitedDashBoardProps) {
   const { user } = useUserStore();
+  const [isInitialized, setIsInitialized] = useState(false);
+
   const [searchTitle, setSearchTitle] = useState("");
   const [invitationData, setInvitationData] = useState<Map<CursorId, Invite[]>>(
     new Map()
@@ -255,6 +266,10 @@ export default function InvitedDashBoard() {
             return newMap;
           });
 
+          setTimeout(() => {
+            setIsInitialized(true);
+          }, 0);
+
           if (newInvitations.length < ITEMS_PER_PAGE) {
             setHasMore(false);
           }
@@ -269,15 +284,30 @@ export default function InvitedDashBoard() {
 
   const invitationArray = Array.from(invitationData.values()).flat();
 
+  const removeInvitation = (inviteId: number) => {
+    setInvitationData((prev) => {
+      const newMap = new Map();
+      for (const [key, list] of prev) {
+        newMap.set(
+          key,
+          list.filter((invite) => invite.id !== inviteId)
+        );
+      }
+      return newMap;
+    });
+  };
+
+  if (!isInitialized) return null;
+
   return (
     <div>
       {invitationArray.length === 0 ? (
         <EmptyInvitations />
       ) : (
-        <div className="relative bg-white rounded-lg shadow-md w-[260px] sm:w-[504px] lg:w-[1022px] h-[770px] sm:h-[592px] lg:h-[620px] max-w-none">
+        <div className="relative bg-white rounded-lg shadow-md w-[260px] sm:w-[504px] lg:w-[1022px] h-[550px] sm:h-[450px] lg:h-[500px] max-w-none">
           <div className="flex flex-col p-6 w-full h-[104px]">
             <div className="flex flex-col w-full sm:w-[448px] lg:w-[966px] gap-[24px]">
-              <p className="text-black3 text-xl sm:text-2xl font-bold">
+              <p className="text-black3 text-[16px] sm:text-[20px] font-bold">
                 초대받은 대시보드
               </p>
 
@@ -294,7 +324,7 @@ export default function InvitedDashBoard() {
                   width={18}
                   height={18}
                   color="#333236"
-                  className="absolute left-[16px] top-1/2 transform -translate-y-1/2 z-50"
+                  className="absolute left-[16px] top-1/2 transform -translate-y-1/2 z-10"
                 />
               </div>
               <InvitedList
@@ -302,6 +332,8 @@ export default function InvitedDashBoard() {
                 invitationData={invitationArray}
                 fetchNextPage={fetchNextPage}
                 hasMore={hasMore}
+                agreeInvitation={agreeInvitation}
+                onDecision={removeInvitation}
               />
             </div>
           </div>
