@@ -7,6 +7,7 @@ import { Invite } from "@/types/invite";
 import useUserStore from "@/store/useUserStore";
 import { toast } from "react-toastify";
 import { Search } from "lucide-react";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 const ITEMS_PER_PAGE = 6; // 한 번에 보여줄 개수
 
@@ -198,6 +199,8 @@ export default function InvitedDashBoard({
   agreeInvitation,
 }: InvitedDashBoardProps) {
   const { user } = useUserStore();
+  const [isInitialized, setIsInitialized] = useState(false);
+
   const [searchTitle, setSearchTitle] = useState("");
   const [invitationData, setInvitationData] = useState<Map<CursorId, Invite[]>>(
     new Map()
@@ -264,6 +267,10 @@ export default function InvitedDashBoard({
             return newMap;
           });
 
+          setTimeout(() => {
+            setIsInitialized(true);
+          }, 0);
+
           if (newInvitations.length < ITEMS_PER_PAGE) {
             setHasMore(false);
           }
@@ -290,6 +297,8 @@ export default function InvitedDashBoard({
       return newMap;
     });
   };
+
+  if (!isInitialized) return null;
 
   return (
     <div>
