@@ -176,7 +176,8 @@ export default function CardDetailPage({
             }
           }}
           initialData={{
-            status: columnName,
+            status:
+              columns.find((col) => col.id === cardData.columnId)?.title ?? "", // ✅ 정확한 title 매핑
             assignee: cardData.assignee.nickname,
             title: cardData.title,
             description: cardData.description,
