@@ -5,7 +5,7 @@ import TextButton from "@/components/modalInput/TextButton";
 import StatusSelect from "@/components/modalInput/StatusSelect";
 import AssigneeSelect from "@/components/modalInput/AssigneeSelect";
 import { useTaskForm } from "@/hooks/useTaskForm";
-import { ColumnType } from "@/types/task"; // ✅ 추가
+import { ColumnType } from "@/types/task";
 
 interface TaskModalProps {
   mode?: "create" | "edit";
@@ -22,7 +22,7 @@ interface TaskModalProps {
   columnId: number;
   dashboardId: number;
   cardId?: number;
-  columns: ColumnType[]; // ✅ 추가
+  columns: ColumnType[];
 }
 
 export interface TaskData {
@@ -44,7 +44,7 @@ export default function TaskModal({
   columnId,
   dashboardId,
   cardId,
-  columns, // ✅ columns 받기
+  columns,
 }: TaskModalProps) {
   const {
     formData,
@@ -58,7 +58,7 @@ export default function TaskModal({
     dashboardId,
     columnId,
     cardId,
-    columns, // ✅ 전달
+    columns,
     onClose,
     onSubmit,
   });

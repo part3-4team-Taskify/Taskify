@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getColumns } from "@/api/columns"; // ← 여기 주의!
-import { ColumnType } from "@/types/task"; // 실제 ColumnType 정의가 있다면 여기서 import
+import { getColumns } from "@/api/columns";
+import { ColumnType } from "@/types/task";
 
 export function useColumnStatus(
   dashboardId: number,
@@ -10,7 +10,7 @@ export function useColumnStatus(
 ) {
   const { data: columns = [] } = useQuery<ColumnType[]>({
     queryKey: ["columns", dashboardId],
-    queryFn: () => getColumns({ dashboardId }), // 🔥 전체 컬럼 목록 가져오기
+    queryFn: () => getColumns({ dashboardId }), //전체 컬럼 목록 가져오기
   });
 
   const matchedColumn = useMemo(() => {

@@ -153,7 +153,7 @@ export default function Dashboard() {
                 createdByMe={currentDashboard?.createdByMe ?? false}
                 columnDelete={fetchColumnsAndCards}
                 fetchColumnsAndCards={fetchColumnsAndCards}
-                columns={columns} // ✅ columns 전달
+                columns={columns}
               />
             ))}
             <div className={`lg:py-10 pb-5 lg:px-2 bg-white`}>
