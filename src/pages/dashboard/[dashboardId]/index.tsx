@@ -24,7 +24,7 @@ import LoadingSpinner from "@/components/common/LoadingSpinner";
 export default function Dashboard() {
   const router = useRouter();
   const { user, isInitialized } = useAuthGuard();
-  const { guard: postGuard } = usePostGuard();
+  const { guard: postGuard, isLoading } = usePostGuard();
 
   const { dashboardId } = router.query;
   const [columns, setColumns] = useState<ColumnType[]>([]);
@@ -153,6 +153,7 @@ export default function Dashboard() {
                 createdByMe={currentDashboard?.createdByMe ?? false}
                 columnDelete={fetchColumnsAndCards}
                 fetchColumnsAndCards={fetchColumnsAndCards}
+                columns={columns} // ✅ columns 전달
               />
             ))}
             {/* ColumnsButton: 모바일/태블릿에서는 하단 고정, 데스크탑에서는 원래 위치 */}
