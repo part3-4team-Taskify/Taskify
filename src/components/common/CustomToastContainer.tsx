@@ -8,7 +8,7 @@ const CustomToastContainer = () => {
       limit={2}
       position="bottom-center"
       autoClose={3000}
-      newestOnTop={false}
+      newestOnTop={true}
       closeButton={false}
       pauseOnHover={false}
       hideProgressBar={true}
