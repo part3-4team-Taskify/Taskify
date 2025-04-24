@@ -147,7 +147,7 @@ export const ProfileCard = () => {
             className="text-black4"
           />
           <button
-            className="cursor-pointer w-[252px] sm:w-[272px] lg:w-[348px] h-[54px] bg-[var(--primary)] text-white rounded-[8px] text-lg font-medium mt-3"
+            className="cursor-pointer w-[252px] sm:w-[272px] lg:w-[348px] h-[54px] bg-primary text-white rounded-[8px] text-lg font-medium mt-3"
             onClick={handleSave}
           >
             저장

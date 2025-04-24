@@ -17,11 +17,13 @@ export const Representative = ({ card }: RepresentativeProps) => {
       <div
         className="flex items-center justify-center
       sm:items-start sm:justify-between
-      sm:flex-col sm:gap-4 gap-18"
+      sm:flex-col sm:gap-4 gap-6 p-1"
       >
         {/* 담당자 컨테이너 */}
         <div>
-          <p className="font-12sb text-black3 mb-[4px]">담당자</p>
+          <p className="sm:text-[14px] text-12-sb text-black3 mb-[4px]">
+            담당자
+          </p>
           <div className="flex items-center gap-2">
             <ProfileIcon
               key={card.assignee.profileImageUrl}
@@ -30,7 +32,7 @@ export const Representative = ({ card }: RepresentativeProps) => {
               profileImageUrl={card.assignee.profileImageUrl ?? ""}
               id={card.assignee.id}
               imgClassName="w-6 h-6"
-              fontClassName="font-14r"
+              fontClassName="text-14-r"
             />
             <span className="font-normal text-black3 sm:text-[14px] text-[12px]">
               {card.assignee.nickname}
@@ -40,7 +42,9 @@ export const Representative = ({ card }: RepresentativeProps) => {
 
         {/* 마감일 컨테이너 */}
         <div>
-          <p className="font-12sb text-black3 mb-[4px]">마감일</p>
+          <p className="sm:text-[14px] text-12-sb text-black3 mb-[4px]">
+            마감일
+          </p>
           <div className="flex items-center w-full h-6">
             <p className="font-normal text-black3 sm:text-[14px] text-[12px]">
               {card.dueDate
