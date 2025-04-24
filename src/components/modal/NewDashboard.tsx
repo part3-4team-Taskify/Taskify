@@ -118,9 +118,9 @@ export default function NewDashboard({ onClose, onCreate }: NewDashboardProps) {
           <button
             onClick={handleSubmit}
             disabled={!title || selected === null || isLoading}
-            className={`cursor-pointer sm:w-[256px] sm:h-[54px] w-[144px] h-[54px] rounded-[8px] 
+            className={`sm:w-[256px] sm:h-[54px] w-[144px] h-[54px] rounded-[8px] 
             border border-gray3 text-white 
-            ${!title || selected === null ? "bg-gray-300 cursor-not-allowed" : "bg-primary"}`}
+            ${!title || selected === null ? "bg-gray-300" : "bg-primary cursor-pointer"}`}
           >
             {isLoading ? "생성 중..." : "생성"}
           </button>
