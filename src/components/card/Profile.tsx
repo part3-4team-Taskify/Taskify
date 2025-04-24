@@ -68,6 +68,11 @@ export const ProfileCard = () => {
       return;
     }
 
+    if (nickname.length > 10) {
+      toast.error("닉네임은 10자 이하로 입력해 주세요.");
+      return;
+    }
+
     try {
       const payload: { nickname: string; profileImageUrl?: string } = {
         nickname,
