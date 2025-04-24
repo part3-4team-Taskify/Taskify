@@ -213,7 +213,7 @@ export default function TaskModal({
             textSize="md"
             onClick={onClose}
             className="sm:w-[256px] w-[144px] h-[54px] bg-white
-            border border-gray3 text-gray1 rounded-lg cursor-pointer"
+            border border-gray3 text-gray1 font-16m rounded-lg cursor-pointer"
           >
             취소
           </TextButton>
@@ -221,10 +221,9 @@ export default function TaskModal({
           <TextButton
             color="primary"
             buttonSize="md"
-            textSize="md"
             onClick={handleSubmit}
             className="sm:w-[256px] w-[144px] h-[54px] bg-primary
-            text-white rounded-lg"
+            text-white font-16m rounded-lg"
             disabled={!isFormValid}
           >
             {mode === "edit" ? "수정" : "생성"}

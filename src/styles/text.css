@@ -1,3 +1,11 @@
+@layer utilities {
+  .font-16m {
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 500;
+  }
+}
+
 @theme {
   /* 32-b */
   --text-32-b: 32px;

@@ -15,9 +15,8 @@ export const Representative = ({ card }: RepresentativeProps) => {
     >
       {/* 내부 아이템 컨테이너 */}
       <div
-        className="flex items-center justify-center
-      sm:items-start sm:justify-between
-      sm:flex-col sm:gap-4 gap-6 p-1"
+        className="flex sm:items-start sm:flex-col sm:gap-4 sm:px-1
+        justify-between items-center px-3.5"
       >
         {/* 담당자 컨테이너 */}
         <div>
@@ -34,11 +33,18 @@ export const Representative = ({ card }: RepresentativeProps) => {
               imgClassName="w-6 h-6"
               fontClassName="text-14-r"
             />
-            <span className="font-normal text-black3 sm:text-[14px] text-[12px]">
+            <span
+              title={card.assignee.nickname}
+              className="font-normal text-black3 sm:text-[14px] text-[12px]
+            truncate sm:max-w-none max-w-20 whitespace-nowrap"
+            >
               {card.assignee.nickname}
             </span>
           </div>
         </div>
+
+        {/* 모바일 gap 조절용 */}
+        <div className="min-w-4 sm:hidden flex-shrink-0" />
 
         {/* 마감일 컨테이너 */}
         <div>

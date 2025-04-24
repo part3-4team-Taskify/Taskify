@@ -312,7 +312,7 @@ export default function InvitedDashBoard({
               <div className="relative w-full sm:w-[448px] lg:w-[966px] mx-auto">
                 <input
                   id="title"
-                  placeholder="검색"
+                  placeholder="대시보드 이름을 입력하세요"
                   type="text"
                   value={searchTitle}
                   onChange={handleSearchInputChange}
