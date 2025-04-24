@@ -38,7 +38,10 @@ const MemberListMenu: React.FC<MemberListMenuProps> = ({
             className="px-4 py-2 flex items-center gap-2 hover:bg-[#f9f9f9]"
           >
             <MemberProfileIcon members={member} />
-            <span className="text-black3 text-sm md:text-base truncate max-w-[60px] sm:max-w-[85px]">
+            <span
+              title={member.nickname}
+              className="text-black3 text-sm md:text-base truncate max-w-[60px] sm:max-w-[85px]"
+            >
               {member.nickname}
             </span>
           </li>
