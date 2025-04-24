@@ -89,9 +89,9 @@ export default function FormModal({
           <button
             onClick={onSubmit}
             disabled={!inputValue || !isInputValid}
-            className={`cursor-pointer sm:w-[256px] sm:h-[54px] w-[144px] h-[54px] rounded-[8px] 
+            className={`sm:w-[256px] sm:h-[54px] w-[144px] h-[54px] rounded-[8px] 
                 border border-gray3 text-white 
-                ${!inputValue || !isInputValid ? "bg-gray-300 cursor-not-allowed" : "bg-primary"}`}
+                ${!inputValue || !isInputValid ? "bg-gray-300" : "bg-primary cursor-pointer"}`}
           >
             {submitText}
           </button>
